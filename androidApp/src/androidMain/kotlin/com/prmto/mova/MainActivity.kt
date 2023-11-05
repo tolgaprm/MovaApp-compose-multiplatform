@@ -1,4 +1,4 @@
-package com.myapplication
+package com.prmto.mova
 
 import MainView
 import android.os.Bundle

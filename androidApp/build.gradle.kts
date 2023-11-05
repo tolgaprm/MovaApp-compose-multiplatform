@@ -16,15 +16,15 @@ kotlin {
 }
 
 android {
-    compileSdk = (findProperty("android.compileSdk") as String).toInt()
-    namespace = "com.myapplication"
+    compileSdk = libs.versions.compileSdk.version.get().toInt()
+    namespace = "com.prmto.mova"
 
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
 
     defaultConfig {
-        applicationId = "com.myapplication.MyApplication"
-        minSdk = (findProperty("android.minSdk") as String).toInt()
-        targetSdk = (findProperty("android.targetSdk") as String).toInt()
+        applicationId = "com.prmto.mova"
+        minSdk = libs.versions.minSdk.version.get().toInt()
+        targetSdk = libs.versions.targetSdk.version.get().toInt()
         versionCode = 1
         versionName = "1.0"
     }

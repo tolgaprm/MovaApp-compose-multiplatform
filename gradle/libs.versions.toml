@@ -1,0 +1,24 @@
+[versions]
+activity-compose-version = "1.7.2"
+appcompat-version = "1.6.1"
+core-ktx-version = "1.10.1"
+minSdk-version = "24"
+targetSdk-version = "34"
+compileSdk-version = "34"
+kotlin-version = "1.9.10"
+agp-version = "8.0.2"
+compose-version = "1.5.3"
+moko-version = "0.16.1"
+
+[libraries]
+activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose-version" }
+appcompat = { group = "androidx.appcompat",name="appcompat", version.ref = "appcompat-version" }
+core-ktx = { group = "androidx.core" ,name="core-ktx", version.ref = "core-ktx-version" }
+moko-mvvm-core = { group = "dev.icerock.moko",name="mvvm-core", version.ref = "moko-version" }
+moko-mvvm-compose = { group = "dev.icerock.moko", name="mvvm-compose", version.ref = "moko-version" }
+moko-mvvm-flow = { group = "dev.icerock.moko",name="mvvm-flow", version.ref = "moko-version" }
+moko-mvvm-flow-compose = { group = "dev.icerock.moko", name="mvvm-flow-compose", version.ref = "moko-version" }
+
+
+[bundles]
+moko-mvvm = ["moko-mvvm-core", "moko-mvvm-compose", "moko-mvvm-flow", "moko-mvvm-flow-compose"]
