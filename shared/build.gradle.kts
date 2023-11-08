@@ -26,7 +26,14 @@ kotlin {
                 implementation(compose.material)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
-                api(libs.bundles.moko.mvvm)
+                // Ktor
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.serialization)
+                implementation(libs.ktor.contentNegotiotion)
+                // Voyager
+                implementation(libs.bundles.voyager)
+                // Koin
+                api(libs.koin.core)
             }
         }
         val androidMain by getting {
@@ -34,6 +41,7 @@ kotlin {
                 api(libs.activity.compose)
                 api(libs.appcompat)
                 api(libs.core.ktx)
+                implementation(libs.ktor.client.okhttp)
             }
         }
         val iosX64Main by getting
@@ -44,6 +52,9 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
+            dependencies {
+                implementation(libs.ktor.client.darwin)
+            }
         }
     }
 }

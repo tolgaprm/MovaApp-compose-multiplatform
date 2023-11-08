@@ -1,24 +1,37 @@
 [versions]
 activity-compose-version = "1.7.2"
-appcompat-version = "1.6.1"
-core-ktx-version = "1.10.1"
-minSdk-version = "24"
-targetSdk-version = "34"
-compileSdk-version = "34"
-kotlin-version = "1.9.10"
 agp-version = "8.0.2"
+appcompat-version = "1.6.1"
+compileSdk-version = "34"
 compose-version = "1.5.3"
+core-ktx-version = "1.10.1"
+koin-version = "3.5.0"
+kotlin-version = "1.9.10"
+ktor-version = "2.3.5"
+minSdk-version = "24"
 moko-version = "0.16.1"
+targetSdk-version = "34"
+voyager-version = "1.0.0-rc10"
 
 [libraries]
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose-version" }
-appcompat = { group = "androidx.appcompat",name="appcompat", version.ref = "appcompat-version" }
-core-ktx = { group = "androidx.core" ,name="core-ktx", version.ref = "core-ktx-version" }
-moko-mvvm-core = { group = "dev.icerock.moko",name="mvvm-core", version.ref = "moko-version" }
-moko-mvvm-compose = { group = "dev.icerock.moko", name="mvvm-compose", version.ref = "moko-version" }
-moko-mvvm-flow = { group = "dev.icerock.moko",name="mvvm-flow", version.ref = "moko-version" }
-moko-mvvm-flow-compose = { group = "dev.icerock.moko", name="mvvm-flow-compose", version.ref = "moko-version" }
-
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat-version" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx-version" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin-version" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-version" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor-version" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor-version" }
+ktor-contentNegotiotion = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor-version" }
+ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor-version" }
+voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager-version" }
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager-version" }
+voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager-version" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager-version" }
 
 [bundles]
-moko-mvvm = ["moko-mvvm-core", "moko-mvvm-compose", "moko-mvvm-flow", "moko-mvvm-flow-compose"]
+voyager = [
+    "voyager-koin",
+    "voyager-navigator",
+    "voyager-tabNavigator",
+    "voyager-transitions",
+]
