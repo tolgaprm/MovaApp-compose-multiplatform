@@ -1,5 +1,11 @@
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 
-actual fun getPlatformName(): String = "Android"
-
-@Composable fun MainView() = App()
+@Composable
+fun MainView() {
+    val isDarkTheme = isSystemInDarkTheme()
+    App(
+        darkTheme = isDarkTheme,
+        dynamicColor = false
+    )
+}
