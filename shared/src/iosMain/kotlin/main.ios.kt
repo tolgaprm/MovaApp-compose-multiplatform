@@ -9,5 +9,6 @@ fun MainViewController() = ComposeUIViewController {
     App(
         darkTheme = isDarkTheme,
         dynamicColor = false,
+        androidApp = false
     )
 }

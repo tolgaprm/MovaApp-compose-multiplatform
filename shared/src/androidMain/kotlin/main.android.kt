@@ -6,6 +6,7 @@ fun MainView() {
     val isDarkTheme = isSystemInDarkTheme()
     App(
         darkTheme = isDarkTheme,
-        dynamicColor = false
+        dynamicColor = false,
+        androidApp = true
     )
 }
