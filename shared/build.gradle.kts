@@ -40,6 +40,14 @@ kotlin {
                 api(libs.koin.core)
             }
         }
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+                implementation(libs.assertK)
+                implementation(libs.turbine)
+                implementation(libs.koin.test)
+            }
+        }
         val androidMain by getting {
             dependsOn(commonMain)
             dependencies {

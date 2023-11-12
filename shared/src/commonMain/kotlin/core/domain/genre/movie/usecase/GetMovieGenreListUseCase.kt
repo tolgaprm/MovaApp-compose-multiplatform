@@ -11,7 +11,8 @@ class GetMovieGenreListUseCase : KoinComponent {
 
     suspend operator fun invoke(language: String = ""): Resource<List<Genre>> {
         return try {
-            Resource.Success(movieGenreRepository.getMovieGenreList(language))
+            val result = movieGenreRepository.getMovieGenreList(language)
+            Resource.Success(result)
         } catch (e: Exception) {
             Resource.Error(e)
         }

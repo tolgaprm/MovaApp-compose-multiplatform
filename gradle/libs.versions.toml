@@ -2,6 +2,7 @@
 activity-compose-version = "1.8.0"
 agp-version = "8.0.2"
 appcompat-version = "1.6.1"
+assertK-version = "0.25"
 compileSdk-version = "34"
 compose-version = "1.5.3"
 core-ktx-version = "1.12.0"
@@ -11,6 +12,7 @@ ktor-version = "2.3.5"
 minSdk-version = "24"
 moko-version = "0.16.1"
 targetSdk-version = "34"
+turbine-version = "0.7.0"
 voyager-version = "1.0.0-rc10"
 ## AndroidApp Dependencies Version
 splash-screen-version = "1.0.1"
@@ -18,13 +20,16 @@ splash-screen-version = "1.0.1"
 [libraries]
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose-version" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat-version" }
+assertK = { module = "com.willowtreeapps.assertk:assertk", version.ref = "assertK-version" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx-version" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin-version" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin-version" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-version" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor-version" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor-version" }
 ktor-contentNegotiotion = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor-version" }
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor-version" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine-version" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager-version" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager-version" }
 voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager-version" }

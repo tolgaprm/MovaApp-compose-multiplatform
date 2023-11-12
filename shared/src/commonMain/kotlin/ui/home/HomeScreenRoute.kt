@@ -9,9 +9,8 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import org.koin.core.component.KoinComponent
 
-class HomeScreenRoute : Screen, KoinComponent {
+class HomeScreenRoute : Screen {
 
     @Composable
     override fun Content() {
