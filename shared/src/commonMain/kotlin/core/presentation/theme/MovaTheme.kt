@@ -1,4 +1,4 @@
-package core.theme
+package core.presentation.theme
 
 import androidx.compose.runtime.Composable
 

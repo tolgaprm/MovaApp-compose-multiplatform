@@ -1,0 +1,47 @@
+package feature_home.presentation
+
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import cafe.adriel.voyager.navigator.tab.Tab
+import cafe.adriel.voyager.navigator.tab.TabOptions
+
+object HomeScreenRoute : Tab {
+
+    @Composable
+    override fun Content() {
+        HomeScreen()
+    }
+
+    override val options: TabOptions
+        @Composable
+        get() {
+            val icon = rememberVectorPainter(Icons.Rounded.Home)
+            return remember {
+                TabOptions(
+                    icon = icon,
+                    title = "Home",
+                    index = 0u
+                )
+            }
+        }
+}
+
+@Composable
+private fun HomeScreen(modifier: Modifier = Modifier) {
+    Scaffold(
+        modifier = modifier.fillMaxSize()
+    ) {
+        Text(
+            text = "Home Screen",
+            modifier = Modifier.padding(it)
+        )
+    }
+}
