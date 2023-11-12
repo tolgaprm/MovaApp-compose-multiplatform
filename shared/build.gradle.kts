@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("org.jetbrains.compose")
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.10"
 }
 
 kotlin {
@@ -15,6 +16,7 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "shared"
             isStatic = true
+            binaryOption("bundleId", "com.prmto.mova")
         }
     }
 
@@ -32,6 +34,7 @@ kotlin {
                 implementation(libs.ktor.serialization)
                 implementation(libs.ktor.contentNegotiotion)
                 // Voyager
+
                 implementation(libs.bundles.voyager)
                 // Koin
                 api(libs.koin.core)
