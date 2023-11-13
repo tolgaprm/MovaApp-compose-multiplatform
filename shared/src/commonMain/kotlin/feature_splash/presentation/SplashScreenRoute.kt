@@ -1,4 +1,4 @@
-package ui.splash
+package feature_splash.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -12,13 +12,13 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import core.presentation.tabNavigation.TabNavigationRoute
 import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import ui.home.HomeScreenRoute
 import kotlin.time.Duration.Companion.seconds
 
-class SplashScreenRoute : Screen {
+object SplashScreenRoute : Screen {
 
     @Composable
     override fun Content() {
@@ -27,7 +27,7 @@ class SplashScreenRoute : Screen {
 
         LaunchedEffect(Unit) {
             delay(2.seconds)
-            navigator.replace(HomeScreenRoute())
+            navigator.replace(TabNavigationRoute)
         }
     }
 }

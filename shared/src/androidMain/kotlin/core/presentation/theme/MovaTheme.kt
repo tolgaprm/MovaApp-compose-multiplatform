@@ -1,4 +1,4 @@
-package core.theme
+package core.presentation.theme
 
 import android.app.Activity
 import android.os.Build

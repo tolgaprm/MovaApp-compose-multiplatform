@@ -1,4 +1,4 @@
-package core.theme
+package core.presentation.theme
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
@@ -12,7 +12,7 @@ val Salute = Color(0xFF282C36)
 val lightSchemeColors = lightColorScheme(
     primary = PiercingRed,
     onPrimary = Color.White,
-    background = BrilliantWhite,
+    background = Color.White,
     onBackground = Color.Black,
     secondaryContainer = BrilliantWhite.copy(alpha = 0.8f),
     onSecondaryContainer = Color.Black,
