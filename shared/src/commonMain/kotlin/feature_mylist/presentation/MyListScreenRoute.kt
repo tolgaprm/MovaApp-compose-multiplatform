@@ -1,10 +1,10 @@
-package feature_home.presentation
+package feature_mylist.presentation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.outlined.BookmarkBorder
+import androidx.compose.material.icons.rounded.Bookmark
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,38 +15,38 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 
-object HomeScreenRoute : Tab {
+object MyListScreenRoute : Tab {
 
     @Composable
     override fun Content() {
-        HomeScreen()
+        MyListScreen()
     }
 
     override val options: TabOptions
         @Composable
         get() {
-            val icon = rememberVectorPainter(Icons.Rounded.Home)
+            val icon = rememberVectorPainter(Icons.Rounded.Bookmark)
             return remember {
                 TabOptions(
                     icon = icon,
-                    title = "Home",
-                    index = 0u
+                    title = "My List",
+                    index = 3u
                 )
             }
         }
 
     fun unselectedIcon(): ImageVector {
-        return Icons.Outlined.Home
+        return Icons.Outlined.BookmarkBorder
     }
 }
 
 @Composable
-private fun HomeScreen(modifier: Modifier = Modifier) {
+private fun MyListScreen(modifier: Modifier = Modifier) {
     Scaffold(
         modifier = modifier.fillMaxSize()
     ) {
         Text(
-            text = "Home Screen",
+            text = "MyList Screen",
             modifier = Modifier.padding(it)
         )
     }

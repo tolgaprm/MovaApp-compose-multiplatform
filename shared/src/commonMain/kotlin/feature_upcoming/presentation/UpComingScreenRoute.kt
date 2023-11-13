@@ -1,10 +1,10 @@
-package feature_home.presentation
+package feature_upcoming.presentation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.outlined.Upcoming
+import androidx.compose.material.icons.rounded.Upcoming
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,38 +15,38 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 
-object HomeScreenRoute : Tab {
+object UpComingScreenRoute : Tab {
 
     @Composable
     override fun Content() {
-        HomeScreen()
+        UpComingScreen()
     }
 
     override val options: TabOptions
         @Composable
         get() {
-            val icon = rememberVectorPainter(Icons.Rounded.Home)
+            val icon = rememberVectorPainter(Icons.Rounded.Upcoming)
             return remember {
                 TabOptions(
                     icon = icon,
-                    title = "Home",
-                    index = 0u
+                    title = "UpComing",
+                    index = 2u
                 )
             }
         }
 
     fun unselectedIcon(): ImageVector {
-        return Icons.Outlined.Home
+        return Icons.Outlined.Upcoming
     }
 }
 
 @Composable
-private fun HomeScreen(modifier: Modifier = Modifier) {
+private fun UpComingScreen(modifier: Modifier = Modifier) {
     Scaffold(
         modifier = modifier.fillMaxSize()
     ) {
         Text(
-            text = "Home Screen",
+            text = "Upcoming Screen",
             modifier = Modifier.padding(it)
         )
     }
