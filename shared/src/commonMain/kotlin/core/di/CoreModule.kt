@@ -1,6 +1,6 @@
 package core.di
 
-import core.common.Constants
+import core.common.TMDBConstants
 import core.data.genre.movie.remote.MovieGenreRemoteDataSource
 import core.data.genre.movie.repository.MovieGenreRepoImpl
 import core.data.genre.tv.remote.TvGenreRemoteDataSource
@@ -37,8 +37,8 @@ private fun createHttpClient(
 
     defaultRequest {
         url {
-            takeFrom(Constants.TMDB_BASE_URL)
-            parameters.append("api_key", Constants.API_KEY)
+            takeFrom(TMDBConstants.TMDB_BASE_URL)
+            parameters.append("api_key", TMDBConstants.API_KEY)
         }
     }
 }
