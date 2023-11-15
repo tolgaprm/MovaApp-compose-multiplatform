@@ -34,10 +34,11 @@ kotlin {
                 implementation(libs.ktor.serialization)
                 implementation(libs.ktor.contentNegotiotion)
                 // Voyager
-
                 implementation(libs.bundles.voyager)
                 // Koin
                 api(libs.koin.core)
+                // Paging
+                implementation(libs.bundles.paging.library)
             }
         }
         val commonTest by getting {

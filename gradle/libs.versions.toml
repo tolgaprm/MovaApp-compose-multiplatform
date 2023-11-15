@@ -11,6 +11,7 @@ kotlin-version = "1.9.10"
 ktor-version = "2.3.5"
 minSdk-version = "24"
 moko-version = "0.16.1"
+pagingComposeCommon = "3.3.0-alpha02-0.4.0"
 targetSdk-version = "34"
 turbine-version = "0.7.0"
 voyager-version = "1.0.0-rc10"
@@ -29,6 +30,8 @@ ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "kto
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor-version" }
 ktor-contentNegotiotion = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor-version" }
 ktor-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor-version" }
+paging-common = { module = "app.cash.paging:paging-common", version.ref = "pagingComposeCommon" }
+paging-compose-common = { module = "app.cash.paging:paging-compose-common", version.ref = "pagingComposeCommon" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine-version" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager-version" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager-version" }
@@ -43,4 +46,9 @@ voyager = [
     "voyager-navigator",
     "voyager-tabNavigator",
     "voyager-transitions",
+]
+
+paging-library = [
+    "paging-common",
+    "paging-compose-common",
 ]
