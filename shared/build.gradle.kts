@@ -29,6 +29,8 @@ kotlin {
                 implementation(compose.materialIconsExtended)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
+                //Logger
+                implementation(libs.kermit.logger)
                 // Ktor
                 implementation(libs.ktor.client.core)
                 implementation(libs.ktor.serialization)

@@ -1,5 +1,6 @@
 package core.domain.genre.movie.usecase
 
+import app.cash.turbine.test
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
@@ -32,8 +33,11 @@ class GetMovieGenreListUseCaseTest : KoinTest {
 
     @Test
     fun getMovieGenres() = runBlocking {
-        val result = getMovieGenreListUseCase("en")
-        assertThat(result).isInstanceOf(Resource.Success::class)
-        assertThat(result.data).isEqualTo(CoreTestConstants.movieEnGenreList)
+        getMovieGenreListUseCase("en").test {
+            val result = awaitItem()
+            assertThat(result).isInstanceOf(Resource.Success::class)
+            assertThat(result.data).isEqualTo(CoreTestConstants.movieEnGenreList)
+            cancelAndConsumeRemainingEvents()
+        }
     }
 }

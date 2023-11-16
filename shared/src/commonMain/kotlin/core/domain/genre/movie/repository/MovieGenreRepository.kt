@@ -4,5 +4,5 @@ import core.domain.genre.models.Genre
 
 interface MovieGenreRepository {
 
-    suspend fun getMovieGenreList(language: String = "en"): List<Genre>
+    suspend fun getMovieGenreList(language: String): List<Genre>
 }

@@ -1,5 +1,6 @@
 package core.data.util
 
+import co.touchlab.kermit.Logger
 import core.domain.error.ServiceUnavailableException
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
@@ -12,7 +13,7 @@ suspend inline fun <reified R> tryResult(
     val result = try {
         block()
     } catch (e: IOException) {
-        println("Mova: IOException ${e.message}")
+        Logger.withTag("tryResult").e("IOException ${e.message}")
         throw ServiceUnavailableException()
     }
 
@@ -26,6 +27,7 @@ suspend inline fun <reified R> tryResult(
     return try {
         result.body<R>()
     } catch (e: Exception) {
+        Logger.withTag("tryResult").e("Exception ${e.message}")
         throw ServiceUnavailableException()
     }
 }
