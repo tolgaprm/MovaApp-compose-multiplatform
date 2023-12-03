@@ -41,6 +41,8 @@ kotlin {
                 api(libs.koin.core)
                 // Paging
                 implementation(libs.bundles.paging.library)
+                // Load Image
+                implementation(libs.kamel.media)
             }
         }
         val commonTest by getting {

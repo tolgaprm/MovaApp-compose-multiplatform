@@ -1,5 +1,6 @@
 package core.presentation.tabNavigation
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -32,9 +33,13 @@ object TabNavigationRoute : Screen {
                         TabNavigationItem(UpComingScreenRoute, UpComingScreenRoute.unselectedIcon())
                         TabNavigationItem(MyListScreenRoute, MyListScreenRoute.unselectedIcon())
                     }
-                }
+                },
+                modifier = Modifier.fillMaxSize()
             ) {
-                Surface(modifier = Modifier.padding(it)) {
+                Surface(
+                    modifier = Modifier
+                        .padding(it)
+                ) {
                     CurrentTab()
                 }
             }

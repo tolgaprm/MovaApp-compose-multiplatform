@@ -35,7 +35,6 @@ class GetNowPlayingMoviesUseCase : KoinComponent {
             }
             Resource.Success(data = result)
         } catch (e: Exception) {
-            println("GetNowPlayingMoviesUseCase: ${e.message}")
             Resource.Error(e)
         }
     }

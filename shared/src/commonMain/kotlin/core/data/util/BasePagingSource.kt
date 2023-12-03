@@ -2,7 +2,6 @@ package core.data.util
 
 import androidx.paging.PagingState
 import app.cash.paging.PagingSource
-import co.touchlab.kermit.Logger
 
 abstract class BasePagingSource<Value : Any> : PagingSource<Int, Value>() {
 
@@ -18,7 +17,7 @@ abstract class BasePagingSource<Value : Any> : PagingSource<Int, Value>() {
                 nextKey = currentPage + 1
             )
         } catch (e: Exception) {
-            Logger.withTag("BasePagingSource").e("Error: $e")
+            //Logger.withTag("BasePagingSource").e("Error: $e")
             LoadResult.Error(e)
         }
     }
