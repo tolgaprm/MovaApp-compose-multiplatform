@@ -5,14 +5,14 @@ sealed class Resource<T>(val data: T? = null, val error: Throwable? = null) {
     class Error<T>(error: Throwable, data: T? = null) : Resource<T>(data = data, error = error)
 }
 
-inline fun <T> Resource<T>.success(action: (T) -> Unit): Resource<T> {
+inline fun <T> Resource<T>.onSuccess(action: (T) -> Unit): Resource<T> {
     if (this is Resource.Success) {
         action(data!!)
     }
     return this
 }
 
-inline fun <T, R> Resource<T>.error(action: (Throwable) -> R): Resource<T> {
+inline fun <T, R> Resource<T>.onError(action: (Throwable) -> R): Resource<T> {
     if (this is Resource.Error) {
         action(error!!)
     }

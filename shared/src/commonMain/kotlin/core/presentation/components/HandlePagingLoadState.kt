@@ -1,7 +1,7 @@
 package core.presentation.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -12,30 +12,34 @@ import app.cash.paging.LoadStateNotLoading
 import app.cash.paging.compose.LazyPagingItems
 
 @Composable
-fun <T : Any> BoxScope.HandlePagingLoadState(
+fun <T : Any> HandlePagingLoadState(
     pagingItems: LazyPagingItems<T>,
 ) {
-    pagingItems.loadState.apply {
-        when {
-            refresh is LoadStateNotLoading && pagingItems.itemCount < 1 -> {
-                NotLoadingStateView(modifier = Modifier.fillMaxSize())
-            }
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        pagingItems.loadState.apply {
+            when {
+                refresh is LoadStateNotLoading && pagingItems.itemCount < 1 -> {
+                    NotLoadingStateView(modifier = Modifier.fillMaxSize())
+                }
 
-            refresh is LoadStateLoading -> {
-                MCircularProgressIndicator()
-            }
+                refresh is LoadStateLoading -> {
+                    MCircularProgressIndicator()
+                }
 
-            refresh is LoadStateError -> {
-                ErrorView(
-                    modifier = Modifier.fillMaxSize()
-                        .background(color = MaterialTheme.colorScheme.background),
-                    errorMessage = (refresh as LoadStateError).error.message,
-                    onClickRetry = { pagingItems.retry() }
-                )
-            }
+                refresh is LoadStateError -> {
+                    ErrorView(
+                        modifier = Modifier.fillMaxSize()
+                            .background(color = MaterialTheme.colorScheme.background),
+                        errorMessage = (refresh as LoadStateError).error.message,
+                        onClickRetry = { pagingItems.retry() }
+                    )
+                }
 
-            append is LoadStateLoading -> {
-                MCircularProgressIndicator()
+                append is LoadStateLoading -> {
+                    MCircularProgressIndicator()
+                }
             }
         }
     }

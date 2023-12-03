@@ -26,4 +26,18 @@ class MovieRemoteDataSource(
             }
         }
     }
+
+    suspend fun getPopularMovies(
+        language: String = "en",
+        page: Int
+    ): ApiResponse<MovieDto> {
+        return withContext(dispatcherProvider.IO) {
+            tryResult {
+                httpClient.get("movie/popular") {
+                    parameter("language", language)
+                    parameter("page", page)
+                }
+            }
+        }
+    }
 }

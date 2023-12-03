@@ -9,4 +9,10 @@ object GenreUtil {
             genres.find { genre -> genre.id == genreId }?.name ?: ""
         }
     }
+
+    fun formatVoteCount(voteCount: Int): String {
+        if (voteCount < 1000) return voteCount.toString()
+        val voteAverageInThousand = voteCount / 1000
+        return "${voteAverageInThousand}k"
+    }
 }

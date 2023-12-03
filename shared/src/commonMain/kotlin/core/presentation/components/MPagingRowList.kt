@@ -35,6 +35,10 @@ fun <T : Any> MPagingRowList(
             pagingItems[index]?.let { item ->
                 itemContent(item)
             }
+
+            HandlePagingLoadState(
+                pagingItems,
+            )
         }
     }
 }

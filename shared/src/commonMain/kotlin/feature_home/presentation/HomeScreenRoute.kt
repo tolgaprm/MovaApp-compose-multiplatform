@@ -1,9 +1,8 @@
 package feature_home.presentation
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Home
@@ -20,8 +19,8 @@ import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import core.domain.movie.models.Movie
-import feature_home.presentation.components.HomeFilmSection
-import feature_home.presentation.components.NowPlayingHorizontalRowPager
+import feature_home.presentation.components.NowPlayingSection
+import feature_home.presentation.components.PopularMoviesSection
 
 object HomeScreenRoute : Tab {
 
@@ -29,7 +28,8 @@ object HomeScreenRoute : Tab {
     override fun Content() {
         val homeScreenModel = getScreenModel<HomeScreenModel>()
         val nowPlayingMovies = homeScreenModel.nowPlayingMovies.data?.collectAsLazyPagingItems()
-        HomeScreen(nowPlayingMovies = nowPlayingMovies)
+        val popularMovies = homeScreenModel.popularMovies.data?.collectAsLazyPagingItems()
+        HomeScreen(nowPlayingMovies = nowPlayingMovies, popularMovies = popularMovies)
     }
 
     override val options: TabOptions
@@ -53,24 +53,16 @@ object HomeScreenRoute : Tab {
 @Composable
 private fun HomeScreen(
     modifier: Modifier = Modifier,
-    nowPlayingMovies: LazyPagingItems<Movie>?
+    nowPlayingMovies: LazyPagingItems<Movie>?,
+    popularMovies: LazyPagingItems<Movie>?
 ) {
     LazyColumn(
         contentPadding = PaddingValues(16.dp),
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        item {
-            HomeFilmSection(title = "Now Playing", onClickSeeAll = {}) {
-                NowPlayingHorizontalRowPager(
-                    modifier = modifier.fillMaxSize(),
-                    nowPlayingPagingItems = nowPlayingMovies,
-                    onClickMovie = {
+        NowPlayingSection(nowPlayingMovies = nowPlayingMovies)
 
-                    }
-                )
-            }
-        }
-
-        item { Spacer(modifier = Modifier.height(16.dp)) }
+        PopularMoviesSection(popularMovies = popularMovies)
     }
 }

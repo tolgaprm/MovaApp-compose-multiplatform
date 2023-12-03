@@ -30,4 +30,22 @@ class HomeMovieRepoImpl(
             }
         ).flow
     }
+
+    override fun getPopularMovies(language: String): Flow<PagingData<Movie>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = ITEMS_PER_PAGE,
+            ),
+            pagingSourceFactory = {
+                MoviePagingSource(
+                    fetchMovie = { page ->
+                        movieRemoteDataSource.getPopularMovies(
+                            language = language,
+                            page = page
+                        ).results
+                    }
+                )
+            }
+        ).flow
+    }
 }

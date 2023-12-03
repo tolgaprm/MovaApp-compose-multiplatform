@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import core.common.ImageSize
 import core.domain.movie.models.Movie
 import core.presentation.components.MovaImage
+import core.presentation.components.RatingStats
 
 @Composable
 fun NowPlayingItem(
@@ -69,7 +70,6 @@ private fun BoxScope.NowPlayingItemContent(
         modifier = modifier.fillMaxWidth()
             .align(alignment = Alignment.BottomStart)
             .padding(16.dp)
-
     ) {
         Text(
             text = movie.title,
@@ -83,8 +83,14 @@ private fun BoxScope.NowPlayingItemContent(
                 text = movie.genresBySeparatedByComma,
                 style = MaterialTheme.typography.labelMedium,
                 maxLines = 1,
-                color = Color.White
+                color = Color.White,
+                modifier = Modifier.padding(vertical = 4.dp)
             )
         }
+
+        RatingStats(
+            formattedVoteCount = movie.formattedVoteCount,
+            voteAverage = movie.voteAverage
+        )
     }
 }

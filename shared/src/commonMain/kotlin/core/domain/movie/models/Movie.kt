@@ -1,5 +1,7 @@
 package core.domain.movie.models
 
+import core.domain.util.GenreUtil
+
 data class Movie(
     val id: Int,
     val genreIds: List<Int>,
@@ -10,4 +12,7 @@ data class Movie(
     val voteAverage: Double,
     val voteCount: Int,
     val genresBySeparatedByComma: String? = null
-)
+) {
+    val formattedVoteCount: String
+        get() = GenreUtil.formatVoteCount(voteCount)
+}

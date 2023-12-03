@@ -9,4 +9,8 @@ interface HomeMovieRepository {
     fun getNowPlayingMovies(
         language: String = "en"
     ): Flow<PagingData<Movie>>
+
+    fun getPopularMovies(
+        language: String = "en"
+    ): Flow<PagingData<Movie>>
 }
