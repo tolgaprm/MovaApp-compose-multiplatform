@@ -15,4 +15,9 @@ object GenreUtil {
         val voteAverageInThousand = voteCount / 1000
         return "${voteAverageInThousand}k"
     }
+
+    fun getYearFromReleaseDate(releaseDate: String?): String {
+        if (releaseDate == null) return ""
+        return releaseDate.split("-").first()
+    }
 }

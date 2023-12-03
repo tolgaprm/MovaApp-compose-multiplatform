@@ -1,12 +1,14 @@
 package feature_home.presentation.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListScope
-import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
 import core.domain.movie.models.Movie
 import core.presentation.components.MPagingRowList
+import core.presentation.components.MovieItem
 
 @Suppress("functionName")
 fun LazyListScope.PopularMoviesSection(
@@ -21,9 +23,10 @@ fun LazyListScope.PopularMoviesSection(
         ) {
             MPagingRowList(
                 pagingItems = popularMovies,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) { movie ->
-                Text(movie.title)
+                MovieItem(movie = movie)
             }
         }
     }

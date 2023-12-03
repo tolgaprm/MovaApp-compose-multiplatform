@@ -8,7 +8,7 @@ data class Movie(
     val title: String,
     val overview: String,
     val posterPath: String?,
-    val releaseDate: String?,
+    val releaseDate: String,
     val voteAverage: Double,
     val voteCount: Int,
     val genresBySeparatedByComma: String? = null

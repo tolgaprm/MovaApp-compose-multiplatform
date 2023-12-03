@@ -12,7 +12,7 @@ import app.cash.paging.compose.LazyPagingItems
 @Composable
 fun <T : Any> MPagingRowList(
     pagingItems: LazyPagingItems<T>?,
-    paddingValues: PaddingValues = PaddingValues(16.dp),
+    paddingValues: PaddingValues = PaddingValues(),
     verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(8.dp),
     modifier: Modifier = Modifier,
