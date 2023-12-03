@@ -8,7 +8,7 @@ import feature_home.presentation.HomeScreenModel
 import org.koin.dsl.module
 
 val homeModule = module {
-    single { MovieRemoteDataSource(get()) }
+    single { MovieRemoteDataSource(get(), get()) }
     single<HomeMovieRepository> { HomeMovieRepoImpl(get()) }
     factory { GetNowPlayingMoviesUseCase() }
     factory { HomeScreenModel(get()) }
