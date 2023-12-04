@@ -1,9 +1,12 @@
 package core.presentation.tabNavigation
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
@@ -30,9 +33,15 @@ object TabNavigationRoute : Screen {
                         TabNavigationItem(UpComingScreenRoute, UpComingScreenRoute.unselectedIcon())
                         TabNavigationItem(MyListScreenRoute, MyListScreenRoute.unselectedIcon())
                     }
-                }
+                },
+                modifier = Modifier.fillMaxSize()
             ) {
-                CurrentTab()
+                Surface(
+                    modifier = Modifier
+                        .padding(it)
+                ) {
+                    CurrentTab()
+                }
             }
         }
     }

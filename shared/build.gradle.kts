@@ -29,15 +29,20 @@ kotlin {
                 implementation(compose.materialIconsExtended)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
+                //Logger
+                implementation(libs.kermit.logger)
                 // Ktor
                 implementation(libs.ktor.client.core)
                 implementation(libs.ktor.serialization)
                 implementation(libs.ktor.contentNegotiotion)
                 // Voyager
-
                 implementation(libs.bundles.voyager)
                 // Koin
                 api(libs.koin.core)
+                // Paging
+                implementation(libs.bundles.paging.library)
+                // Load Image
+                implementation(libs.kamel.media)
             }
         }
         val commonTest by getting {

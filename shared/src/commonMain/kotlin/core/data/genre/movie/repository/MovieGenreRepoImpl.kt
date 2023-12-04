@@ -9,7 +9,7 @@ class MovieGenreRepoImpl(
     private val movieGenreRemoteDataSource: MovieGenreRemoteDataSource
 ) : MovieGenreRepository {
     override suspend fun getMovieGenreList(language: String): List<Genre> {
-        return movieGenreRemoteDataSource.getMovieGenreList(language)
-            .genres.map { it.toGenre() }
+        return movieGenreRemoteDataSource.getMovieGenreList(language).genres.map { it.toGenre() }
+
     }
 }

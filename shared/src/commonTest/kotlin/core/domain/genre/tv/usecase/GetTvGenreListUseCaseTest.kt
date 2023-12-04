@@ -16,7 +16,6 @@ import kotlin.test.Test
 
 class GetTvGenreListUseCaseTest : KoinTest {
 
-
     private lateinit var getTvGenreListUseCase: GetTvGenreListUseCase
 
     @BeforeTest
