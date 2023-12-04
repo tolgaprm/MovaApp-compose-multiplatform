@@ -7,10 +7,14 @@ import kotlinx.coroutines.flow.Flow
 interface HomeMovieRepository {
 
     fun getNowPlayingMovies(
-        language: String = "en"
+        language: String
     ): Flow<PagingData<Movie>>
 
     fun getPopularMovies(
-        language: String = "en"
+        language: String
+    ): Flow<PagingData<Movie>>
+
+    fun getTopRatedMovies(
+        language: String
     ): Flow<PagingData<Movie>>
 }

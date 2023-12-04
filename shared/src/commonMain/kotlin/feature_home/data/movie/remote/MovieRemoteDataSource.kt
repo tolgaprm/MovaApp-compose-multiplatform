@@ -14,7 +14,7 @@ class MovieRemoteDataSource(
     private val dispatcherProvider: DispatcherProvider
 ) {
     suspend fun getNowPlayingMovies(
-        language: String = "en",
+        language: String,
         page: Int
     ): ApiResponse<MovieDto> {
         return withContext(dispatcherProvider.IO) {
@@ -28,12 +28,26 @@ class MovieRemoteDataSource(
     }
 
     suspend fun getPopularMovies(
-        language: String = "en",
+        language: String,
         page: Int
     ): ApiResponse<MovieDto> {
         return withContext(dispatcherProvider.IO) {
             tryResult {
                 httpClient.get("movie/popular") {
+                    parameter("language", language)
+                    parameter("page", page)
+                }
+            }
+        }
+    }
+
+    suspend fun getTopRatedMovies(
+        language: String,
+        page: Int
+    ): ApiResponse<MovieDto> {
+        return withContext(dispatcherProvider.IO) {
+            tryResult {
+                httpClient.get("movie/top_rated") {
                     parameter("language", language)
                     parameter("page", page)
                 }

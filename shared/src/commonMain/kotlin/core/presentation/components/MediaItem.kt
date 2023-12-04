@@ -49,6 +49,7 @@ private fun MediaItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp)
+                .background(MaterialTheme.colorScheme.secondaryContainer)
         )
         Column(
             modifier = Modifier.fillMaxWidth()

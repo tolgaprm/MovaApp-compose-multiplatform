@@ -17,7 +17,7 @@ class GetNowPlayingMoviesUseCase : KoinComponent {
     operator fun invoke(language: String = "en"): Resource<Flow<PagingData<Movie>>> {
         return combineMovieAndGenreReturnResourceFlow(
             movieGenreResourceFlow = getMovieGenreListUseCase(language = language),
-            moviePagingDataFlow = homeMovieRepository.getNowPlayingMovies()
+            moviePagingDataFlow = homeMovieRepository.getNowPlayingMovies(language = language)
         )
     }
 }

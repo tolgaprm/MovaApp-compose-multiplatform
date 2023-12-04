@@ -11,18 +11,19 @@ import core.presentation.components.MPagingRowList
 import core.presentation.components.MovieItem
 
 @Suppress("functionName")
-fun LazyListScope.PopularMoviesSection(
+fun LazyListScope.MoviesSection(
     modifier: Modifier = Modifier,
-    popularMovies: LazyPagingItems<Movie>?
+    movies: LazyPagingItems<Movie>?,
+    title: String,
 ) {
     item {
         HomeFilmSection(
             modifier = modifier,
-            title = "Popular Movies",
+            title = title,
             onClickSeeAll = {}
         ) {
             MPagingRowList(
-                pagingItems = popularMovies,
+                pagingItems = movies,
                 modifier = Modifier.fillMaxSize(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) { movie ->

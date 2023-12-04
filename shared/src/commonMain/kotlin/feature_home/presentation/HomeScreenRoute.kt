@@ -19,8 +19,8 @@ import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import core.domain.movie.models.Movie
+import feature_home.presentation.components.MoviesSection
 import feature_home.presentation.components.NowPlayingSection
-import feature_home.presentation.components.PopularMoviesSection
 
 object HomeScreenRoute : Tab {
 
@@ -29,7 +29,13 @@ object HomeScreenRoute : Tab {
         val homeScreenModel = getScreenModel<HomeScreenModel>()
         val nowPlayingMovies = homeScreenModel.nowPlayingMovies.data?.collectAsLazyPagingItems()
         val popularMovies = homeScreenModel.popularMovies.data?.collectAsLazyPagingItems()
-        HomeScreen(nowPlayingMovies = nowPlayingMovies, popularMovies = popularMovies)
+        val topRatedMovies =
+            homeScreenModel.getTopRatedMoviesUseCase.data?.collectAsLazyPagingItems()
+        HomeScreen(
+            nowPlayingMovies = nowPlayingMovies,
+            popularMovies = popularMovies,
+            topRatedMovies = topRatedMovies
+        )
     }
 
     override val options: TabOptions
@@ -54,7 +60,8 @@ object HomeScreenRoute : Tab {
 private fun HomeScreen(
     modifier: Modifier = Modifier,
     nowPlayingMovies: LazyPagingItems<Movie>?,
-    popularMovies: LazyPagingItems<Movie>?
+    popularMovies: LazyPagingItems<Movie>?,
+    topRatedMovies: LazyPagingItems<Movie>?
 ) {
     LazyColumn(
         contentPadding = PaddingValues(16.dp),
@@ -63,6 +70,8 @@ private fun HomeScreen(
     ) {
         NowPlayingSection(nowPlayingMovies = nowPlayingMovies)
 
-        PopularMoviesSection(popularMovies = popularMovies)
+        MoviesSection(movies = popularMovies, title = "Popular Movies")
+        
+        MoviesSection(movies = topRatedMovies, title = "Top Rated Movies")
     }
 }

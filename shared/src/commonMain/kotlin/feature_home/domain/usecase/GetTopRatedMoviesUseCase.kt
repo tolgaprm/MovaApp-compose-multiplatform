@@ -10,14 +10,14 @@ import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class GetPopularMoviesUseCase : KoinComponent {
+class GetTopRatedMoviesUseCase : KoinComponent {
     private val homeMovieRepository: HomeMovieRepository by inject()
     private val getMovieGenreListUseCase: GetMovieGenreListUseCase by inject()
 
     operator fun invoke(language: String = "en"): Resource<Flow<PagingData<Movie>>> {
         return combineMovieAndGenreReturnResourceFlow(
-            movieGenreResourceFlow = getMovieGenreListUseCase(language = language),
-            moviePagingDataFlow = homeMovieRepository.getPopularMovies(language = language)
+            moviePagingDataFlow = homeMovieRepository.getTopRatedMovies(language = language),
+            movieGenreResourceFlow = getMovieGenreListUseCase(language = language)
         )
     }
 }
