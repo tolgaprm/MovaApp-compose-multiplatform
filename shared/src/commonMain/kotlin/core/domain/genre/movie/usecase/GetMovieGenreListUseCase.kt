@@ -2,7 +2,7 @@ package core.domain.genre.movie.usecase
 
 import core.common.Resource
 import core.domain.genre.models.Genre
-import core.domain.genre.movie.repository.MovieGenreRepository
+import core.domain.genre.movie.MovieGenreRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.koin.core.component.KoinComponent

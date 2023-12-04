@@ -1,9 +1,8 @@
-package core.data.genre.tv.repository
+package core.data.genre.tv
 
-import core.data.genre.tv.remote.TvGenreRemoteDataSource
 import core.data.mapper.toGenre
 import core.domain.genre.models.Genre
-import core.domain.genre.tv.repository.TvGenreRepository
+import core.domain.genre.tv.TvGenreRepository
 
 class TvGenreRepoImpl(
     private val tvGenreRemoteDataSource: TvGenreRemoteDataSource

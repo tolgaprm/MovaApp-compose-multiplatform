@@ -1,7 +1,7 @@
 package core.data.mapper
 
-import core.data.movie.dto.MovieDto
-import core.domain.movie.models.Movie
+import core.data.movie.MovieDto
+import core.domain.movie.Movie
 import core.domain.util.GenreUtil
 
 fun MovieDto.toMovie(): Movie {

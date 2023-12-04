@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
-import core.domain.movie.models.Movie
+import core.domain.movie.Movie
 import core.presentation.components.MPagingRowList
 import core.presentation.components.MovieItem
 

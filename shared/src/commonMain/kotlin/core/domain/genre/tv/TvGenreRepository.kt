@@ -1,4 +1,4 @@
-package core.domain.genre.tv.repository
+package core.domain.genre.tv
 
 import core.domain.genre.models.Genre
 

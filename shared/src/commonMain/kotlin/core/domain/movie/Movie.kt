@@ -1,4 +1,4 @@
-package core.domain.movie.models
+package core.domain.movie
 
 import core.domain.util.GenreUtil
 

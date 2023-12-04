@@ -1,9 +1,8 @@
-package core.data.genre.movie.repository
+package core.data.genre.movie
 
-import core.data.genre.movie.remote.MovieGenreRemoteDataSource
 import core.data.mapper.toGenre
 import core.domain.genre.models.Genre
-import core.domain.genre.movie.repository.MovieGenreRepository
+import core.domain.genre.movie.MovieGenreRepository
 
 class MovieGenreRepoImpl(
     private val movieGenreRemoteDataSource: MovieGenreRemoteDataSource

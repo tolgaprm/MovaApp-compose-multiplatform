@@ -4,7 +4,7 @@ import app.cash.paging.PagingData
 import app.cash.paging.map
 import core.common.Resource
 import core.domain.genre.models.Genre
-import core.domain.movie.models.Movie
+import core.domain.movie.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 

@@ -1,7 +1,7 @@
-package feature_home.domain.repository
+package feature_home.domain.movie
 
 import app.cash.paging.PagingData
-import core.domain.movie.models.Movie
+import core.domain.movie.Movie
 import kotlinx.coroutines.flow.Flow
 
 interface HomeMovieRepository {

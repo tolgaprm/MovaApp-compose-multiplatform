@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import core.common.ImageSize
-import core.domain.movie.models.Movie
+import core.domain.movie.Movie
 import core.presentation.components.MovaImage
 import core.presentation.components.RatingStats
 

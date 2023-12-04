@@ -1,4 +1,4 @@
-package core.domain.genre.movie.repository
+package core.domain.genre.movie
 
 import core.domain.genre.models.Genre
 

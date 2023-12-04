@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.ui.Modifier
 import app.cash.paging.compose.LazyPagingItems
-import core.domain.movie.models.Movie
+import core.domain.movie.Movie
 
 @Suppress("functionName")
 fun LazyListScope.NowPlayingSection(

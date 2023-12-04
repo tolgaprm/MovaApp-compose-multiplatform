@@ -1,4 +1,4 @@
-package core.data.movie.dto
+package core.data.movie
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

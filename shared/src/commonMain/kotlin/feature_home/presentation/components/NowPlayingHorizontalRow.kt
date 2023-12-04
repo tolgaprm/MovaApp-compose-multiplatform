@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
-import core.domain.movie.models.Movie
+import core.domain.movie.Movie
 import core.presentation.components.HandlePagingLoadState
 import core.presentation.components.NotLoadingStateView
 

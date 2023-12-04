@@ -1,11 +1,11 @@
-package feature_home.domain.usecase
+package feature_home.domain.movie.usecase
 
 import app.cash.paging.PagingData
 import core.common.Resource
 import core.domain.genre.movie.usecase.GetMovieGenreListUseCase
-import core.domain.movie.models.Movie
+import core.domain.movie.Movie
 import core.domain.util.combineMovieAndGenreReturnResourceFlow
-import feature_home.domain.repository.HomeMovieRepository
+import feature_home.domain.movie.HomeMovieRepository
 import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

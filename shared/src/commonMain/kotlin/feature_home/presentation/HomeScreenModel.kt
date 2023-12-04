@@ -1,9 +1,9 @@
 package feature_home.presentation
 
 import cafe.adriel.voyager.core.model.ScreenModel
-import feature_home.domain.usecase.GetNowPlayingMoviesUseCase
-import feature_home.domain.usecase.GetPopularMoviesUseCase
-import feature_home.domain.usecase.GetTopRatedMoviesUseCase
+import feature_home.domain.movie.usecase.GetNowPlayingMoviesUseCase
+import feature_home.domain.movie.usecase.GetPopularMoviesUseCase
+import feature_home.domain.movie.usecase.GetTopRatedMoviesUseCase
 
 class HomeScreenModel(
     getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase,

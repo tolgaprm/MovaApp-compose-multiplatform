@@ -2,7 +2,7 @@ package core.domain.genre.tv.usecase
 
 import core.common.Resource
 import core.domain.genre.models.Genre
-import core.domain.genre.tv.repository.TvGenreRepository
+import core.domain.genre.tv.TvGenreRepository
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

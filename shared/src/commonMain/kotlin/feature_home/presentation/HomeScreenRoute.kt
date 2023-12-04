@@ -18,7 +18,7 @@ import app.cash.paging.compose.collectAsLazyPagingItems
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
-import core.domain.movie.models.Movie
+import core.domain.movie.Movie
 import feature_home.presentation.components.MoviesSection
 import feature_home.presentation.components.NowPlayingSection
 
