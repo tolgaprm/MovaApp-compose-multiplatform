@@ -20,7 +20,8 @@ import core.domain.tvseries.TvSeries
 
 @Composable
 fun MovieItem(
-    modifier: Modifier = Modifier, movie: Movie
+    modifier: Modifier = Modifier,
+    movie: Movie
 ) {
     MediaItem(
         modifier = modifier,
@@ -87,6 +88,7 @@ private fun MediaItem(
             RatingStats(
                 voteAverage = voteAverage,
                 formattedVoteCount = formattedVoteCount,
+                textColor = MaterialTheme.colorScheme.onSecondaryContainer
             )
         }
     }

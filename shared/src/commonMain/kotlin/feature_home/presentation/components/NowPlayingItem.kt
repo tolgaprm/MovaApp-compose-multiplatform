@@ -28,14 +28,14 @@ import core.presentation.components.RatingStats
 @Composable
 fun NowPlayingItem(
     movie: Movie,
-    onClickMovie: (Int) -> Unit,
+    onClickMovie: (Movie) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier
             .width(400.dp)
             .fillMaxHeight()
-            .clickable(onClick = { onClickMovie(movie.id) })
+            .clickable(onClick = { onClickMovie(movie) })
     ) {
         MovaImage(
             imageUrl = movie.posterPath,
@@ -90,7 +90,8 @@ private fun BoxScope.NowPlayingItemContent(
 
         RatingStats(
             formattedVoteCount = movie.formattedVoteCount,
-            voteAverage = movie.voteAverage
+            voteAverage = movie.voteAverage,
+            textColor = Color.White
         )
     }
 }

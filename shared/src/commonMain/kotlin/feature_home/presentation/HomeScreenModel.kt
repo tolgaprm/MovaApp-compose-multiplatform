@@ -1,22 +1,38 @@
 package feature_home.presentation
 
-import cafe.adriel.voyager.core.model.ScreenModel
-import core.domain.genre.tv.usecase.GetTopRatedTvSeriesUseCase
-import feature_home.domain.movie.usecase.GetNowPlayingMoviesUseCase
-import feature_home.domain.movie.usecase.GetPopularMoviesUseCase
-import feature_home.domain.movie.usecase.GetTopRatedMoviesUseCase
-import feature_home.domain.tv.usecase.GetPopularTvSeriesUseCase
+import core.presentation.base.BaseScreenModel
+import feature_home.domain.usecase.HomeUseCases
+import kotlinx.coroutines.flow.update
 
 class HomeScreenModel(
-    getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase,
-    getPopularMoviesUseCase: GetPopularMoviesUseCase,
-    getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
-    getPopularTvSeriesUseCase: GetPopularTvSeriesUseCase,
-    getTopRatedTvSeriesUseCase: GetTopRatedTvSeriesUseCase
-) : ScreenModel {
-    val nowPlayingMovies = getNowPlayingMoviesUseCase()
-    val popularMovies = getPopularMoviesUseCase()
-    val topRatedMovies = getTopRatedMoviesUseCase()
-    val popularTvSeries = getPopularTvSeriesUseCase()
-    val topRatedTvSeries = getTopRatedTvSeriesUseCase()
+    homeUseCases: HomeUseCases
+) : BaseScreenModel<HomeScreenUiState, HomeScreenEvent>(HomeScreenUiState()) {
+
+    val nowPlayingMovies = homeUseCases.getNowPlayingMoviesUseCase()
+    val popularMovies = homeUseCases.getPopularMoviesUseCase()
+    val topRatedMovies = homeUseCases.getTopRatedMoviesUseCase()
+    val popularTvSeries = homeUseCases.getPopularTvSeriesUseCase()
+    val topRatedTvSeries = homeUseCases.getTopRatedTvSeriesUseCase()
+
+    override fun onEvent(event: HomeScreenEvent) {
+        when (event) {
+            is HomeScreenEvent.OnMovieSelected -> {
+                mutableState.update {
+                    it.copy(
+                        selectedMovie = event.movie,
+                        selectedTvSeries = null
+                    )
+                }
+            }
+
+            is HomeScreenEvent.OnTvSeriesSelected -> {
+                mutableState.update {
+                    it.copy(
+                        selectedTvSeries = event.tvSeries,
+                        selectedMovie = null
+                    )
+                }
+            }
+        }
+    }
 }

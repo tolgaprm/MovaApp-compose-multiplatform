@@ -1,4 +1,4 @@
-package feature_home.presentation.components
+package feature_home.presentation.components.section
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

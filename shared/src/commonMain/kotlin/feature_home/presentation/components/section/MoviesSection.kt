@@ -1,5 +1,6 @@
-package feature_home.presentation.components
+package feature_home.presentation.components.section
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListScope
@@ -17,6 +18,7 @@ fun LazyListScope.MoviesSection(
     modifier: Modifier = Modifier,
     movies: LazyPagingItems<Movie>?,
     title: String,
+    onClicked: (Movie) -> Unit
 ) {
     item {
         HomeFilmSection(
@@ -29,7 +31,10 @@ fun LazyListScope.MoviesSection(
                 modifier = Modifier.fillMaxSize(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) { movie ->
-                MovieItem(movie = movie)
+                MovieItem(
+                    modifier = Modifier.clickable { onClicked(movie) },
+                    movie = movie
+                )
             }
         }
     }
@@ -40,6 +45,7 @@ fun LazyListScope.TvSeriesSection(
     modifier: Modifier = Modifier,
     tvSeriesPagingData: LazyPagingItems<TvSeries>?,
     title: String,
+    onClicked: (TvSeries) -> Unit
 ) {
     item {
         HomeFilmSection(
@@ -52,7 +58,10 @@ fun LazyListScope.TvSeriesSection(
                 modifier = Modifier.fillMaxSize(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) { tvSeries ->
-                TvSeriesItem(tvSeries = tvSeries)
+                TvSeriesItem(
+                    modifier = Modifier.clickable { onClicked(tvSeries) },
+                    tvSeries = tvSeries
+                )
             }
         }
     }

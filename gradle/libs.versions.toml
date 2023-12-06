@@ -19,6 +19,7 @@ turbine-version = "0.7.0"
 voyager-version = "1.0.0-rc10"
 ## AndroidApp Dependencies Version
 splash-screen-version = "1.0.1"
+lifecycle-runtime-compose = "2.6.2"
 
 [libraries]
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose-version" }
@@ -43,6 +44,7 @@ voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", v
 voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager-version" }
 ## AndroidApp Dependencies
 splash-screen = { module = "androidx.core:core-splashscreen", version.ref = "splash-screen-version" }
+android-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-runtime-compose" }
 
 [bundles]
 voyager = [

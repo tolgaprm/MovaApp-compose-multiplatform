@@ -1,14 +1,19 @@
 package feature_home.presentation
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.BottomSheetScaffoldState
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.rememberBottomSheetScaffoldState
+import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
@@ -20,28 +25,58 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import core.domain.movie.Movie
 import core.domain.tvseries.TvSeries
-import feature_home.presentation.components.MoviesSection
-import feature_home.presentation.components.NowPlayingSection
-import feature_home.presentation.components.TvSeriesSection
+import core.presentation.util.collectAsStateWithLifecycleM
+import feature_home.presentation.components.HomeScreenBottomSheet
+import feature_home.presentation.components.HomeScreenContent
+import kotlinx.coroutines.launch
 
 object HomeScreenRoute : Tab {
 
+    @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
         val homeScreenModel = getScreenModel<HomeScreenModel>()
         val nowPlayingMovies = homeScreenModel.nowPlayingMovies.data?.collectAsLazyPagingItems()
         val popularMovies = homeScreenModel.popularMovies.data?.collectAsLazyPagingItems()
-        val topRatedMovies =
-            homeScreenModel.topRatedMovies.data?.collectAsLazyPagingItems()
+        val topRatedMovies = homeScreenModel.topRatedMovies.data?.collectAsLazyPagingItems()
         val popularTvSeries = homeScreenModel.popularTvSeries.data?.collectAsLazyPagingItems()
         val topRatedTvSeries = homeScreenModel.topRatedTvSeries.data?.collectAsLazyPagingItems()
+
+        val uiState = homeScreenModel.state.collectAsStateWithLifecycleM()
+
+        val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
+            bottomSheetState = rememberStandardBottomSheetState(
+                skipHiddenState = false
+            )
+        )
+        val coroutineScope = rememberCoroutineScope()
 
         HomeScreen(
             nowPlayingMovies = nowPlayingMovies,
             popularMovies = popularMovies,
             topRatedMovies = topRatedMovies,
             popularTvSeries = popularTvSeries,
-            topRatedTvSeries = topRatedTvSeries
+            topRatedTvSeries = topRatedTvSeries,
+            scaffoldState = bottomSheetScaffoldState,
+            selectedMovie = uiState.selectedMovie,
+            selectedTvSeries = uiState.selectedTvSeries,
+            onClickedMovie = { movie ->
+                homeScreenModel.onEvent(HomeScreenEvent.OnMovieSelected(movie))
+                coroutineScope.launch {
+                    bottomSheetScaffoldState.bottomSheetState.expand()
+                }
+            },
+            onClickedTvSeries = { tvSeries ->
+                homeScreenModel.onEvent(HomeScreenEvent.OnTvSeriesSelected(tvSeries))
+                coroutineScope.launch {
+                    bottomSheetScaffoldState.bottomSheetState.expand()
+                }
+            },
+            onClickCloseBottomSheet = {
+                coroutineScope.launch {
+                    bottomSheetScaffoldState.bottomSheetState.hide()
+                }
+            }
         )
     }
 
@@ -63,6 +98,7 @@ object HomeScreenRoute : Tab {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -70,21 +106,38 @@ private fun HomeScreen(
     popularMovies: LazyPagingItems<Movie>?,
     topRatedMovies: LazyPagingItems<Movie>?,
     popularTvSeries: LazyPagingItems<TvSeries>?,
-    topRatedTvSeries: LazyPagingItems<TvSeries>?
+    topRatedTvSeries: LazyPagingItems<TvSeries>?,
+    scaffoldState: BottomSheetScaffoldState,
+    selectedMovie: Movie? = null,
+    selectedTvSeries: TvSeries? = null,
+    onClickedMovie: (Movie) -> Unit,
+    onClickedTvSeries: (TvSeries) -> Unit,
+    onClickCloseBottomSheet: () -> Unit
 ) {
-    LazyColumn(
-        contentPadding = PaddingValues(16.dp),
+    BottomSheetScaffold(
         modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        NowPlayingSection(nowPlayingMovies = nowPlayingMovies)
-
-        MoviesSection(movies = popularMovies, title = "Popular Movies")
-
-        TvSeriesSection(tvSeriesPagingData = popularTvSeries, title = "Popular Tv Series")
-
-        MoviesSection(movies = topRatedMovies, title = "Top Rated Movies")
-
-        TvSeriesSection(tvSeriesPagingData = topRatedTvSeries, title = "Top Rated Tv Series")
-    }
+        sheetPeekHeight = 0.dp,
+        sheetContent = {
+            HomeScreenBottomSheet(
+                modifier = Modifier.fillMaxWidth(),
+                selectedMovie = selectedMovie,
+                selectedTvSeries = selectedTvSeries,
+                onClickClose = onClickCloseBottomSheet
+            )
+        },
+        sheetContainerColor = MaterialTheme.colorScheme.background,
+        sheetContentColor = MaterialTheme.colorScheme.onBackground,
+        scaffoldState = scaffoldState,
+        content = {
+            HomeScreenContent(
+                nowPlayingMovies = nowPlayingMovies,
+                popularMovies = popularMovies,
+                topRatedMovies = topRatedMovies,
+                popularTvSeries = popularTvSeries,
+                topRatedTvSeries = topRatedTvSeries,
+                onClickedMovie = onClickedMovie,
+                onClickedTvSeries = onClickedTvSeries
+            )
+        }
+    )
 }

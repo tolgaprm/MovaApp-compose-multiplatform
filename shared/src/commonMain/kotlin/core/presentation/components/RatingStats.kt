@@ -15,7 +15,8 @@ import androidx.compose.ui.unit.dp
 fun RatingStats(
     modifier: Modifier = Modifier,
     formattedVoteCount: String,
-    voteAverage: Double
+    voteAverage: Double,
+    textColor: Color
 ) {
     Row(
         modifier = modifier,
@@ -28,6 +29,7 @@ fun RatingStats(
         Text(
             text = "$voteAverage ($formattedVoteCount)",
             modifier = Modifier.padding(start = 4.dp),
+            color = textColor
         )
     }
 }

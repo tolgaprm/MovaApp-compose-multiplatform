@@ -27,7 +27,7 @@ fun NowPlayingHorizontalRowPager(
     verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Center,
     nowPlayingPagingItems: LazyPagingItems<Movie>? = null,
-    onClickMovie: (movieId: Int) -> Unit
+    onClickMovie: (Movie) -> Unit
 ) {
     LazyRow(
         modifier = modifier,
