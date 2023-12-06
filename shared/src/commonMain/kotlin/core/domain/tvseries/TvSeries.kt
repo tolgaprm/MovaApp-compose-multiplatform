@@ -1,12 +1,12 @@
-package core.domain.movie
+package core.domain.tvseries
 
-data class Movie(
+data class TvSeries(
     val id: Int,
-    val genreIds: List<Int>,
-    val title: String,
-    val overview: String,
+    val name: String,
     val posterPath: String?,
+    val overview: String,
     val releaseDate: String,
+    val genreIds: List<Int>,
     val voteAverage: Double,
     val formattedVoteCount: String,
     val genresBySeparatedByComma: String? = null

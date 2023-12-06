@@ -1,6 +1,6 @@
 package core.data.genre.movie
 
-import core.data.mapper.toGenre
+import core.data.genre.toGenre
 import core.domain.genre.models.Genre
 import core.domain.genre.movie.MovieGenreRepository
 

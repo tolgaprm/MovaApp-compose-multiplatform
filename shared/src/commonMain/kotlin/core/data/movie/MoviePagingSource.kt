@@ -1,6 +1,5 @@
 package core.data.movie
 
-import core.data.mapper.toMovie
 import core.data.util.BasePagingSource
 import core.domain.movie.Movie
 

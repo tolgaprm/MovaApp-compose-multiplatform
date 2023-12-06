@@ -2,7 +2,7 @@ package core.domain.util
 
 import core.domain.genre.models.Genre
 
-object GenreUtil {
+object MovaUtil {
     fun getGenresBySeparatedByComma(genreIds: List<Int>, genres: List<Genre>?): String {
         if (genres == null) return ""
         return genreIds.joinToString(", ") { genreId ->
@@ -10,7 +10,8 @@ object GenreUtil {
         }
     }
 
-    fun formatVoteCount(voteCount: Int): String {
+    fun formatVoteCount(voteCount: Int?): String {
+        if (voteCount == null) return ""
         if (voteCount < 1000) return voteCount.toString()
         val voteAverageInThousand = voteCount / 1000
         return "${voteAverageInThousand}k"

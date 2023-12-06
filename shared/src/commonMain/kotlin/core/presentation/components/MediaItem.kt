@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import core.domain.movie.Movie
+import core.domain.tvseries.TvSeries
 
 @Composable
 fun MovieItem(
@@ -28,6 +29,21 @@ fun MovieItem(
         year = movie.releaseDate,
         voteAverage = movie.voteAverage,
         formattedVoteCount = movie.formattedVoteCount,
+    )
+}
+
+@Composable
+fun TvSeriesItem(
+    modifier: Modifier = Modifier,
+    tvSeries: TvSeries
+) {
+    MediaItem(
+        modifier = modifier,
+        posterImageUrl = tvSeries.posterPath,
+        title = tvSeries.name,
+        year = tvSeries.releaseDate,
+        voteAverage = tvSeries.voteAverage,
+        formattedVoteCount = tvSeries.formattedVoteCount,
     )
 }
 
