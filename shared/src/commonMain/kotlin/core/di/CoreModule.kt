@@ -1,13 +1,14 @@
 package core.di
 
 import core.common.TMDBConstants
-import core.data.genre.movie.remote.MovieGenreRemoteDataSource
-import core.data.genre.movie.repository.MovieGenreRepoImpl
-import core.data.genre.tv.remote.TvGenreRemoteDataSource
-import core.data.genre.tv.repository.TvGenreRepoImpl
-import core.domain.genre.movie.repository.MovieGenreRepository
+import core.data.genre.movie.MovieGenreRemoteDataSource
+import core.data.genre.movie.MovieGenreRepoImpl
+import core.data.genre.tv.TvGenreRemoteDataSource
+import core.data.genre.tv.TvGenreRepoImpl
+import core.domain.genre.movie.MovieGenreRepository
 import core.domain.genre.movie.usecase.GetMovieGenreListUseCase
-import core.domain.genre.tv.repository.TvGenreRepository
+import core.domain.genre.tv.TvGenreRepository
+import core.domain.genre.tv.usecase.GetTvGenreListUseCase
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -24,6 +25,7 @@ val coreModule = module {
     single<MovieGenreRepository> { MovieGenreRepoImpl(get()) }
     single<TvGenreRepository> { TvGenreRepoImpl(get()) }
     factory { GetMovieGenreListUseCase() }
+    factory { GetTvGenreListUseCase() }
 }
 
 private fun createHttpClient(

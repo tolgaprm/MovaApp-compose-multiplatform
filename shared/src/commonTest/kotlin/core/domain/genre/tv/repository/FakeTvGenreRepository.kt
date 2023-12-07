@@ -2,6 +2,7 @@ package core.domain.genre.tv.repository
 
 import core.domain.genre.CoreTestConstants
 import core.domain.genre.models.Genre
+import core.domain.genre.tv.TvGenreRepository
 
 class FakeTvGenreRepository : TvGenreRepository {
     override suspend fun getTvGenreList(language: String): List<Genre> {

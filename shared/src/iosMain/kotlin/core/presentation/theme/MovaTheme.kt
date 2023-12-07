@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 
 @Composable
@@ -12,14 +13,18 @@ actual fun MovaTheme(
     dynamicColor: Boolean,
     content: @Composable () -> Unit
 ) {
-    MaterialTheme(
-        if (darkTheme) darkSchemeColors else lightSchemeColors
+    CompositionLocalProvider(
+        LocalDimensions provides Dimensions()
     ) {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
+        MaterialTheme(
+            if (darkTheme) darkSchemeColors else lightSchemeColors
         ) {
-            content()
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colorScheme.background
+            ) {
+                content()
+            }
         }
     }
 }

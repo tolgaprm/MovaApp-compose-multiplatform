@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,11 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import core.domain.movie.models.Movie
+import core.domain.movie.Movie
+import core.domain.tvseries.TvSeries
+import core.presentation.theme.dimensions
 
 @Composable
 fun MovieItem(
-    modifier: Modifier = Modifier, movie: Movie
+    modifier: Modifier = Modifier,
+    movie: Movie
 ) {
     MediaItem(
         modifier = modifier,
@@ -28,6 +30,21 @@ fun MovieItem(
         year = movie.releaseDate,
         voteAverage = movie.voteAverage,
         formattedVoteCount = movie.formattedVoteCount,
+    )
+}
+
+@Composable
+fun TvSeriesItem(
+    modifier: Modifier = Modifier,
+    tvSeries: TvSeries
+) {
+    MediaItem(
+        modifier = modifier,
+        posterImageUrl = tvSeries.posterPath,
+        title = tvSeries.name,
+        year = tvSeries.releaseDate,
+        voteAverage = tvSeries.voteAverage,
+        formattedVoteCount = tvSeries.formattedVoteCount,
     )
 }
 
@@ -41,7 +58,7 @@ private fun MediaItem(
     formattedVoteCount: String,
 ) {
     Column(
-        modifier = modifier.clip(RoundedCornerShape(8.dp))
+        modifier = modifier.clip(MaterialTheme.shapes.small)
             .width(165.dp)
     ) {
         MovaImage(
@@ -49,12 +66,13 @@ private fun MediaItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp)
+                .background(MaterialTheme.colorScheme.secondaryContainer)
         )
         Column(
             modifier = Modifier.fillMaxWidth()
                 .background(MaterialTheme.colorScheme.secondaryContainer)
-                .padding(8.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+                .padding(MaterialTheme.dimensions.twoLevel),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.oneLevel)
         ) {
             Text(
                 title,
@@ -70,6 +88,7 @@ private fun MediaItem(
             RatingStats(
                 voteAverage = voteAverage,
                 formattedVoteCount = formattedVoteCount,
+                textColor = MaterialTheme.colorScheme.onSecondaryContainer
             )
         }
     }

@@ -60,6 +60,7 @@ kotlin {
                 api(libs.appcompat)
                 api(libs.core.ktx)
                 implementation(libs.ktor.client.okhttp)
+                implementation(libs.android.lifecycle.runtime.compose)
             }
         }
         val iosX64Main by getting

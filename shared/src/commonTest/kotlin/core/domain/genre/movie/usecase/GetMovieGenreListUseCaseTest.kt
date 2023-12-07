@@ -7,7 +7,7 @@ import assertk.assertions.isInstanceOf
 import core.common.Resource
 import core.domain.genre.CoreTestConstants
 import core.domain.genre.movie.repository.FakeMovieGenreRepository
-import core.domain.genre.movie.repository.MovieGenreRepository
+import core.domain.genre.movie.MovieGenreRepository
 import kotlinx.coroutines.runBlocking
 import org.koin.core.context.startKoin
 import org.koin.dsl.module

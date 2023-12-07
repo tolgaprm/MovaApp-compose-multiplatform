@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
-import core.domain.movie.models.Movie
+import core.domain.movie.Movie
 import core.presentation.components.HandlePagingLoadState
 import core.presentation.components.NotLoadingStateView
 
@@ -27,7 +27,7 @@ fun NowPlayingHorizontalRowPager(
     verticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Center,
     nowPlayingPagingItems: LazyPagingItems<Movie>? = null,
-    onClickMovie: (movieId: Int) -> Unit
+    onClickMovie: (Movie) -> Unit
 ) {
     LazyRow(
         modifier = modifier,
