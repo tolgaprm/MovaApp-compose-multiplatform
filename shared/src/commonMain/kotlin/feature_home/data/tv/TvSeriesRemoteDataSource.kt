@@ -19,7 +19,7 @@ class TvSeriesRemoteDataSource(
     ): ApiResponse<TvSeriesDto> {
         return withContext(dispatcherProvider.IO) {
             tryResult {
-                httpClient.get("tv/popular") {
+                httpClient.get(TV_POPULAR) {
                     addCommonParameters(language = language, page = page)
                 }
             }
@@ -32,10 +32,15 @@ class TvSeriesRemoteDataSource(
     ): ApiResponse<TvSeriesDto> {
         return withContext(dispatcherProvider.IO) {
             tryResult {
-                httpClient.get("tv/top_rated") {
+                httpClient.get(TV_TOP_RATED) {
                     addCommonParameters(language = language, page = page)
                 }
             }
         }
+    }
+
+    companion object {
+        const val TV_POPULAR = "tv/popular"
+        const val TV_TOP_RATED = "tv/top_rated"
     }
 }

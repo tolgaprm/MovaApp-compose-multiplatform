@@ -19,7 +19,7 @@ class MovieRemoteDataSource(
     ): ApiResponse<MovieDto> {
         return withContext(dispatcherProvider.IO) {
             tryResult<ApiResponse<MovieDto>> {
-                httpClient.get("movie/now_playing") {
+                httpClient.get(MOVIE_NOW_PLAYING) {
                     addCommonParameters(language = language, page = page)
                 }
             }
@@ -32,7 +32,7 @@ class MovieRemoteDataSource(
     ): ApiResponse<MovieDto> {
         return withContext(dispatcherProvider.IO) {
             tryResult {
-                httpClient.get("movie/popular") {
+                httpClient.get(MOVIE_POPULAR) {
                     addCommonParameters(language = language, page = page)
                 }
             }
@@ -45,10 +45,16 @@ class MovieRemoteDataSource(
     ): ApiResponse<MovieDto> {
         return withContext(dispatcherProvider.IO) {
             tryResult {
-                httpClient.get("movie/top_rated") {
+                httpClient.get(MOVIE_TOP_RATED) {
                     addCommonParameters(language = language, page = page)
                 }
             }
         }
+    }
+
+    companion object {
+        const val MOVIE_NOW_PLAYING = "movie/now_playing"
+        const val MOVIE_POPULAR = "movie/popular"
+        const val MOVIE_TOP_RATED = "movie/top_rated"
     }
 }
