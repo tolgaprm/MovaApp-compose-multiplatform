@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowRight
 import androidx.compose.material.icons.rounded.Close
@@ -29,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import core.domain.movie.Movie
 import core.domain.tvseries.TvSeries
 import core.presentation.components.MovaImage
+import core.presentation.theme.dimensions
 
 @Composable
 fun HomeScreenBottomSheet(
@@ -39,8 +39,8 @@ fun HomeScreenBottomSheet(
 ) {
     Column(
         modifier = modifier
-            .padding(horizontal = 16.dp)
-            .padding(bottom = 16.dp)
+            .padding(horizontal = MaterialTheme.dimensions.fourLevel)
+            .padding(bottom = MaterialTheme.dimensions.fourLevel)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -50,12 +50,15 @@ fun HomeScreenBottomSheet(
                 imageUrl = selectedMovie?.posterPath ?: selectedTvSeries?.posterPath ?: "",
                 modifier = Modifier.height(220.dp)
                     .width(120.dp)
-                    .clip(RoundedCornerShape(8.dp))
+                    .clip(MaterialTheme.shapes.small)
             )
 
             Column(
                 modifier = Modifier
-                    .padding(start = 16.dp, end = 8.dp)
+                    .padding(
+                        start = MaterialTheme.dimensions.fourLevel,
+                        end = MaterialTheme.dimensions.twoLevel
+                    )
             ) {
                 BottomSheetTop(
                     modifier = Modifier.fillMaxWidth(),
@@ -67,7 +70,7 @@ fun HomeScreenBottomSheet(
                     text = selectedMovie?.releaseDate ?: selectedTvSeries?.releaseDate ?: "",
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.6f),
-                    modifier = Modifier.padding(bottom = 12.dp)
+                    modifier = Modifier.padding(bottom = MaterialTheme.dimensions.threeLevel)
                 )
 
                 Text(
@@ -80,7 +83,7 @@ fun HomeScreenBottomSheet(
 
         BottomSheetButton(
             modifier = Modifier
-                .padding(top = 16.dp)
+                .padding(top = MaterialTheme.dimensions.fourLevel)
                 .fillMaxWidth(),
             buttonText = selectedMovie?.let {
                 "Details and More"
@@ -114,7 +117,7 @@ private fun BottomSheetTop(
         IconButton(
             onClick = onClickClose,
             modifier = Modifier
-                .clip(RoundedCornerShape(8.dp))
+                .clip(MaterialTheme.shapes.small)
                 .background(MaterialTheme.colorScheme.secondaryContainer)
                 .weight(2f)
 
@@ -136,14 +139,14 @@ private fun BottomSheetButton(
 ) {
     Row(
         modifier = modifier
-            .clip(RoundedCornerShape(16.dp))
+            .clip(MaterialTheme.shapes.large)
             .clickable(onClick = onClicked)
             .background(MaterialTheme.colorScheme.secondaryContainer)
-            .padding(16.dp),
+            .padding(MaterialTheme.dimensions.fourLevel),
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.twoLevel)
         ) {
             Icon(
                 imageVector = Icons.Rounded.Details,
@@ -154,7 +157,7 @@ private fun BottomSheetButton(
             Text(
                 text = buttonText,
                 style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(start = 8.dp)
+                modifier = Modifier.padding(start = MaterialTheme.dimensions.twoLevel)
             )
         }
         Icon(

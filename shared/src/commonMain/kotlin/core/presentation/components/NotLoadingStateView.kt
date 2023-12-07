@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import core.presentation.theme.dimensions
 
 @Composable
 fun NotLoadingStateView(modifier: Modifier = Modifier) {
@@ -19,7 +19,7 @@ fun NotLoadingStateView(modifier: Modifier = Modifier) {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            modifier = Modifier.padding(vertical = 16.dp),
+            modifier = Modifier.padding(vertical = MaterialTheme.dimensions.fourLevel),
             text = "No items found",
             textAlign = TextAlign.Center
         )

@@ -4,17 +4,18 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
 import core.domain.movie.Movie
 import core.domain.tvseries.TvSeries
 import core.presentation.components.MPagingRowList
 import core.presentation.components.MovieItem
 import core.presentation.components.TvSeriesItem
+import core.presentation.theme.dimensions
 
 @Suppress("functionName")
-fun LazyListScope.MoviesSection(
+fun LazyListScope.MoviesSectionWithTitle(
     modifier: Modifier = Modifier,
     movies: LazyPagingItems<Movie>?,
     title: String,
@@ -29,7 +30,7 @@ fun LazyListScope.MoviesSection(
             MPagingRowList(
                 pagingItems = movies,
                 modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.threeLevel)
             ) { movie ->
                 MovieItem(
                     modifier = Modifier.clickable { onClicked(movie) },
@@ -41,7 +42,7 @@ fun LazyListScope.MoviesSection(
 }
 
 @Suppress("functionName")
-fun LazyListScope.TvSeriesSection(
+fun LazyListScope.TvSeriesSectionWithTitle(
     modifier: Modifier = Modifier,
     tvSeriesPagingData: LazyPagingItems<TvSeries>?,
     title: String,
@@ -56,7 +57,7 @@ fun LazyListScope.TvSeriesSection(
             MPagingRowList(
                 pagingItems = tvSeriesPagingData,
                 modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.threeLevel)
             ) { tvSeries ->
                 TvSeriesItem(
                     modifier = Modifier.clickable { onClicked(tvSeries) },

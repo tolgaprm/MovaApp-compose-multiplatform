@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import core.domain.movie.Movie
 import core.domain.tvseries.TvSeries
+import core.presentation.theme.dimensions
 
 @Composable
 fun MovieItem(
@@ -58,7 +58,7 @@ private fun MediaItem(
     formattedVoteCount: String,
 ) {
     Column(
-        modifier = modifier.clip(RoundedCornerShape(8.dp))
+        modifier = modifier.clip(MaterialTheme.shapes.small)
             .width(165.dp)
     ) {
         MovaImage(
@@ -71,8 +71,8 @@ private fun MediaItem(
         Column(
             modifier = Modifier.fillMaxWidth()
                 .background(MaterialTheme.colorScheme.secondaryContainer)
-                .padding(8.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+                .padding(MaterialTheme.dimensions.twoLevel),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.oneLevel)
         ) {
             Text(
                 title,

@@ -12,7 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import core.presentation.theme.dimensions
 
 @Composable
 fun HomeFilmSection(
@@ -26,7 +26,7 @@ fun HomeFilmSection(
     ) {
         Row(
             modifier = Modifier.fillMaxWidth()
-                .padding(bottom = 8.dp),
+                .padding(bottom = MaterialTheme.dimensions.twoLevel),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {

@@ -3,15 +3,16 @@ package feature_home.presentation.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
 import core.domain.movie.Movie
 import core.domain.tvseries.TvSeries
-import feature_home.presentation.components.section.MoviesSection
+import core.presentation.theme.dimensions
+import feature_home.presentation.components.section.MoviesSectionWithTitle
 import feature_home.presentation.components.section.NowPlayingSection
-import feature_home.presentation.components.section.TvSeriesSection
+import feature_home.presentation.components.section.TvSeriesSectionWithTitle
 
 @Composable
 fun HomeScreenContent(
@@ -25,34 +26,34 @@ fun HomeScreenContent(
     onClickedTvSeries: (TvSeries) -> Unit
 ) {
     LazyColumn(
-        contentPadding = PaddingValues(16.dp),
+        contentPadding = PaddingValues(MaterialTheme.dimensions.fourLevel),
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.fourLevel)
     ) {
         NowPlayingSection(
             nowPlayingMovies = nowPlayingMovies,
             onClickedMovie = onClickedMovie
         )
 
-        MoviesSection(
+        MoviesSectionWithTitle(
             movies = popularMovies,
             title = "Popular Movies",
             onClicked = onClickedMovie
         )
 
-        TvSeriesSection(
+        TvSeriesSectionWithTitle(
             tvSeriesPagingData = popularTvSeries,
             title = "Popular Tv Series",
             onClicked = onClickedTvSeries
         )
 
-        MoviesSection(
+        MoviesSectionWithTitle(
             movies = topRatedMovies,
             title = "Top Rated Movies",
             onClicked = onClickedMovie
         )
 
-        TvSeriesSection(
+        TvSeriesSectionWithTitle(
             tvSeriesPagingData = topRatedTvSeries,
             title = "Top Rated Tv Series",
             onClicked = onClickedTvSeries
