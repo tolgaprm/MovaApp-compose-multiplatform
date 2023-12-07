@@ -35,7 +35,8 @@ fun HomeScreenBottomSheet(
     modifier: Modifier,
     selectedMovie: Movie?,
     selectedTvSeries: TvSeries?,
-    onClickClose: () -> Unit
+    onClickClose: () -> Unit,
+    onClickedDetails: () -> Unit
 ) {
     Column(
         modifier = modifier
@@ -90,7 +91,7 @@ fun HomeScreenBottomSheet(
             } ?: selectedTvSeries?.let {
                 "Episodes and More"
             } ?: "",
-            onClicked = {}
+            onClicked = onClickedDetails
         )
     }
 }

@@ -11,6 +11,7 @@ import core.domain.genre.tv.TvGenreRepository
 import core.domain.genre.tv.usecase.GetTvGenreListUseCase
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.plugins.cache.HttpCache
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.http.takeFrom
@@ -37,6 +38,9 @@ private fun createHttpClient(
                 ignoreUnknownKeys = true
             }
         )
+    }
+
+    install(HttpCache) {
     }
 
     defaultRequest {

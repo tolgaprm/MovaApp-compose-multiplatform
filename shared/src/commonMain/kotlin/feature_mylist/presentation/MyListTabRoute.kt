@@ -1,10 +1,10 @@
-package feature_explore.presentation
+package feature_mylist.presentation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Explore
-import androidx.compose.material.icons.rounded.Explore
+import androidx.compose.material.icons.outlined.BookmarkBorder
+import androidx.compose.material.icons.rounded.Bookmark
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,38 +15,38 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 
-object ExploreScreenRoute : Tab {
+object MyListTabRoute : Tab {
 
     @Composable
     override fun Content() {
-        ExploreScreen()
+        MyListScreen()
     }
 
     override val options: TabOptions
         @Composable
         get() {
-            val icon = rememberVectorPainter(Icons.Rounded.Explore)
+            val icon = rememberVectorPainter(Icons.Rounded.Bookmark)
             return remember {
                 TabOptions(
                     icon = icon,
-                    title = "Explore",
-                    index = 1u
+                    title = "My List",
+                    index = 3u
                 )
             }
         }
 
     fun unselectedIcon(): ImageVector {
-        return Icons.Outlined.Explore
+        return Icons.Outlined.BookmarkBorder
     }
 }
 
 @Composable
-private fun ExploreScreen(modifier: Modifier = Modifier) {
+private fun MyListScreen(modifier: Modifier = Modifier) {
     Scaffold(
         modifier = modifier.fillMaxSize()
     ) {
         Text(
-            text = "Explore Screen",
+            text = "MyList Screen",
             modifier = Modifier.padding(it)
         )
     }
