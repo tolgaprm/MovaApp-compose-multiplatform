@@ -3,6 +3,7 @@ package core.domain.util
 import app.cash.paging.PagingData
 import app.cash.paging.map
 import core.common.Resource
+import core.data.util.MovaUtil
 import core.domain.genre.models.Genre
 import core.domain.movie.Movie
 import core.domain.tvseries.TvSeries

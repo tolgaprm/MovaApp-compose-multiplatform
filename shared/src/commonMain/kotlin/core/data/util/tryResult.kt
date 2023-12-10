@@ -5,7 +5,9 @@ import core.domain.error.ServiceUnavailableException
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.utils.io.errors.IOException
+import kotlin.coroutines.cancellation.CancellationException
 
+@Throws(ServiceUnavailableException::class, CancellationException::class)
 suspend inline fun <reified R> tryResult(
     block: () -> HttpResponse
 ): R {

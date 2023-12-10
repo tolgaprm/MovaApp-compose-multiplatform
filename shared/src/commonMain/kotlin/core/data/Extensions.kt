@@ -8,6 +8,17 @@ fun Int?.orZero(): Int = this ?: 0
 fun Double?.orZero(): Double = this ?: 0.0
 
 fun HttpRequestBuilder.addCommonParameters(language: String, page: Int) {
-    parameter("language", language)
-    parameter("page", page)
+    addLanguageParameter(language = language)
+    addPageParameter(page = page)
 }
+
+fun HttpRequestBuilder.addLanguageParameter(language: String) {
+    parameter(LANGUAGE_PARAM, language)
+}
+
+fun HttpRequestBuilder.addPageParameter(page: Int) {
+    parameter(PAGE_PARAM, page)
+}
+
+const val LANGUAGE_PARAM = "language"
+const val PAGE_PARAM = "page"
