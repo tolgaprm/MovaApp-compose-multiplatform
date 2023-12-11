@@ -26,8 +26,10 @@ object TabNavigationRoute : Screen {
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         val homeTab = HomeTabRoute(
-            onNavigateToDetail = {
-                navigator.push(DetailScreenRoute(mediaId = it))
+            onNavigateToDetail = { movieId, tvSeriesId ->
+                navigator.push(
+                    DetailScreenRoute(movieId = movieId, tvSeriesId = tvSeriesId)
+                )
             }
         )
 

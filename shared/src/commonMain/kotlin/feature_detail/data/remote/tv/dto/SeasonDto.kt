@@ -12,5 +12,5 @@ data class SeasonDto(
     val overview: String?,
     @SerialName("poster_path") val posterPath: String?,
     @SerialName("season_number") val seasonNumber: Int?,
-    @SerialName("vote_average") val voteAverage: Int?
+    @SerialName("vote_average") val voteAverage: Double?
 )

@@ -1,8 +1,8 @@
 package core.data.movie
 
 import core.data.orZero
+import core.data.util.MovaUtil
 import core.domain.movie.Movie
-import core.domain.util.MovaUtil
 
 fun MovieDto.toMovie(): Movie {
     return Movie(

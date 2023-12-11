@@ -20,5 +20,7 @@ fun HttpRequestBuilder.addPageParameter(page: Int) {
     parameter(PAGE_PARAM, page)
 }
 
+fun Boolean?.orFalse(): Boolean = this ?: false
+
 const val LANGUAGE_PARAM = "language"
 const val PAGE_PARAM = "page"

@@ -14,6 +14,7 @@ fun MovieDetailDto.toMovieDetail(): MovieDetail {
         releaseDate = releaseDate.orEmpty(),
         runtime = MovaUtil.convertRuntimeToInHoursAndMinutes(runtimeInMin = runtime),
         voteAverage = voteAverage.orZero(),
-        formattedVoteCount = MovaUtil.formatVoteCount(voteCount = voteCount)
+        formattedVoteCount = MovaUtil.formatVoteCount(voteCount = voteCount),
+        genresBySeparatedByComma = genres?.map { it.name }?.joinToString(", ")
     )
 }

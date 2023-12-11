@@ -28,7 +28,7 @@ val Typography = Typography(
     bodyMedium = TextStyle(
         fontFamily = FontFamily.MonospaceFont,
         fontWeight = FontWeight.Normal,
-        fontSize = 18.sp
+        fontSize = 16.sp
     ),
     labelMedium = TextStyle(
         fontFamily = FontFamily.MonospaceFont,

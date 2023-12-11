@@ -6,6 +6,6 @@ import feature_detail.domain.tv.model.TvSeriesDetail
 interface TvSeriesDetailRepository {
     suspend fun getTvSeriesDetail(
         id: Int,
-        language: String
+        language: String = "en"
     ): Resource<TvSeriesDetail>
 }

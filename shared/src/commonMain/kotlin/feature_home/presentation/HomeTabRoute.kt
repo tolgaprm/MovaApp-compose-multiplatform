@@ -30,8 +30,8 @@ import feature_home.presentation.components.HomeScreenBottomSheet
 import feature_home.presentation.components.HomeScreenContent
 import kotlinx.coroutines.launch
 
-class HomeTabRoute(
-    val onNavigateToDetail: (Int?) -> Unit = {},
+data class HomeTabRoute(
+    val onNavigateToDetail: (movieId: Int?, tvSeriesId: Int?) -> Unit,
 ) : Tab {
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -83,7 +83,10 @@ class HomeTabRoute(
                     bottomSheetScaffoldState.bottomSheetState.hide()
                 }
 
-                onNavigateToDetail(uiState.selectedMovie?.id ?: uiState.selectedTvSeries?.id)
+                onNavigateToDetail(
+                    uiState.selectedMovie?.id,
+                    uiState.selectedTvSeries?.id
+                )
             }
         )
     }

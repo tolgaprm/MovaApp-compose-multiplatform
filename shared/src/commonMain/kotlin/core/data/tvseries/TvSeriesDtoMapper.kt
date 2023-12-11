@@ -1,8 +1,8 @@
 package core.data.tvseries
 
 import core.data.orZero
+import core.data.util.MovaUtil
 import core.domain.tvseries.TvSeries
-import core.domain.util.MovaUtil
 
 fun TvSeriesDto.toTvSeries(): TvSeries {
     return TvSeries(
