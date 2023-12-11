@@ -1,4 +1,4 @@
-package core.domain.util
+package core.data.util
 
 import core.domain.genre.models.Genre
 
@@ -21,4 +21,17 @@ object MovaUtil {
         if (releaseDate == null) return ""
         return releaseDate.split("-").first()
     }
+
+    fun convertRuntimeToInHoursAndMinutes(runtimeInMin: Int?): Map<String, String> {
+        if (runtimeInMin == null) return mapOf()
+        val hour = runtimeInMin / 60
+        val minutes = runtimeInMin - (hour * 60)
+        return mapOf(
+            hourKey to hour.toString(),
+            minutesKey to minutes.toString()
+        )
+    }
 }
+
+const val hourKey = "hour"
+const val minutesKey = "minutes"

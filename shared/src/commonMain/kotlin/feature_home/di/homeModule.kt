@@ -13,17 +13,29 @@ import feature_home.domain.tv.HomeTvSeriesRepository
 import feature_home.domain.tv.usecase.GetPopularTvSeriesUseCase
 import feature_home.domain.usecase.HomeUseCases
 import feature_home.presentation.HomeScreenModel
+import org.koin.core.module.Module
 import org.koin.dsl.module
 
 val homeModule = module {
-    // Movie
+    moduleForMovies()
+    moduleForTvSeries()
+    moduleUseCases()
+
+    // ScreenModel
+    factory { HomeScreenModel(get()) }
+}
+
+private fun Module.moduleForMovies() {
     single { MovieRemoteDataSource(get(), get()) }
     single<HomeMovieRepository> { HomeMovieRepoImpl(get()) }
+}
 
-    // TvSeries
+private fun Module.moduleForTvSeries() {
     single { TvSeriesRemoteDataSource(get(), get()) }
     single<HomeTvSeriesRepository> { HomeTvSeriesRepositoryImpl(get()) }
+}
 
+private fun Module.moduleUseCases() {
     factory {
         HomeUseCases(
             getNowPlayingMoviesUseCase = GetNowPlayingMoviesUseCase(),
@@ -33,7 +45,4 @@ val homeModule = module {
             getTopRatedTvSeriesUseCase = GetTopRatedTvSeriesUseCase()
         )
     }
-
-    // ScreenModel
-    factory { HomeScreenModel(get()) }
 }

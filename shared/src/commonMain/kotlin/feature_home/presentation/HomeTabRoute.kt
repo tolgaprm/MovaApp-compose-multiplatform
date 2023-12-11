@@ -30,7 +30,9 @@ import feature_home.presentation.components.HomeScreenBottomSheet
 import feature_home.presentation.components.HomeScreenContent
 import kotlinx.coroutines.launch
 
-object HomeScreenRoute : Tab {
+data class HomeTabRoute(
+    val onNavigateToDetail: (movieId: Int?, tvSeriesId: Int?) -> Unit,
+) : Tab {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
@@ -51,8 +53,7 @@ object HomeScreenRoute : Tab {
         )
         val coroutineScope = rememberCoroutineScope()
 
-        HomeScreen(
-            nowPlayingMovies = nowPlayingMovies,
+        HomeScreen(nowPlayingMovies = nowPlayingMovies,
             popularMovies = popularMovies,
             topRatedMovies = topRatedMovies,
             popularTvSeries = popularTvSeries,
@@ -76,6 +77,16 @@ object HomeScreenRoute : Tab {
                 coroutineScope.launch {
                     bottomSheetScaffoldState.bottomSheetState.hide()
                 }
+            },
+            onClickedDetails = {
+                coroutineScope.launch {
+                    bottomSheetScaffoldState.bottomSheetState.hide()
+                }
+
+                onNavigateToDetail(
+                    uiState.selectedMovie?.id,
+                    uiState.selectedTvSeries?.id
+                )
             }
         )
     }
@@ -112,7 +123,8 @@ private fun HomeScreen(
     selectedTvSeries: TvSeries? = null,
     onClickedMovie: (Movie) -> Unit,
     onClickedTvSeries: (TvSeries) -> Unit,
-    onClickCloseBottomSheet: () -> Unit
+    onClickCloseBottomSheet: () -> Unit,
+    onClickedDetails: () -> Unit
 ) {
     BottomSheetScaffold(
         modifier = modifier.fillMaxSize(),
@@ -122,7 +134,8 @@ private fun HomeScreen(
                 modifier = Modifier.fillMaxWidth(),
                 selectedMovie = selectedMovie,
                 selectedTvSeries = selectedTvSeries,
-                onClickClose = onClickCloseBottomSheet
+                onClickClose = onClickCloseBottomSheet,
+                onClickedDetails = onClickedDetails
             )
         },
         sheetContainerColor = MaterialTheme.colorScheme.background,

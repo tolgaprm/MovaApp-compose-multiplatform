@@ -10,28 +10,40 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import feature_explore.presentation.ExploreScreenRoute
-import feature_home.presentation.HomeScreenRoute
-import feature_mylist.presentation.MyListScreenRoute
-import feature_upcoming.presentation.UpComingScreenRoute
+import feature_detail.presentation.DetailScreenRoute
+import feature_explore.presentation.ExploreTabRoute
+import feature_home.presentation.HomeTabRoute
+import feature_mylist.presentation.MyListTabRoute
+import feature_upcoming.presentation.UpComingTabRoute
 
 object TabNavigationRoute : Screen {
 
     @Composable
     override fun Content() {
-        TabNavigator(HomeScreenRoute) {
+        val navigator = LocalNavigator.currentOrThrow
+        val homeTab = HomeTabRoute(
+            onNavigateToDetail = { movieId, tvSeriesId ->
+                navigator.push(
+                    DetailScreenRoute(movieId = movieId, tvSeriesId = tvSeriesId)
+                )
+            }
+        )
+
+        TabNavigator(homeTab) {
             Scaffold(
                 bottomBar = {
                     NavigationBar(
                         modifier = Modifier.fillMaxWidth(),
                         containerColor = MaterialTheme.colorScheme.secondaryContainer
                     ) {
-                        TabNavigationItem(HomeScreenRoute, HomeScreenRoute.unselectedIcon())
-                        TabNavigationItem(ExploreScreenRoute, ExploreScreenRoute.unselectedIcon())
-                        TabNavigationItem(UpComingScreenRoute, UpComingScreenRoute.unselectedIcon())
-                        TabNavigationItem(MyListScreenRoute, MyListScreenRoute.unselectedIcon())
+                        TabNavigationItem(homeTab, homeTab.unselectedIcon())
+                        TabNavigationItem(ExploreTabRoute, ExploreTabRoute.unselectedIcon())
+                        TabNavigationItem(UpComingTabRoute, UpComingTabRoute.unselectedIcon())
+                        TabNavigationItem(MyListTabRoute, MyListTabRoute.unselectedIcon())
                     }
                 },
                 modifier = Modifier.fillMaxSize()

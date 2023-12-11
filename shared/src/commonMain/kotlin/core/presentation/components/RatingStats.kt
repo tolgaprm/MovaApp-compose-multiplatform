@@ -17,8 +17,14 @@ fun RatingStats(
     modifier: Modifier = Modifier,
     formattedVoteCount: String,
     voteAverage: Double,
-    textColor: Color
+    textColor: Color = MaterialTheme.colorScheme.onBackground,
+    isAddReviewText: Boolean = false
 ) {
+    val concatVoteCountAndVoteAverage = if (isAddReviewText) {
+        "$voteAverage ($formattedVoteCount reviews)"
+    } else {
+        "$voteAverage ($formattedVoteCount)"
+    }
     Row(
         modifier = modifier,
     ) {
@@ -28,7 +34,7 @@ fun RatingStats(
             tint = Color.Yellow
         )
         Text(
-            text = "$voteAverage ($formattedVoteCount)",
+            text = concatVoteCountAndVoteAverage,
             modifier = Modifier.padding(start = MaterialTheme.dimensions.oneLevel),
             color = textColor
         )
