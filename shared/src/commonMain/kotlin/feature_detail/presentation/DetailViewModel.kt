@@ -1,17 +1,17 @@
 package feature_detail.presentation
 
-import cafe.adriel.voyager.core.model.screenModelScope
-import core.presentation.base.BaseScreenModel
+import core.presentation.base.BaseViewModel
+import core.presentation.viewModelScope
 import feature_detail.domain.movie.MovieDetailRepository
 import feature_detail.domain.tv.TvSeriesDetailRepository
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class DetailScreenModel(
+class DetailViewModel(
     private val movieDetailRepository: MovieDetailRepository,
     private val tvSeriesDetailRepository: TvSeriesDetailRepository
 ) :
-    BaseScreenModel<DetailScreenUiState, DetailScreenEvent>(DetailScreenUiState.Loading) {
+    BaseViewModel<DetailScreenUiState, DetailScreenEvent>(DetailScreenUiState.Loading) {
     override fun onEvent(event: DetailScreenEvent) {
         when (event) {
             is DetailScreenEvent.GetMovieDetail -> {
@@ -26,7 +26,7 @@ class DetailScreenModel(
 
     private fun getMovieDetail(id: Int) {
         mutableState.update { DetailScreenUiState.Loading }
-        screenModelScope.launch {
+        viewModelScope.launch {
             handleResourceWithCallbacks(
                 resourceSupplier = {
                     movieDetailRepository.getMovieDetail(id = id)
@@ -51,7 +51,7 @@ class DetailScreenModel(
 
     private fun getTvSeriesDetail(id: Int) {
         mutableState.update { DetailScreenUiState.Loading }
-        screenModelScope.launch {
+        viewModelScope.launch {
             handleResourceWithCallbacks(
                 resourceSupplier = {
                     tvSeriesDetailRepository.getTvSeriesDetail(id = id)

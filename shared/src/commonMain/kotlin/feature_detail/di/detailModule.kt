@@ -6,7 +6,7 @@ import feature_detail.data.remote.tv.TvSeriesDetailRemoteDataSource
 import feature_detail.data.remote.tv.TvSeriesDetailRepositoryImpl
 import feature_detail.domain.movie.MovieDetailRepository
 import feature_detail.domain.tv.TvSeriesDetailRepository
-import feature_detail.presentation.DetailScreenModel
+import feature_detail.presentation.DetailViewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -14,7 +14,7 @@ val detailModule = module {
     moduleForMovies()
     moduleForTvSeries()
 
-    factory { DetailScreenModel(get(), get()) }
+    factory { DetailViewModel(get(), get()) }
 }
 
 private fun Module.moduleForMovies() {

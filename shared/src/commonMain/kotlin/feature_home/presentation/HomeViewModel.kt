@@ -1,12 +1,12 @@
 package feature_home.presentation
 
-import core.presentation.base.BaseScreenModel
+import core.presentation.base.BaseViewModel
 import feature_home.domain.usecase.HomeUseCases
 import kotlinx.coroutines.flow.update
 
-class HomeScreenModel(
+class HomeViewModel(
     homeUseCases: HomeUseCases
-) : BaseScreenModel<HomeScreenUiState, HomeScreenEvent>(HomeScreenUiState()) {
+) : BaseViewModel<HomeScreenUiState, HomeScreenEvent>(HomeScreenUiState()) {
 
     val nowPlayingMovies = homeUseCases.getNowPlayingMoviesUseCase()
     val popularMovies = homeUseCases.getPopularMoviesUseCase()

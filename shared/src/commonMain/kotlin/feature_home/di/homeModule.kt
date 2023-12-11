@@ -12,7 +12,7 @@ import feature_home.domain.movie.usecase.GetTopRatedMoviesUseCase
 import feature_home.domain.tv.HomeTvSeriesRepository
 import feature_home.domain.tv.usecase.GetPopularTvSeriesUseCase
 import feature_home.domain.usecase.HomeUseCases
-import feature_home.presentation.HomeScreenModel
+import feature_home.presentation.HomeViewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -22,7 +22,7 @@ val homeModule = module {
     moduleUseCases()
 
     // ScreenModel
-    factory { HomeScreenModel(get()) }
+    factory { HomeViewModel(get()) }
 }
 
 private fun Module.moduleForMovies() {

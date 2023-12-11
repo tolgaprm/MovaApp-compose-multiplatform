@@ -10,12 +10,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
 import core.presentation.components.BackButton
 import core.presentation.components.ErrorView
 import core.presentation.components.MCircularProgressIndicator
 import core.presentation.theme.dimensions
 import core.presentation.util.collectAsStateWithLifecycleM
+import core.presentation.viewModel
 import feature_detail.presentation.components.MovieDetailSuccessView
 import feature_detail.presentation.components.TvDetailSuccessView
 
@@ -26,17 +26,17 @@ data class DetailScreenRoute(
 
     @Composable
     override fun Content() {
-        val detailScreenModel = getScreenModel<DetailScreenModel>()
+        val detailViewModel = viewModel<DetailViewModel>()
         LaunchedEffect(movieId, tvSeriesId) {
             movieId?.let {
-                detailScreenModel.onEvent(DetailScreenEvent.GetMovieDetail(it))
+                detailViewModel.onEvent(DetailScreenEvent.GetMovieDetail(it))
             }
 
             tvSeriesId?.let {
-                detailScreenModel.onEvent(DetailScreenEvent.GetTvSeriesDetail(it))
+                detailViewModel.onEvent(DetailScreenEvent.GetTvSeriesDetail(it))
             }
         }
-        val uiState = detailScreenModel.state.collectAsStateWithLifecycleM()
+        val uiState = detailViewModel.state.collectAsStateWithLifecycleM()
         DetailScreen(uiState = uiState)
     }
 }

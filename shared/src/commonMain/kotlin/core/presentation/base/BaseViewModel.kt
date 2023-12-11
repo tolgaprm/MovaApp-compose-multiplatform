@@ -3,7 +3,7 @@ package core.presentation.base
 import cafe.adriel.voyager.core.model.StateScreenModel
 import core.common.Resource
 
-abstract class BaseScreenModel<State : Any, Event : Any>(
+abstract class BaseViewModel<State : Any, Event : Any>(
     initialState: State
 ) : StateScreenModel<State>(initialState) {
 
