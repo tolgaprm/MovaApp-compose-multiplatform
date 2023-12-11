@@ -10,5 +10,9 @@ sealed interface DetailScreenUiState {
 
     data class TvSeriesSuccess(val tvSeriesDetail: TvSeriesDetail) : DetailScreenUiState
 
-    data class Error(val message: String) : DetailScreenUiState
+    data class Error(
+        val message: String,
+        val tvSeriesId: Int? = null,
+        val movieId: Int? = null
+    ) : DetailScreenUiState
 }

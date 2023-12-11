@@ -3,11 +3,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.transitions.SlideTransition
-import core.presentation.tabNavigation.TabNavigationRoute
 import core.presentation.theme.MovaTheme
 import feature_splash.presentation.SplashScreenRoute
+import main.navigation.MainScreenRoute
 
 @Composable
 fun App(
@@ -25,9 +25,9 @@ fun App(
         ) {
             // if Android app, start with TabNavigationRoute, otherwise start with SplashScreenRoute
             // Because We implement the splash with splashScreenAPI in Android
-            val startingRoute = if (androidApp) TabNavigationRoute else SplashScreenRoute
+            val startingRoute = if (androidApp) MainScreenRoute() else SplashScreenRoute()
             Navigator(startingRoute) {
-                SlideTransition(it)
+                CurrentScreen()
             }
         }
     }

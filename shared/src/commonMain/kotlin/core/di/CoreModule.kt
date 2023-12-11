@@ -7,6 +7,7 @@ import core.data.genre.tv.TvGenreRemoteDataSource
 import core.data.genre.tv.TvGenreRepoImpl
 import core.domain.genre.movie.usecase.GetMovieGenreListUseCase
 import core.domain.genre.tv.usecase.GetTvGenreListUseCase
+import feature_splash.presentation.SplashViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.plugins.cache.HttpCache
@@ -15,6 +16,7 @@ import io.ktor.client.plugins.defaultRequest
 import io.ktor.http.takeFrom
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import main.MainViewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -22,6 +24,9 @@ val coreModule = module {
     single { createHttpClient(get()) }
     moduleForMovies()
     moduleForTvSeries()
+
+    factory { MainViewModel() }
+    factory { SplashViewModel() }
 }
 
 private fun createHttpClient(

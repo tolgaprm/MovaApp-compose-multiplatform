@@ -6,52 +6,27 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import cafe.adriel.voyager.core.screen.Screen
 import core.presentation.components.BackButton
 import core.presentation.components.ErrorView
 import core.presentation.components.MCircularProgressIndicator
 import core.presentation.theme.dimensions
-import core.presentation.util.collectAsStateWithLifecycleM
-import core.presentation.viewModel
 import feature_detail.presentation.components.MovieDetailSuccessView
 import feature_detail.presentation.components.TvDetailSuccessView
 
-data class DetailScreenRoute(
-    val movieId: Int? = null,
-    val tvSeriesId: Int? = null
-) : Screen {
-
-    @Composable
-    override fun Content() {
-        val detailViewModel = viewModel<DetailViewModel>()
-        LaunchedEffect(movieId, tvSeriesId) {
-            movieId?.let {
-                detailViewModel.onEvent(DetailScreenEvent.GetMovieDetail(it))
-            }
-
-            tvSeriesId?.let {
-                detailViewModel.onEvent(DetailScreenEvent.GetTvSeriesDetail(it))
-            }
-        }
-        val uiState = detailViewModel.state.collectAsStateWithLifecycleM()
-        DetailScreen(uiState = uiState)
-    }
-}
-
 @Composable
-private fun DetailScreen(
+fun DetailScreen(
     modifier: Modifier = Modifier,
-    uiState: DetailScreenUiState
+    uiState: DetailScreenUiState,
+    onBackPressed: () -> Unit,
+    onEvent: (DetailScreenEvent) -> Unit
 ) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
     ) {
         Box(
             modifier = Modifier.fillMaxSize()
-                .padding(it)
         ) {
             when (uiState) {
                 is DetailScreenUiState.Error -> {
@@ -60,7 +35,7 @@ private fun DetailScreen(
                             .align(Alignment.Center),
                         errorMessage = uiState.message,
                         onClickRetry = {
-                            // TODO
+                            onEvent(DetailScreenEvent.Retry)
                         }
                     )
                 }
@@ -86,8 +61,7 @@ private fun DetailScreen(
                 modifier = Modifier
                     .padding(MaterialTheme.dimensions.fourLevel)
                     .align(alignment = Alignment.TopStart),
-                onClick = { // TODO
-                }
+                onClick = onBackPressed
             )
         }
     }

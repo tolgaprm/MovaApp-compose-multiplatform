@@ -1,7 +1,7 @@
 package feature_detail.presentation
 
 import core.presentation.base.BaseViewModel
-import core.presentation.viewModelScope
+import core.presentation.util.viewModelScope
 import feature_detail.domain.movie.MovieDetailRepository
 import feature_detail.domain.tv.TvSeriesDetailRepository
 import kotlinx.coroutines.flow.update
@@ -20,6 +20,18 @@ class DetailViewModel(
 
             is DetailScreenEvent.GetTvSeriesDetail -> {
                 event.id?.let { getTvSeriesDetail(it) } ?: return
+            }
+
+            DetailScreenEvent.Retry -> {
+                val state = (state.value as? DetailScreenUiState.Error)
+                state?.let { errorState ->
+                    errorState.movieId?.let {
+                        getMovieDetail(it)
+                    }
+                    errorState.tvSeriesId?.let {
+                        getTvSeriesDetail(it)
+                    }
+                }
             }
         }
     }
@@ -41,7 +53,9 @@ class DetailViewModel(
                 onErrorCallback = { errorMessage ->
                     mutableState.update {
                         DetailScreenUiState.Error(
-                            message = errorMessage
+                            message = errorMessage,
+                            movieId = id,
+                            tvSeriesId = null
                         )
                     }
                 }
@@ -66,7 +80,9 @@ class DetailViewModel(
                 onErrorCallback = { errorMessage ->
                     mutableState.update {
                         DetailScreenUiState.Error(
-                            message = errorMessage
+                            message = errorMessage,
+                            movieId = null,
+                            tvSeriesId = id
                         )
                     }
                 }

@@ -12,22 +12,29 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import core.presentation.tabNavigation.TabNavigationRoute
-import kotlinx.coroutines.delay
+import core.presentation.util.collectAsStateWithLifecycleM
+import core.presentation.util.viewModel
+import main.navigation.MainScreenRoute
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import kotlin.time.Duration.Companion.seconds
 
-object SplashScreenRoute : Screen {
+class SplashScreenRoute : Screen {
 
     @Composable
     override fun Content() {
+        val viewModel = viewModel<SplashViewModel>()
+        val uiState = viewModel.state.collectAsStateWithLifecycleM()
         val navigator = LocalNavigator.currentOrThrow
         SplashScreen()
 
-        LaunchedEffect(Unit) {
-            delay(2.seconds)
-            navigator.replace(TabNavigationRoute)
+        LaunchedEffect(uiState.consumableEvents) {
+            if (uiState.consumableEvents.isNotEmpty()) {
+                when (uiState.consumableEvents.first()) {
+                    SplashConsumableEvents.NavigateToHome -> {
+                        navigator.replace(MainScreenRoute())
+                    }
+                }
+            }
         }
     }
 }
