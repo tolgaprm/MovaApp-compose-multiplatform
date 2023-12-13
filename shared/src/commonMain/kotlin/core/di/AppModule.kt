@@ -1,6 +1,7 @@
 package core.di
 
 import feature_detail.di.detailModule
+import feature_explore.di.exploreModule
 import feature_home.di.homeModule
 import org.koin.core.context.startKoin
 
@@ -10,7 +11,8 @@ fun initKoin() {
             platformModule(),
             coreModule,
             homeModule,
-            detailModule
+            detailModule,
+            exploreModule
         )
     }
 }
