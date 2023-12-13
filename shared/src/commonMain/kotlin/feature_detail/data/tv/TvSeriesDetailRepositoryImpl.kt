@@ -1,8 +1,9 @@
-package feature_detail.data.remote.tv
+package feature_detail.data.tv
 
 import core.common.Resource
 import core.data.util.tryResultReturnResource
-import feature_detail.data.remote.tv.mapper.toTvSeriesDetail
+import feature_detail.data.tv.remote.TvSeriesDetailRemoteDataSource
+import feature_detail.data.tv.remote.mapper.toTvSeriesDetail
 import feature_detail.domain.tv.TvSeriesDetailRepository
 import feature_detail.domain.tv.model.TvSeriesDetail
 

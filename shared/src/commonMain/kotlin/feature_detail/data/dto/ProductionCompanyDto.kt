@@ -1,12 +1,12 @@
-package feature_detail.data.remote.tv.dto
+package feature_detail.data.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NetworkDto(
+data class ProductionCompanyDto(
     val id: Int?,
-    val name: String?,
     @SerialName("logo_path") val logoPath: String?,
+    val name: String?,
     @SerialName("origin_country") val originCountry: String?
 )

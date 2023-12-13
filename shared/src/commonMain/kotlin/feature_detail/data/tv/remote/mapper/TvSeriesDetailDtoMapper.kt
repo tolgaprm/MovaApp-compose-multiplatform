@@ -1,9 +1,9 @@
-package feature_detail.data.remote.tv.mapper
+package feature_detail.data.tv.remote.mapper
 
 import core.data.orFalse
 import core.data.orZero
 import core.data.util.MovaUtil
-import feature_detail.data.remote.tv.dto.TvSeriesDetailDto
+import feature_detail.data.tv.remote.dto.TvSeriesDetailDto
 import feature_detail.domain.tv.model.TvSeriesDetail
 
 fun TvSeriesDetailDto.toTvSeriesDetail(): TvSeriesDetail = TvSeriesDetail(

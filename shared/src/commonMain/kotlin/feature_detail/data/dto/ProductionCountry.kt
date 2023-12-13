@@ -1,4 +1,4 @@
-package feature_detail.data.remote.dto
+package feature_detail.data.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

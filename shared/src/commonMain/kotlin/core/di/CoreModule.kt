@@ -3,6 +3,7 @@ package core.di
 import core.common.TMDBConstants
 import core.data.genre.movie.MovieGenreRemoteDataSource
 import core.data.genre.movie.MovieGenreRepoImpl
+import core.data.genre.service.GenreServiceImpl
 import core.data.genre.tv.TvGenreRemoteDataSource
 import core.data.genre.tv.TvGenreRepoImpl
 import core.domain.genre.movie.usecase.GetMovieGenreListUseCase
@@ -22,6 +23,8 @@ import org.koin.dsl.module
 
 val coreModule = module {
     single { createHttpClient(get()) }
+    single { GenreServiceImpl(get(), get()) }
+
     moduleForMovies()
     moduleForTvSeries()
 

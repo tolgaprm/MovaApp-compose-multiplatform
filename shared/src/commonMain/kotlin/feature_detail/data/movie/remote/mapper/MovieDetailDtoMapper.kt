@@ -1,8 +1,8 @@
-package feature_detail.data.remote.movie.mapper
+package feature_detail.data.movie.remote.mapper
 
 import core.data.orZero
 import core.data.util.MovaUtil
-import feature_detail.data.remote.movie.dto.MovieDetailDto
+import feature_detail.data.movie.remote.dto.MovieDetailDto
 import feature_detail.domain.movie.MovieDetail
 
 fun MovieDetailDto.toMovieDetail(): MovieDetail {

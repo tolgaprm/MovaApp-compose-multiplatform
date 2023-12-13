@@ -1,4 +1,4 @@
-package feature_detail.data.remote.tv.dto
+package feature_detail.data.tv.remote.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

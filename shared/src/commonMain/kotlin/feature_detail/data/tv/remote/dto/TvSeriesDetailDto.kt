@@ -1,9 +1,9 @@
-package feature_detail.data.remote.tv.dto
+package feature_detail.data.tv.remote.dto
 
 import core.data.genre.dto.GenreDto
-import feature_detail.data.remote.dto.ProductionCompanyDto
-import feature_detail.data.remote.dto.ProductionCountry
-import feature_detail.data.remote.dto.SpokenLanguageDto
+import feature_detail.data.dto.ProductionCompanyDto
+import feature_detail.data.dto.ProductionCountry
+import feature_detail.data.dto.SpokenLanguageDto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
