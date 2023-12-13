@@ -32,7 +32,8 @@ import core.presentation.theme.dimensions
 @Composable
 fun UpComingMovieItem(
     modifier: Modifier = Modifier,
-    movie: Movie
+    movie: Movie,
+    onClickedInfo: () -> Unit
 ) {
     Card(
         modifier = modifier,
@@ -51,7 +52,8 @@ fun UpComingMovieItem(
                     .fillMaxWidth()
                     .background(MaterialTheme.colorScheme.secondaryContainer)
                     .padding(MaterialTheme.dimensions.fourLevel),
-                movie = movie
+                movie = movie,
+                onClickedInfo = onClickedInfo
             )
         }
     }
@@ -85,7 +87,11 @@ private fun UpComingPoster(
 
 
 @Composable
-private fun UpComingMovieInfo(modifier: Modifier, movie: Movie) {
+private fun UpComingMovieInfo(
+    modifier: Modifier,
+    movie: Movie,
+    onClickedInfo: () -> Unit
+) {
     Column(modifier = modifier) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -102,7 +108,7 @@ private fun UpComingMovieInfo(modifier: Modifier, movie: Movie) {
 
             InfoButton(
                 modifier = Modifier.weight(2f),
-                onClick = { }
+                onClick = onClickedInfo
             )
         }
 
