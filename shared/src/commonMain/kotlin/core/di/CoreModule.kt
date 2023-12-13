@@ -3,10 +3,13 @@ package core.di
 import core.common.TMDBConstants
 import core.data.genre.movie.MovieGenreRemoteDataSource
 import core.data.genre.movie.MovieGenreRepoImpl
+import core.data.genre.service.GenreService
 import core.data.genre.service.GenreServiceImpl
 import core.data.genre.tv.TvGenreRemoteDataSource
 import core.data.genre.tv.TvGenreRepoImpl
+import core.domain.genre.movie.MovieGenreRepository
 import core.domain.genre.movie.usecase.GetMovieGenreListUseCase
+import core.domain.genre.tv.TvGenreRepository
 import core.domain.genre.tv.usecase.GetTvGenreListUseCase
 import feature_splash.presentation.SplashViewModel
 import io.ktor.client.HttpClient
@@ -23,7 +26,7 @@ import org.koin.dsl.module
 
 val coreModule = module {
     single { createHttpClient(get()) }
-    single { GenreServiceImpl(get(), get()) }
+    single<GenreService> { GenreServiceImpl(get(), get()) }
 
     moduleForMovies()
     moduleForTvSeries()
@@ -56,12 +59,12 @@ private fun createHttpClient(
 
 private fun Module.moduleForMovies() {
     single { MovieGenreRemoteDataSource(get()) }
-    single { MovieGenreRepoImpl(get()) }
+    single<MovieGenreRepository> { MovieGenreRepoImpl(get()) }
     factory { GetMovieGenreListUseCase() }
 }
 
 private fun Module.moduleForTvSeries() {
     single { TvGenreRemoteDataSource(get()) }
-    single { TvGenreRepoImpl(get()) }
+    single<TvGenreRepository> { TvGenreRepoImpl(get()) }
     factory { GetTvGenreListUseCase() }
 }

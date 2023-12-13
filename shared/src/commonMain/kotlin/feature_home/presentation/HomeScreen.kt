@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
 import core.domain.movie.Movie
 import core.domain.tvseries.TvSeries
-import feature_home.presentation.components.HomeScreenBottomSheet
+import core.presentation.components.InfoBottomSheet
 import feature_home.presentation.components.HomeScreenContent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -37,7 +37,7 @@ fun HomeScreen(
         modifier = modifier.fillMaxSize(),
         sheetPeekHeight = 0.dp,
         sheetContent = {
-            HomeScreenBottomSheet(
+            InfoBottomSheet(
                 modifier = Modifier.fillMaxWidth(),
                 selectedMovie = selectedMovie,
                 selectedTvSeries = selectedTvSeries,

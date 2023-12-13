@@ -21,6 +21,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import core.data.util.hourKey
 import core.data.util.minutesKey
+import core.presentation.components.GenresView
 import core.presentation.components.MovaImage
 import core.presentation.components.RatingStats
 import core.presentation.theme.dimensions
@@ -41,10 +42,10 @@ fun DetailSuccessSection(
         modifier = modifier.verticalScroll(rememberScrollState())
     ) {
         MovaImage(
-            imageUrl = posterPath, modifier = modifier.fillMaxWidth().height(500.dp)
+            imageUrl = posterPath, modifier = Modifier.fillMaxWidth().height(500.dp)
         )
         Column(
-            modifier = modifier.fillMaxWidth().padding(MaterialTheme.dimensions.fourLevel)
+            modifier = Modifier.fillMaxWidth().padding(MaterialTheme.dimensions.fourLevel)
         ) {
             Text(
                 text = originalTitle, style = MaterialTheme.typography.headlineMedium
@@ -53,7 +54,6 @@ fun DetailSuccessSection(
             Spacer(modifier = Modifier.height(MaterialTheme.dimensions.twoLevel))
 
             RatingStats(
-                modifier = modifier,
                 formattedVoteCount = formattedVoteCount,
                 voteAverage = voteAverage,
                 isAddReviewText = true
@@ -61,11 +61,9 @@ fun DetailSuccessSection(
 
             Spacer(modifier = Modifier.height(MaterialTheme.dimensions.twoLevel))
 
-            genresBySeparatedByComma?.let {
-                GenresView(
-                    modifier = modifier, genresSeparatedByComma = it
-                )
-            }
+            GenresView(
+                genresSeparatedByComma = genresBySeparatedByComma,
+            )
 
             Spacer(modifier = Modifier.height(MaterialTheme.dimensions.twoLevel))
 
@@ -76,31 +74,16 @@ fun DetailSuccessSection(
             // This runtime is for movie
             runtime?.let {
                 RuntimeView(
-                    modifier = modifier,
                     runtime = it,
                 )
             }
 
             OverviewTitleAndText(
-                modifier = modifier.padding(top = MaterialTheme.dimensions.twoLevel),
+                modifier = Modifier.padding(top = MaterialTheme.dimensions.twoLevel),
                 overview = overview
             )
         }
     }
-}
-
-@Composable
-private fun GenresView(
-    modifier: Modifier = Modifier,
-    genresSeparatedByComma: String,
-    textColor: Color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
-) {
-    Text(
-        text = genresSeparatedByComma,
-        modifier = modifier,
-        style = MaterialTheme.typography.labelMedium,
-        color = textColor
-    )
 }
 
 @Composable

@@ -1,4 +1,4 @@
-package feature_home.presentation.components
+package core.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,11 +27,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import core.domain.movie.Movie
 import core.domain.tvseries.TvSeries
-import core.presentation.components.MovaImage
 import core.presentation.theme.dimensions
 
 @Composable
-fun HomeScreenBottomSheet(
+fun InfoBottomSheet(
     modifier: Modifier,
     selectedMovie: Movie?,
     selectedTvSeries: TvSeries?,
