@@ -7,7 +7,6 @@ import core.data.util.tryResult
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
-import io.ktor.client.request.url
 import kotlinx.coroutines.withContext
 
 class GenreServiceImpl(
@@ -17,8 +16,7 @@ class GenreServiceImpl(
     override suspend fun getMovieGenreList(language: String): GenreListResponse {
         return withContext(dispatcherProvider.IO) {
             tryResult {
-                httpClient.get {
-                    url(MOVIE_GENRE_LIST)
+                httpClient.get(MOVIE_GENRE_LIST) {
                     addLanguageParameter(language)
                 }.body()
             }
@@ -28,8 +26,7 @@ class GenreServiceImpl(
     override suspend fun getTvSeriesGenreList(language: String): GenreListResponse {
         return withContext(dispatcherProvider.IO) {
             tryResult {
-                httpClient.get {
-                    url(TV_SERIES_GENRE_LIST)
+                httpClient.get(TV_SERIES_GENRE_LIST) {
                     addLanguageParameter(language)
                 }
             }

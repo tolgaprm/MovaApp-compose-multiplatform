@@ -9,6 +9,5 @@ class MovieGenreRepoImpl(
 ) : MovieGenreRepository {
     override suspend fun getMovieGenreList(language: String): List<Genre> {
         return movieGenreRemoteDataSource.getMovieGenreList(language).genres.map { it.toGenre() }
-
     }
 }
