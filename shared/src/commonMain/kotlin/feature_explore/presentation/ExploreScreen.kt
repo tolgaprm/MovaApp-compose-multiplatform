@@ -1,5 +1,6 @@
 package feature_explore.presentation
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,6 +18,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
+import core.presentation.components.InfoBottomSheet
 import core.presentation.components.paging.MPagingVerticalGrid
 import core.presentation.theme.dimensions
 import feature_explore.domain.multiSearch.MultiSearch
@@ -33,7 +35,9 @@ fun ExploreScreen(
     modifier: Modifier = Modifier,
     uiState: ExploreScreenUiState,
     multiSearchPagingData: LazyPagingItems<MultiSearch>,
-    onEvent: (ExploreScreenEvent) -> Unit
+    onEvent: (ExploreScreenEvent) -> Unit,
+    onNavigateToPersonDetail: (Int) -> Unit,
+    onNavigateToDetail: () -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
@@ -45,7 +49,23 @@ fun ExploreScreen(
     BottomSheetScaffold(
         modifier = modifier,
         scaffoldState = bottomSheetScaffoldState,
-        sheetContent = { ExploreSheetContent() },
+        sheetContent = {
+            if (uiState.selectedMovie != null || uiState.selectedTvSeries != null) {
+                InfoBottomSheet(
+                    modifier = Modifier.fillMaxWidth(),
+                    selectedMovie = uiState.selectedMovie,
+                    selectedTvSeries = uiState.selectedTvSeries,
+                    onClickClose = {
+                        coroutineScope.launch {
+                            bottomSheetScaffoldState.bottomSheetState.hide()
+                        }
+                    },
+                    onClickedDetails = onNavigateToDetail
+                )
+            } else {
+                ExploreSheetContent()
+            }
+        },
         sheetPeekHeight = 0.dp,
         sheetContainerColor = MaterialTheme.colorScheme.background,
         sheetContentColor = MaterialTheme.colorScheme.onBackground
@@ -56,6 +76,12 @@ fun ExploreScreen(
             onEvent = onEvent,
             multiSearchPagingData = multiSearchPagingData,
             onClickedFilter = {
+                coroutineScope.launch {
+                    bottomSheetScaffoldState.bottomSheetState.expand()
+                }
+            },
+            onNavigateToPersonDetail = onNavigateToPersonDetail,
+            onClickedItem = {
                 coroutineScope.launch {
                     bottomSheetScaffoldState.bottomSheetState.expand()
                 }
@@ -70,7 +96,9 @@ private fun ExploreScreenContent(
     uiState: ExploreScreenUiState,
     onEvent: (ExploreScreenEvent) -> Unit,
     multiSearchPagingData: LazyPagingItems<MultiSearch>,
-    onClickedFilter: () -> Unit
+    onClickedFilter: () -> Unit,
+    onClickedItem: () -> Unit,
+    onNavigateToPersonDetail: (Int) -> Unit
 ) {
     Box(modifier = modifier) {
         MPagingVerticalGrid(
@@ -85,7 +113,10 @@ private fun ExploreScreenContent(
                     ExploreScreenTopSectionWithSearchBar(
                         modifier = Modifier.fillMaxWidth(),
                         searchText = uiState.searchText,
-                        onClickedFilter = onClickedFilter,
+                        onClickedFilter = {
+                            onEvent(ExploreScreenEvent.OnClickFilterItem)
+                            onClickedFilter()
+                        },
                         onEvent = onEvent
                     )
                 }
@@ -94,6 +125,10 @@ private fun ExploreScreenContent(
             when (multiSearch) {
                 is MultiSearch.MovieItem -> {
                     SearchItem(
+                        modifier = Modifier.clickable {
+                            onEvent(ExploreScreenEvent.OnMovieItemClicked(multiSearch.movie))
+                            onClickedItem()
+                        },
                         title = multiSearch.movie.title,
                         voteAverage = multiSearch.movie.voteAverage,
                         formattedVoteCount = multiSearch.movie.formattedVoteCount,
@@ -104,12 +139,19 @@ private fun ExploreScreenContent(
 
                 is MultiSearch.PersonItem -> {
                     SearchPersonItem(
+                        modifier = Modifier.clickable {
+                            onNavigateToPersonDetail(multiSearch.person.id)
+                        },
                         personSearch = multiSearch.person
                     )
                 }
 
                 is MultiSearch.TvSeriesItem -> {
                     SearchItem(
+                        modifier = Modifier.clickable {
+                            onEvent(ExploreScreenEvent.OnTvSeriesItemClicked(multiSearch.tvSeries))
+                            onClickedItem()
+                        },
                         title = multiSearch.tvSeries.name,
                         voteAverage = multiSearch.tvSeries.voteAverage,
                         formattedVoteCount = multiSearch.tvSeries.formattedVoteCount,

@@ -25,7 +25,7 @@ data class MovieDetailDto(
     @SerialName("production_companies") val productionCompanies: List<ProductionCompanyDto>,
     @SerialName("production_countries") val productionCountries: List<ProductionCountry>,
     @SerialName("release_date") val releaseDate: String?,
-    val revenue: Int?,
+    val revenue: Double?,
     val runtime: Int?,
     @SerialName("spoken_languages") val spokenLanguages: List<SpokenLanguageDto>,
     val status: String?,

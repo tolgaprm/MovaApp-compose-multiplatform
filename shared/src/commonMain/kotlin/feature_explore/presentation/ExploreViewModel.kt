@@ -17,6 +17,32 @@ class ExploreViewModel(
     override fun onEvent(event: ExploreScreenEvent) {
         when (event) {
             is ExploreScreenEvent.OnSearchTextChanged -> handleSearchTextChanged(event.searchText)
+            is ExploreScreenEvent.OnMovieItemClicked -> {
+                mutableState.update {
+                    it.copy(
+                        selectedMovie = event.movie,
+                        selectedTvSeries = null,
+                    )
+                }
+            }
+
+            is ExploreScreenEvent.OnTvSeriesItemClicked -> {
+                mutableState.update {
+                    it.copy(
+                        selectedMovie = null,
+                        selectedTvSeries = event.tvSeries,
+                    )
+                }
+            }
+
+            ExploreScreenEvent.OnClickFilterItem -> {
+                mutableState.update {
+                    it.copy(
+                        selectedMovie = null,
+                        selectedTvSeries = null,
+                    )
+                }
+            }
         }
     }
 

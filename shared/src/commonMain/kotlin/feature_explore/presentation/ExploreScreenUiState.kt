@@ -1,6 +1,8 @@
 package feature_explore.presentation
 
 import androidx.paging.PagingData
+import core.domain.movie.Movie
+import core.domain.tvseries.TvSeries
 import feature_explore.domain.multiSearch.MultiSearch
 import feature_explore.presentation.model.FilterItem
 import kotlinx.coroutines.flow.Flow
@@ -33,5 +35,7 @@ data class ExploreScreenUiState(
         ),
     ),
     val genreFilterItems: List<FilterItem> = emptyList(),
-    val multiSearchFlowPagingData: Flow<PagingData<MultiSearch>> = flowOf()
+    val multiSearchFlowPagingData: Flow<PagingData<MultiSearch>> = flowOf(),
+    val selectedMovie: Movie? = null,
+    val selectedTvSeries: TvSeries? = null
 )
