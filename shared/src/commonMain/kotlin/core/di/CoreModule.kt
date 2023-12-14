@@ -19,6 +19,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.http.takeFrom
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import main.MainViewModel
 import org.koin.core.module.Module
@@ -35,6 +36,7 @@ val coreModule = module {
     factory { SplashViewModel() }
 }
 
+@OptIn(ExperimentalSerializationApi::class)
 private fun createHttpClient(
     httpClientEngine: HttpClientEngine
 ) = HttpClient(httpClientEngine) {
@@ -42,6 +44,7 @@ private fun createHttpClient(
         json(
             Json {
                 ignoreUnknownKeys = true
+                explicitNulls = false
             }
         )
     }

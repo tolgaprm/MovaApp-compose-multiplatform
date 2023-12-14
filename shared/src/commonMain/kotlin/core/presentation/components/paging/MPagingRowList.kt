@@ -1,4 +1,4 @@
-package core.presentation.components
+package core.presentation.components.paging
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -25,21 +25,9 @@ fun <T : Any> MPagingRowList(
         verticalAlignment = verticalAlignment,
         horizontalArrangement = horizontalArrangement
     ) {
-        if (pagingItems == null) {
-            item {
-                NotLoadingStateView(modifier = Modifier.fillParentMaxSize())
-            }
-            return@LazyRow
-        }
-
-        items(pagingItems.itemCount) { index ->
-            pagingItems[index]?.let { item ->
-                itemContent(item)
-            }
-
-            HandlePagingLoadState(
-                pagingItems,
-            )
-        }
+        createLazyPagingList(
+            pagingItems = pagingItems,
+            itemContent = itemContent
+        )
     }
 }

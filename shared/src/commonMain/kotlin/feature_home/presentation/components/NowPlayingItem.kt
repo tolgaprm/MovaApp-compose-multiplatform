@@ -15,14 +15,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import core.common.ImageSize
 import core.domain.movie.Movie
 import core.presentation.components.MovaImage
 import core.presentation.components.RatingStats
+import core.presentation.components.verticalGradientRect
 import core.presentation.theme.dimensions
 
 @Composable
@@ -46,17 +45,7 @@ fun NowPlayingItem(
 
         NowPlayingItemContent(
             movie = movie,
-            modifier = Modifier.drawBehind {
-                drawRoundRect(
-                    brush = Brush.verticalGradient(
-                        listOf(
-                            Color.Black.copy(alpha = 0.4f),
-                            Color.Black.copy(alpha = 0.6f),
-                            Color.Black.copy(alpha = 0.8f)
-                        )
-                    )
-                )
-            }
+            modifier = Modifier.verticalGradientRect()
         )
     }
 }

@@ -52,6 +52,8 @@ private fun TvSeriesReleaseDateAndSeasonNumber(
                 lastAirDate?.let {
                     append(lastAirDate)
                 }
+            } else {
+                append("Continuing")
             }
 
             withStyle(

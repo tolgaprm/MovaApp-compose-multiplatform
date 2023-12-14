@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
 import core.domain.movie.Movie
 import core.presentation.components.InfoBottomSheet
-import core.presentation.components.MPagingColumnList
+import core.presentation.components.paging.MPagingColumnList
 import core.presentation.theme.dimensions
 import feature_upcoming.presentation.components.UpComingMovieItem
 import kotlinx.coroutines.launch

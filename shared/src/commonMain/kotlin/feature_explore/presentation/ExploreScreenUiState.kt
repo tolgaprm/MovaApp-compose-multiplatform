@@ -1,6 +1,10 @@
 package feature_explore.presentation
 
+import androidx.paging.PagingData
+import feature_explore.domain.multiSearch.MultiSearch
 import feature_explore.presentation.model.FilterItem
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
 data class ExploreScreenUiState(
     val searchText: String = "",
@@ -28,9 +32,6 @@ data class ExploreScreenUiState(
             isSelected = false
         ),
     ),
-    val genreFilterItems: List<FilterItem> = emptyList()
+    val genreFilterItems: List<FilterItem> = emptyList(),
+    val multiSearchFlowPagingData: Flow<PagingData<MultiSearch>> = flowOf()
 )
-
-sealed interface ExploreScreenUiState2 {
-
-}

@@ -9,9 +9,9 @@ import androidx.compose.ui.Modifier
 import app.cash.paging.compose.LazyPagingItems
 import core.domain.movie.Movie
 import core.domain.tvseries.TvSeries
-import core.presentation.components.MPagingRowList
 import core.presentation.components.MovieItem
 import core.presentation.components.TvSeriesItem
+import core.presentation.components.paging.MPagingRowList
 import core.presentation.theme.dimensions
 
 @Suppress("functionName")

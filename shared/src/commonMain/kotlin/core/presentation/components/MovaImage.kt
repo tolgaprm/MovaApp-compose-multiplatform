@@ -17,7 +17,9 @@ fun MovaImage(
     imageSize: ImageSize = ImageSize.ORIGINAL,
     contentScale: ContentScale = ContentScale.Crop,
     contentDescription: String? = null,
+    isShowLoading: Boolean = true,
     modifier: Modifier = Modifier,
+    addOnFailureItem: () -> Unit = {},
 ) {
     imageUrl?.let {
         KamelImage(
@@ -28,7 +30,9 @@ fun MovaImage(
                 Logger.withTag("Image Loading Kamel").a("Error loading image: $error")
             },
             onLoading = {
-                MCircularProgressIndicator()
+                if (isShowLoading) {
+                    MCircularProgressIndicator()
+                }
             },
             contentDescription = contentDescription,
             contentScale = contentScale

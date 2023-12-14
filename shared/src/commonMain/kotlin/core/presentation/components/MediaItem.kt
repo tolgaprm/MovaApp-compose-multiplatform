@@ -23,7 +23,8 @@ import core.presentation.theme.dimensions
 @Composable
 fun MovieItem(
     modifier: Modifier = Modifier,
-    movie: Movie
+    movie: Movie,
+    isShowLoading: Boolean = true,
 ) {
     MediaItem(
         modifier = modifier,
@@ -32,13 +33,15 @@ fun MovieItem(
         year = movie.releaseDate,
         voteAverage = movie.voteAverage,
         formattedVoteCount = movie.formattedVoteCount,
+        isShowLoading = isShowLoading
     )
 }
 
 @Composable
 fun TvSeriesItem(
     modifier: Modifier = Modifier,
-    tvSeries: TvSeries
+    tvSeries: TvSeries,
+    isShowLoading: Boolean = true,
 ) {
     MediaItem(
         modifier = modifier,
@@ -47,6 +50,7 @@ fun TvSeriesItem(
         year = tvSeries.releaseDate,
         voteAverage = tvSeries.voteAverage,
         formattedVoteCount = tvSeries.formattedVoteCount,
+        isShowLoading = isShowLoading
     )
 }
 
@@ -56,6 +60,7 @@ private fun MediaItem(
     posterImageUrl: String?,
     title: String,
     year: String,
+    isShowLoading: Boolean = true,
     voteAverage: Double,
     formattedVoteCount: String,
 ) {
@@ -69,6 +74,7 @@ private fun MediaItem(
         Column(modifier = Modifier.fillMaxSize()) {
             MovaImage(
                 imageUrl = posterImageUrl,
+                isShowLoading = isShowLoading,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp)
@@ -99,5 +105,4 @@ private fun MediaItem(
             }
         }
     }
-
 }

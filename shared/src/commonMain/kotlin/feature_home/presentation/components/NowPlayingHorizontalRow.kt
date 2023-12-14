@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
 import core.domain.movie.Movie
-import core.presentation.components.HandlePagingLoadState
 import core.presentation.components.NotLoadingStateView
+import core.presentation.components.paging.HandlePagingLoadState
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

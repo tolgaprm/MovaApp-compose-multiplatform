@@ -72,7 +72,8 @@ private fun UpComingPoster(
             imageUrl = posterPath,
             modifier = Modifier.fillMaxWidth()
                 .alpha(0.4f),
-            imageSize = ImageSize.W300
+            imageSize = ImageSize.W300,
+            isShowLoading = false
         )
 
         MovaImage(

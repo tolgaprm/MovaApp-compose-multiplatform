@@ -1,4 +1,4 @@
-package core.presentation.components
+package core.presentation.components.paging
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -10,10 +10,14 @@ import app.cash.paging.LoadStateError
 import app.cash.paging.LoadStateLoading
 import app.cash.paging.LoadStateNotLoading
 import app.cash.paging.compose.LazyPagingItems
+import core.presentation.components.ErrorView
+import core.presentation.components.MCircularProgressIndicator
+import core.presentation.components.NotLoadingStateView
 
 @Composable
 fun <T : Any> HandlePagingLoadState(
     pagingItems: LazyPagingItems<T>,
+    isShowAppendLoading: Boolean = true,
 ) {
     Box(
         modifier = Modifier.fillMaxSize()
@@ -38,7 +42,9 @@ fun <T : Any> HandlePagingLoadState(
                 }
 
                 append is LoadStateLoading -> {
-                    MCircularProgressIndicator()
+                    if (isShowAppendLoading) {
+                        MCircularProgressIndicator()
+                    }
                 }
             }
         }
