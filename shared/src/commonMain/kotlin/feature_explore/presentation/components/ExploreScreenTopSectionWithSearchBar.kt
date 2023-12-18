@@ -14,14 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import core.presentation.theme.dimensions
-import feature_explore.presentation.ExploreScreenEvent
 
 @Composable
 fun ExploreScreenTopSectionWithSearchBar(
     modifier: Modifier = Modifier,
     searchText: String,
     onClickedFilter: () -> Unit,
-    onEvent: (ExploreScreenEvent) -> Unit,
+    onSearchQueryChanged: (String) -> Unit
 ) {
     Row(
         modifier = modifier
@@ -34,9 +33,7 @@ fun ExploreScreenTopSectionWithSearchBar(
             modifier = Modifier.weight(7f),
             placeholderText = "Search for movies, tv series",
             searchText = searchText,
-            onSearchTextChange = {
-                onEvent(ExploreScreenEvent.OnSearchTextChanged(it))
-            }
+            onSearchTextChange = onSearchQueryChanged,
         )
 
         IconButton(

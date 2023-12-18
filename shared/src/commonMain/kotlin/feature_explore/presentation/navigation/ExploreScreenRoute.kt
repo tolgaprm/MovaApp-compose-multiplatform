@@ -3,7 +3,6 @@ package feature_explore.presentation.navigation
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import app.cash.paging.compose.collectAsLazyPagingItems
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -19,20 +18,11 @@ class ExploreScreenRoute : Screen {
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         val exploreViewModel = viewModel<ExploreViewModel>()
-        val exploreUiState = exploreViewModel.state.collectAsStateWithLifecycleM()
-        val multiSearchPagingData =
-            exploreUiState.multiSearchFlowPagingData.collectAsLazyPagingItems()
-        val movieSearchedPagingData =
-            exploreUiState.searchedMovieFlowPagingData.collectAsLazyPagingItems()
-        val tvSeriesSearchedPagingData =
-            exploreUiState.searchedTvSeriesFlowPagingData.collectAsLazyPagingItems()
+        val exploreUiState = exploreViewModel.uiState.collectAsStateWithLifecycleM()
 
         ExploreScreen(
             modifier = Modifier.fillMaxSize(),
             uiState = exploreUiState,
-            multiSearchPagingData = multiSearchPagingData,
-            movieSearchedPagingData = movieSearchedPagingData,
-            tvSeriesSearchedPagingData = tvSeriesSearchedPagingData,
             onEvent = exploreViewModel::onEvent,
             onNavigateToPersonDetail = {
                 // TODO navigate to person detail

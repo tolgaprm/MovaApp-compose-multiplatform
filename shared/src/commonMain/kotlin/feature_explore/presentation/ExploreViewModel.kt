@@ -13,7 +13,11 @@ import feature_explore.presentation.model.SortBy
 import feature_explore.presentation.model.joinWithComma
 import feature_explore.presentation.model.toFilterItem
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -24,9 +28,17 @@ class ExploreViewModel(
     private val exploreMovieRepository: ExploreMovieRepository,
     private val exploreTvSeriesRepository: ExploreTvSeriesRepository
 ) : BaseViewModel<ExploreScreenUiState, ExploreScreenEvent>(
-    ExploreScreenUiState()
+    ExploreScreenUiState.MultiSearchResponse()
 ) {
+    private val viewModelState = MutableStateFlow(ExploreViewModelState())
     private var searchJob: Job? = null
+
+    val uiState = viewModelState.map(ExploreViewModelState::toUiState)
+        .stateIn(
+            scope = viewModelScope,
+            SharingStarted.Eagerly,
+            viewModelState.value.toUiState()
+        )
 
     init {
         updateGenres()
@@ -36,7 +48,7 @@ class ExploreViewModel(
         when (event) {
             is ExploreScreenEvent.OnSearchTextChanged -> handleSearchTextChanged(event.searchText)
             is ExploreScreenEvent.OnMovieItemClicked -> {
-                mutableState.update {
+                viewModelState.update {
                     it.copy(
                         selectedMovie = event.movie,
                         selectedTvSeries = null,
@@ -45,7 +57,7 @@ class ExploreViewModel(
             }
 
             is ExploreScreenEvent.OnTvSeriesItemClicked -> {
-                mutableState.update {
+                viewModelState.update {
                     it.copy(
                         selectedMovie = null,
                         selectedTvSeries = event.tvSeries,
@@ -54,18 +66,19 @@ class ExploreViewModel(
             }
 
             ExploreScreenEvent.OnClickFilterItem -> {
-                mutableState.update {
+                viewModelState.update {
                     it.copy(
                         selectedMovie = null,
-                        selectedTvSeries = null,
+                        selectedTvSeries = null
                     )
                 }
             }
 
             is ExploreScreenEvent.OnClickCategoriesItem -> {
-                mutableState.update {
+                viewModelState.update {
                     it.copy(
-                        categoriesFilterItems = it.categoriesFilterItems.mapIsSelected(event.filterItem)
+                        categoriesFilterItems = it.categoriesFilterItems.mapIsSelected(event.filterItem),
+                        isActiveFilter = true
                     )
                 }
 
@@ -73,16 +86,17 @@ class ExploreViewModel(
             }
 
             is ExploreScreenEvent.OnClickSortByItem -> {
-                mutableState.update {
+                viewModelState.update {
                     it.copy(
-                        sortByFilterItems = it.sortByFilterItems.mapIsSelected(event.filterItem)
+                        sortByFilterItems = it.sortByFilterItems.mapIsSelected(event.filterItem),
+                        isActiveFilter = true
                     )
                 }
             }
 
             is ExploreScreenEvent.OnClickGenreItem -> {
 
-                val newGenreList = state.value.genreFilterItems.map { filterItem ->
+                val newGenreList = viewModelState.value.genreFilterItems.map { filterItem ->
                     if (filterItem.title == event.filterItem.title) {
                         filterItem.copy(isSelected = !event.filterItem.isSelected)
                     } else {
@@ -90,9 +104,10 @@ class ExploreViewModel(
                     }
                 }
 
-                mutableState.update {
+                viewModelState.update {
                     it.copy(
-                        genreFilterItems = newGenreList
+                        genreFilterItems = newGenreList,
+                        isActiveFilter = true
                     )
                 }
             }
@@ -104,8 +119,8 @@ class ExploreViewModel(
     }
 
     private fun handleOnClickFilterApply() {
-        val selectedCategory = state.value.selectedCategory()
-        val selectedSortBy = state.value.selectedSortBy()
+        val selectedCategory = viewModelState.value.selectedCategory()
+        val selectedSortBy = viewModelState.value.selectedSortBy()
         val selectedGenreList = state.value.genreFilterItems.filter { it.isSelected }
 
         when (selectedCategory) {
@@ -116,10 +131,12 @@ class ExploreViewModel(
                         sortBy = selectedSortBy.queryParam
                     )
 
-                    mutableState.update {
+                    viewModelState.update {
                         it.copy(
+                            searchText = "",
                             searchedMovieFlowPagingData = response,
-                            multiSearchFlowPagingData = flowOf()
+                            multiSearchFlowPagingData = flowOf(),
+                            searchedTvSeriesFlowPagingData = flowOf()
                         )
                     }
                 }
@@ -132,10 +149,12 @@ class ExploreViewModel(
                         sortBy = selectedSortBy.queryParam
                     )
 
-                    mutableState.update {
+                    viewModelState.update {
                         it.copy(
+                            searchText = "",
                             searchedTvSeriesFlowPagingData = response,
-                            multiSearchFlowPagingData = flowOf()
+                            multiSearchFlowPagingData = flowOf(),
+                            searchedMovieFlowPagingData = flowOf()
                         )
                     }
                 }
@@ -144,20 +163,21 @@ class ExploreViewModel(
     }
 
     private fun handleSearchTextChanged(searchText: String) {
-        mutableState.update { it.copy(searchText = searchText) }
+        viewModelState.update { it.copy(searchText = searchText) }
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
             val response = multiSearchRepository.multiSearch(searchText)
-            mutableState.update {
+            viewModelState.update {
                 it.copy(
-                    multiSearchFlowPagingData = response
+                    multiSearchFlowPagingData = response,
+                    isActiveFilter = false
                 )
             }
         }
     }
 
     private fun handleOnClickResetButton() {
-        mutableState.update {
+        viewModelState.update {
             it.copy(
                 genreFilterItems = it.genreFilterItems.map { it.copy(isSelected = false) },
                 categoriesFilterItems = it.categoriesFilterItems.mapIsSelected(
@@ -176,7 +196,7 @@ class ExploreViewModel(
 
     private fun updateGenres() {
         viewModelScope.launch {
-            val genres = when (state.value.selectedCategory()) {
+            val genres = when (viewModelState.value.selectedCategory()) {
                 Category.MOVIES -> {
                     movieGenreRepository.getMovieGenreList()
                 }
@@ -186,7 +206,7 @@ class ExploreViewModel(
                 }
             }
 
-            mutableState.update {
+            viewModelState.update {
                 it.copy(
                     genreFilterItems = genres.map { genre ->
                         FilterItem(
