@@ -22,11 +22,17 @@ class ExploreScreenRoute : Screen {
         val exploreUiState = exploreViewModel.state.collectAsStateWithLifecycleM()
         val multiSearchPagingData =
             exploreUiState.multiSearchFlowPagingData.collectAsLazyPagingItems()
+        val movieSearchedPagingData =
+            exploreUiState.searchedMovieFlowPagingData.collectAsLazyPagingItems()
+        val tvSeriesSearchedPagingData =
+            exploreUiState.searchedTvSeriesFlowPagingData.collectAsLazyPagingItems()
 
         ExploreScreen(
             modifier = Modifier.fillMaxSize(),
             uiState = exploreUiState,
             multiSearchPagingData = multiSearchPagingData,
+            movieSearchedPagingData = movieSearchedPagingData,
+            tvSeriesSearchedPagingData = tvSeriesSearchedPagingData,
             onEvent = exploreViewModel::onEvent,
             onNavigateToPersonDetail = {
                 // TODO navigate to person detail

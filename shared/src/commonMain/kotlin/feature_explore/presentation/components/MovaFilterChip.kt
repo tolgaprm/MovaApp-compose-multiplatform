@@ -14,12 +14,13 @@ import feature_explore.presentation.model.FilterItem
 @Composable
 fun MovaFilterChip(
     modifier: Modifier = Modifier,
-    filterItem: FilterItem
+    filterItem: FilterItem,
+    onClick: () -> Unit
 ) {
     FilterChip(
         modifier = modifier,
         selected = filterItem.isSelected,
-        onClick = { },
+        onClick = onClick,
         label = {
             Text(
                 text = filterItem.title,
