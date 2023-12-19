@@ -1,5 +1,7 @@
 package feature_detail.domain.tv.model
 
+import feature_detail.domain.model.credits.Credit
+
 data class TvSeriesDetail(
     val id: Int,
     val posterPath: String?,
@@ -11,5 +13,6 @@ data class TvSeriesDetail(
     val overview: String,
     val voteAverage: Double,
     val formattedVoteCount: String,
-    val genresBySeparatedByComma: String? = null
+    val genresBySeparatedByComma: String? = null,
+    val credit: Credit
 )

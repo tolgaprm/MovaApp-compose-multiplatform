@@ -13,7 +13,8 @@ import feature_detail.domain.tv.model.TvSeriesDetail
 @Composable
 fun TvDetailSuccessView(
     modifier: Modifier = Modifier,
-    tvSeriesDetail: TvSeriesDetail
+    tvSeriesDetail: TvSeriesDetail,
+    onClickedCastItem: (Int) -> Unit
 ) {
     DetailSuccessSection(
         modifier = modifier,
@@ -31,7 +32,9 @@ fun TvDetailSuccessView(
                 numberOfSeason = tvSeriesDetail.numberOfSeasons,
                 inProduction = tvSeriesDetail.inProduction
             )
-        }
+        },
+        castOfList = tvSeriesDetail.credit.cast,
+        onClickedCastItem = onClickedCastItem
     )
 }
 

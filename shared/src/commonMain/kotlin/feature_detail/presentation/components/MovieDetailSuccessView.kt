@@ -9,7 +9,8 @@ import feature_detail.domain.movie.MovieDetail
 @Composable
 fun MovieDetailSuccessView(
     modifier: Modifier = Modifier,
-    movieDetail: MovieDetail
+    movieDetail: MovieDetail,
+    onClickedCastItem: (Int) -> Unit
 ) {
     DetailSuccessSection(
         modifier = modifier,
@@ -25,6 +26,8 @@ fun MovieDetailSuccessView(
                 text = movieDetail.releaseDate,
                 style = MaterialTheme.typography.labelMedium
             )
-        }
+        },
+        castOfList = movieDetail.credit.cast,
+        onClickedCastItem = onClickedCastItem
     )
 }

@@ -25,7 +25,10 @@ data class DetailScreenRoute(
         DetailScreen(
             uiState = uiState,
             onBackPressed = navigator::pop,
-            onEvent = detailViewModel::onEvent
+            onEvent = detailViewModel::onEvent,
+            onNavigateToActorDetail = {
+                // TODO navigate to Actor Detail
+            }
         )
 
         LaunchedEffect(movieId, tvSeriesId) {

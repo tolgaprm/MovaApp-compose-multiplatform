@@ -4,6 +4,7 @@ import core.data.genre.dto.GenreDto
 import feature_detail.data.dto.ProductionCompanyDto
 import feature_detail.data.dto.ProductionCountry
 import feature_detail.data.dto.SpokenLanguageDto
+import feature_detail.data.dto.credits.CreditsDto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -33,5 +34,6 @@ data class MovieDetailDto(
     val title: String?,
     val video: Boolean?,
     @SerialName("vote_average") val voteAverage: Double?,
-    @SerialName("vote_count") val voteCount: Int?
+    @SerialName("vote_count") val voteCount: Int?,
+    @SerialName("credits") val credits: CreditsDto?
 )

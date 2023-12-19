@@ -6,7 +6,9 @@ import core.data.util.tryResult
 import feature_detail.data.movie.remote.dto.MovieDetailDto
 import feature_detail.data.tv.remote.dto.TvSeriesDetailDto
 import io.ktor.client.HttpClient
+import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
+import io.ktor.client.request.parameter
 import kotlinx.coroutines.withContext
 
 class DetailServiceImpl(
@@ -18,6 +20,10 @@ class DetailServiceImpl(
             tryResult {
                 httpClient.get("$MOVIE_DETAIL/$id") {
                     addLanguageParameter(language = language)
+                    addAppendToResponseQuery(
+                        appendToResponses =
+                        listOf(CREDIT_APPEND_TO_RESPONSE)
+                    )
                 }
             }
         }
@@ -28,6 +34,10 @@ class DetailServiceImpl(
             tryResult {
                 httpClient.get("$TV_DETAIL/$id") {
                     addLanguageParameter(language = language)
+                    addAppendToResponseQuery(
+                        appendToResponses =
+                        listOf(CREDIT_APPEND_TO_RESPONSE)
+                    )
                 }
             }
         }
@@ -36,5 +46,13 @@ class DetailServiceImpl(
     companion object {
         private const val MOVIE_DETAIL = "movie"
         private const val TV_DETAIL = "tv"
+        private const val APPEND_TO_RESPONSE_QUERY = "append_to_response"
+        private const val CREDIT_APPEND_TO_RESPONSE = "credits"
+    }
+
+    private fun HttpRequestBuilder.addAppendToResponseQuery(
+        appendToResponses: List<String>
+    ) {
+        parameter(APPEND_TO_RESPONSE_QUERY, appendToResponses.joinToString(","))
     }
 }
