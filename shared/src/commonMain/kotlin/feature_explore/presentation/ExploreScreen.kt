@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.material3.BottomSheetScaffold
-import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.rememberBottomSheetScaffoldState
@@ -19,7 +17,9 @@ import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.collectAsLazyPagingItems
 import core.domain.movie.Movie
 import core.domain.tvseries.TvSeries
-import core.presentation.components.InfoBottomSheet
+import core.presentation.base.MovaOptionalInfoBottomSheetScaffold
+import core.presentation.base.expandBottomSheet
+import core.presentation.base.hideBottomSheet
 import core.presentation.components.paging.MPagingVerticalGrid
 import core.presentation.theme.dimensions
 import feature_explore.domain.multiSearch.MultiSearch
@@ -28,8 +28,6 @@ import feature_explore.presentation.components.ExploreSheetContent
 import feature_explore.presentation.components.SearchItem
 import feature_explore.presentation.components.SearchPersonItem
 import feature_explore.presentation.model.SearchItemType
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,47 +45,45 @@ fun ExploreScreen(
         )
     )
 
-    BottomSheetScaffold(
-        modifier = modifier,
+    MovaOptionalInfoBottomSheetScaffold(
         scaffoldState = bottomSheetScaffoldState,
-        sheetContent = {
-            if (uiState.selectedMovie != null || uiState.selectedTvSeries != null) {
-                InfoBottomSheet(
-                    modifier = Modifier.fillMaxWidth(),
-                    selectedMovie = uiState.selectedMovie,
-                    selectedTvSeries = uiState.selectedTvSeries,
-                    onClickClose = {
-                        coroutineScope.hideBottomSheet(bottomSheetScaffoldState)
-                    },
-                    onClickedDetails = onNavigateToDetail
-                )
-            } else {
-                ExploreSheetContent(modifier = Modifier.fillMaxWidth(),
-                    categoriesFilterItems = uiState.categoriesFilterItems,
-                    sortByFilterItems = uiState.sortByFilterItems,
-                    genreFilterItems = uiState.genreFilterItems,
-                    onClickCategoryItem = {
-                        onEvent(ExploreScreenEvent.OnClickCategoriesItem(it))
-                    },
-                    onClickGenreItem = {
-                        onEvent(ExploreScreenEvent.OnClickGenreItem(it))
-                    },
-                    onClickSortByItem = {
-                        onEvent(ExploreScreenEvent.OnClickSortByItem(it))
-                    },
-                    onClickResetButton = {
-                        onEvent(ExploreScreenEvent.OnClickResetButton)
-
-                        coroutineScope.hideBottomSheet(bottomSheetScaffoldState)
-                    },
-                    onClickFilterApply = {
-                        onEvent(ExploreScreenEvent.OnClickFilterApply)
-
-                        coroutineScope.hideBottomSheet(bottomSheetScaffoldState)
-                    })
-            }
+        modifier = modifier,
+        selectedMovie = uiState.selectedMovie,
+        selectedTvSeries = uiState.selectedTvSeries,
+        onClickCloseBottomSheet = {
+            coroutineScope.hideBottomSheet(bottomSheetScaffoldState)
         },
-        sheetPeekHeight = 0.dp,
+        onClickedDetails = {
+            coroutineScope.hideBottomSheet(bottomSheetScaffoldState)
+            onNavigateToDetail()
+        },
+        otherSheetContent = {
+            ExploreSheetContent(
+                modifier = Modifier.fillMaxWidth(),
+                categoriesFilterItems = uiState.categoriesFilterItems,
+                sortByFilterItems = uiState.sortByFilterItems,
+                genreFilterItems = uiState.genreFilterItems,
+                onClickCategoryItem = {
+                    onEvent(ExploreScreenEvent.OnClickCategoriesItem(it))
+                },
+                onClickGenreItem = {
+                    onEvent(ExploreScreenEvent.OnClickGenreItem(it))
+                },
+                onClickSortByItem = {
+                    onEvent(ExploreScreenEvent.OnClickSortByItem(it))
+                },
+                onClickResetButton = {
+                    onEvent(ExploreScreenEvent.OnClickResetButton)
+
+                    coroutineScope.hideBottomSheet(bottomSheetScaffoldState)
+                },
+                onClickFilterApply = {
+                    onEvent(ExploreScreenEvent.OnClickFilterApply)
+
+                    coroutineScope.hideBottomSheet(bottomSheetScaffoldState)
+                }
+            )
+        },
         topBar = {
             ExploreScreenTopSectionWithSearchBar(
                 modifier = Modifier.fillMaxWidth(),
@@ -105,51 +101,50 @@ fun ExploreScreen(
                 }
             )
         },
-        sheetContainerColor = MaterialTheme.colorScheme.background,
-        sheetContentColor = MaterialTheme.colorScheme.onBackground
-    ) {
-        when (uiState) {
-            is ExploreScreenUiState.MultiSearchResponse -> {
-                ExploreScreenMultiSearchContent(
-                    modifier = Modifier.fillMaxWidth(),
-                    multiSearchPagingData = uiState.multiSearchFlowPagingData.collectAsLazyPagingItems(),
-                    onClickMovieItem = {
-                        onEvent(ExploreScreenEvent.OnMovieItemClicked(it))
-                        coroutineScope.expandBottomSheet(bottomSheetScaffoldState)
-                    },
-                    onClickTvSeriesItem = {
-                        onEvent(ExploreScreenEvent.OnTvSeriesItemClicked(it))
-                        coroutineScope.expandBottomSheet(bottomSheetScaffoldState)
-                    },
-                    onNavigateToPersonDetail = onNavigateToPersonDetail
-                )
-            }
-
-            is ExploreScreenUiState.SearchedWithFilters -> {
-                val moviePagingItems =
-                    uiState.searchedMovieFlowPagingData.collectAsLazyPagingItems()
-                val tvSeriesPagingItems =
-                    uiState.searchedTvSeriesFlowPagingData.collectAsLazyPagingItems()
-                if (moviePagingItems.itemCount > 0) {
-                    ExploreScreenMovieSearchedWithFiltersContent(
-                        moviePagingItems = moviePagingItems,
+        content = {
+            when (uiState) {
+                is ExploreScreenUiState.MultiSearchResponse -> {
+                    ExploreScreenMultiSearchContent(
+                        modifier = Modifier.fillMaxWidth(),
+                        multiSearchPagingData = uiState.multiSearchFlowPagingData.collectAsLazyPagingItems(),
                         onClickMovieItem = {
                             onEvent(ExploreScreenEvent.OnMovieItemClicked(it))
                             coroutineScope.expandBottomSheet(bottomSheetScaffoldState)
-                        }
-                    )
-                } else {
-                    ExploreScreenTvSeriesSearchedWithFiltersContent(
-                        moviePagingItems = tvSeriesPagingItems,
+                        },
                         onClickTvSeriesItem = {
                             onEvent(ExploreScreenEvent.OnTvSeriesItemClicked(it))
                             coroutineScope.expandBottomSheet(bottomSheetScaffoldState)
-                        }
+                        },
+                        onNavigateToPersonDetail = onNavigateToPersonDetail
                     )
+                }
+
+                is ExploreScreenUiState.SearchedWithFilters -> {
+                    val moviePagingItems =
+                        uiState.searchedMovieFlowPagingData.collectAsLazyPagingItems()
+                    val tvSeriesPagingItems =
+                        uiState.searchedTvSeriesFlowPagingData.collectAsLazyPagingItems()
+                    if (moviePagingItems.itemCount > 0) {
+                        ExploreScreenMovieSearchedWithFiltersContent(
+                            moviePagingItems = moviePagingItems,
+                            onClickMovieItem = {
+                                onEvent(ExploreScreenEvent.OnMovieItemClicked(it))
+                                coroutineScope.expandBottomSheet(bottomSheetScaffoldState)
+                            }
+                        )
+                    } else {
+                        ExploreScreenTvSeriesSearchedWithFiltersContent(
+                            moviePagingItems = tvSeriesPagingItems,
+                            onClickTvSeriesItem = {
+                                onEvent(ExploreScreenEvent.OnTvSeriesItemClicked(it))
+                                coroutineScope.expandBottomSheet(bottomSheetScaffoldState)
+                            }
+                        )
+                    }
                 }
             }
         }
-    }
+    )
 }
 
 @Composable
@@ -246,20 +241,6 @@ private fun ExploreScreenTvSeriesSearchedWithFiltersContent(
             posterImageUrl = tvSeries.posterPath,
             searchItemType = SearchItemType.TV_SERIES
         )
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-private fun CoroutineScope.expandBottomSheet(bottomSheetScaffoldState: BottomSheetScaffoldState) {
-    launch {
-        bottomSheetScaffoldState.bottomSheetState.expand()
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-private fun CoroutineScope.hideBottomSheet(bottomSheetScaffoldState: BottomSheetScaffoldState) {
-    launch {
-        bottomSheetScaffoldState.bottomSheetState.hide()
     }
 }
 

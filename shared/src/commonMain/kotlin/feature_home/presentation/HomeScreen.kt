@@ -1,19 +1,19 @@
 package feature_home.presentation
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.BottomSheetScaffold
-import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.rememberBottomSheetScaffoldState
+import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
 import core.domain.movie.Movie
 import core.domain.tvseries.TvSeries
-import core.presentation.components.InfoBottomSheet
+import core.presentation.base.MovaInfoBottomSheetScaffold
+import core.presentation.base.expandBottomSheet
+import core.presentation.base.hideBottomSheet
 import feature_home.presentation.components.HomeScreenContent
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -25,29 +25,32 @@ fun HomeScreen(
     topRatedMovies: LazyPagingItems<Movie>?,
     popularTvSeries: LazyPagingItems<TvSeries>?,
     topRatedTvSeries: LazyPagingItems<TvSeries>?,
-    scaffoldState: BottomSheetScaffoldState,
     selectedMovie: Movie? = null,
     selectedTvSeries: TvSeries? = null,
-    onClickedMovie: (Movie) -> Unit,
-    onClickedTvSeries: (TvSeries) -> Unit,
-    onClickCloseBottomSheet: () -> Unit,
-    onClickedDetails: () -> Unit
+    onNavigateToDetails: () -> Unit,
+    onEvent: (HomeScreenEvent) -> Unit
 ) {
-    BottomSheetScaffold(
+
+    val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
+        bottomSheetState = rememberStandardBottomSheetState(
+            skipHiddenState = false
+        )
+    )
+    val coroutineScope = rememberCoroutineScope()
+
+
+    MovaInfoBottomSheetScaffold(
         modifier = modifier.fillMaxSize(),
-        sheetPeekHeight = 0.dp,
-        sheetContent = {
-            InfoBottomSheet(
-                modifier = Modifier.fillMaxWidth(),
-                selectedMovie = selectedMovie,
-                selectedTvSeries = selectedTvSeries,
-                onClickClose = onClickCloseBottomSheet,
-                onClickedDetails = onClickedDetails
-            )
+        onClickCloseBottomSheet = {
+            coroutineScope.hideBottomSheet(bottomSheetScaffoldState)
         },
-        sheetContainerColor = MaterialTheme.colorScheme.background,
-        sheetContentColor = MaterialTheme.colorScheme.onBackground,
-        scaffoldState = scaffoldState,
+        scaffoldState = bottomSheetScaffoldState,
+        selectedMovie = selectedMovie,
+        selectedTvSeries = selectedTvSeries,
+        onClickedDetails = {
+            coroutineScope.hideBottomSheet(bottomSheetScaffoldState)
+            onNavigateToDetails()
+        },
         content = {
             HomeScreenContent(
                 modifier = Modifier.padding(it),
@@ -56,9 +59,15 @@ fun HomeScreen(
                 topRatedMovies = topRatedMovies,
                 popularTvSeries = popularTvSeries,
                 topRatedTvSeries = topRatedTvSeries,
-                onClickedMovie = onClickedMovie,
-                onClickedTvSeries = onClickedTvSeries
+                onClickedMovie = { movie ->
+                    onEvent(HomeScreenEvent.OnMovieSelected(movie))
+                    coroutineScope.expandBottomSheet(bottomSheetScaffoldState)
+                },
+                onClickedTvSeries = { tvSeries ->
+                    onEvent(HomeScreenEvent.OnTvSeriesSelected(tvSeries))
+                    coroutineScope.expandBottomSheet(bottomSheetScaffoldState)
+                }
             )
-        }
+        },
     )
 }

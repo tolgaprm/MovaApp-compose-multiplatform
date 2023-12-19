@@ -1,8 +1,6 @@
 package feature_explore.presentation.navigation
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -21,7 +19,6 @@ class ExploreScreenRoute : Screen {
         val exploreUiState = exploreViewModel.uiState.collectAsStateWithLifecycleM()
 
         ExploreScreen(
-            modifier = Modifier.fillMaxSize(),
             uiState = exploreUiState,
             onEvent = exploreViewModel::onEvent,
             onNavigateToPersonDetail = {
