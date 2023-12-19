@@ -14,7 +14,8 @@ import feature_detail.domain.tv.model.TvSeriesDetail
 fun TvDetailSuccessView(
     modifier: Modifier = Modifier,
     tvSeriesDetail: TvSeriesDetail,
-    onClickedCastItem: (Int) -> Unit
+    onClickedCastItem: (Int) -> Unit,
+    onClickedDirector: (Int) -> Unit
 ) {
     DetailSuccessSection(
         modifier = modifier,
@@ -33,8 +34,10 @@ fun TvDetailSuccessView(
                 inProduction = tvSeriesDetail.inProduction
             )
         },
-        castOfList = tvSeriesDetail.credit.cast,
-        onClickedCastItem = onClickedCastItem
+        castOfList = tvSeriesDetail.cast,
+        directors = tvSeriesDetail.directors,
+        onClickedCastItem = onClickedCastItem,
+        onClickedDirector = onClickedDirector
     )
 }
 

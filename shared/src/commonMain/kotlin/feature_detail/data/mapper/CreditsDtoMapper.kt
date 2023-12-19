@@ -7,6 +7,9 @@ import feature_detail.data.dto.credits.CrewDto
 import feature_detail.domain.model.credits.Cast
 import feature_detail.domain.model.credits.Credit
 import feature_detail.domain.model.credits.Crew
+import feature_detail.domain.model.credits.Director
+
+const val DIRECTION_DEPARTMENT_NAME = "Directing"
 
 fun CreditsDto?.toCredit(): Credit {
     return Credit(
@@ -39,3 +42,13 @@ fun List<CrewDto>.toListCrew(): List<Crew> {
     }
 }
 
+fun List<CrewDto>?.toDirectors(): List<Director> {
+    return this?.filter {
+        it.department == DIRECTION_DEPARTMENT_NAME
+    }?.map {
+        Director(
+            id = it.id.orZero(),
+            name = it.name.orEmpty()
+        )
+    }?.take(2) ?: emptyList()
+}

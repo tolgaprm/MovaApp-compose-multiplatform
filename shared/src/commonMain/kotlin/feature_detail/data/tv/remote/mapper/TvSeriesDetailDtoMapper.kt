@@ -3,7 +3,7 @@ package feature_detail.data.tv.remote.mapper
 import core.data.orFalse
 import core.data.orZero
 import core.data.util.MovaUtil
-import feature_detail.data.mapper.toCredit
+import feature_detail.data.mapper.toListCast
 import feature_detail.data.tv.remote.dto.TvSeriesDetailDto
 import feature_detail.domain.tv.model.TvSeriesDetail
 
@@ -19,5 +19,6 @@ fun TvSeriesDetailDto.toTvSeriesDetail(): TvSeriesDetail = TvSeriesDetail(
     voteAverage = voteAverage.orZero(),
     formattedVoteCount = MovaUtil.formatVoteCount(voteCount = voteCount),
     genresBySeparatedByComma = genres?.map { it.name }?.joinToString(", "),
-    credit = credits.toCredit()
+    cast = credits?.castDto?.toListCast().orEmpty(),
+    directors = createdByDto?.take(2)?.map { it.toDirector() }.orEmpty()
 )

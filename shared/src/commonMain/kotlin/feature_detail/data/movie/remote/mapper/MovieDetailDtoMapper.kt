@@ -2,7 +2,8 @@ package feature_detail.data.movie.remote.mapper
 
 import core.data.orZero
 import core.data.util.MovaUtil
-import feature_detail.data.mapper.toCredit
+import feature_detail.data.mapper.toDirectors
+import feature_detail.data.mapper.toListCast
 import feature_detail.data.movie.remote.dto.MovieDetailDto
 import feature_detail.domain.movie.MovieDetail
 
@@ -17,6 +18,7 @@ fun MovieDetailDto.toMovieDetail(): MovieDetail {
         voteAverage = voteAverage.orZero(),
         formattedVoteCount = MovaUtil.formatVoteCount(voteCount = voteCount),
         genresBySeparatedByComma = genres?.map { it.name }?.joinToString(", "),
-        credit = credits.toCredit()
+        casts = credits?.castDto?.toListCast().orEmpty(),
+        directors = credits?.crewDto.toDirectors()
     )
 }

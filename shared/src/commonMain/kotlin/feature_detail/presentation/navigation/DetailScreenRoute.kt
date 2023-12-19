@@ -26,7 +26,7 @@ data class DetailScreenRoute(
             uiState = uiState,
             onBackPressed = navigator::pop,
             onEvent = detailViewModel::onEvent,
-            onNavigateToActorDetail = {
+            onNavigateToPersonDetail = {
                 // TODO navigate to Actor Detail
             }
         )

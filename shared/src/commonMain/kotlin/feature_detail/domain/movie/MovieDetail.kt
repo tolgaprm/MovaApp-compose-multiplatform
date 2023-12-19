@@ -1,6 +1,7 @@
 package feature_detail.domain.movie
 
-import feature_detail.domain.model.credits.Credit
+import feature_detail.domain.model.credits.Cast
+import feature_detail.domain.model.credits.Director
 
 data class MovieDetail(
     val id: Int,
@@ -12,5 +13,6 @@ data class MovieDetail(
     val voteAverage: Double,
     val formattedVoteCount: String,
     val genresBySeparatedByComma: String? = null,
-    val credit: Credit,
+    val casts: List<Cast>,
+    val directors: List<Director>
 )

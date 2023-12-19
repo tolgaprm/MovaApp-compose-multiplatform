@@ -20,7 +20,7 @@ fun DetailScreen(
     modifier: Modifier = Modifier,
     uiState: DetailScreenUiState,
     onBackPressed: () -> Unit,
-    onNavigateToActorDetail: (Int) -> Unit,
+    onNavigateToPersonDetail: (Int) -> Unit,
     onEvent: (DetailScreenEvent) -> Unit
 ) {
     Scaffold(
@@ -49,14 +49,16 @@ fun DetailScreen(
                     MovieDetailSuccessView(
                         modifier = modifier.matchParentSize(),
                         movieDetail = uiState.movieDetail,
-                        onClickedCastItem = onNavigateToActorDetail
+                        onClickedCastItem = onNavigateToPersonDetail,
+                        onClickedDirector = onNavigateToPersonDetail
                     )
                 }
 
                 is DetailScreenUiState.TvSeriesSuccess -> {
                     TvDetailSuccessView(
                         tvSeriesDetail = uiState.tvSeriesDetail,
-                        onClickedCastItem = onNavigateToActorDetail
+                        onClickedCastItem = onNavigateToPersonDetail,
+                        onClickedDirector = onNavigateToPersonDetail
                     )
                 }
             }

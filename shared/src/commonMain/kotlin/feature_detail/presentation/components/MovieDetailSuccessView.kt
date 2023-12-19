@@ -10,7 +10,8 @@ import feature_detail.domain.movie.MovieDetail
 fun MovieDetailSuccessView(
     modifier: Modifier = Modifier,
     movieDetail: MovieDetail,
-    onClickedCastItem: (Int) -> Unit
+    onClickedCastItem: (Int) -> Unit,
+    onClickedDirector: (Int) -> Unit
 ) {
     DetailSuccessSection(
         modifier = modifier,
@@ -27,7 +28,9 @@ fun MovieDetailSuccessView(
                 style = MaterialTheme.typography.labelMedium
             )
         },
-        castOfList = movieDetail.credit.cast,
-        onClickedCastItem = onClickedCastItem
+        castOfList = movieDetail.casts,
+        onClickedCastItem = onClickedCastItem,
+        directors = movieDetail.directors,
+        onClickedDirector = onClickedDirector
     )
 }

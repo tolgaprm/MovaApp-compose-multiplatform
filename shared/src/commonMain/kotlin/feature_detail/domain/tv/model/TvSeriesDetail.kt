@@ -1,6 +1,7 @@
 package feature_detail.domain.tv.model
 
-import feature_detail.domain.model.credits.Credit
+import feature_detail.domain.model.credits.Cast
+import feature_detail.domain.model.credits.Director
 
 data class TvSeriesDetail(
     val id: Int,
@@ -14,5 +15,6 @@ data class TvSeriesDetail(
     val voteAverage: Double,
     val formattedVoteCount: String,
     val genresBySeparatedByComma: String? = null,
-    val credit: Credit
+    val cast: List<Cast>,
+    val directors: List<Director>
 )
