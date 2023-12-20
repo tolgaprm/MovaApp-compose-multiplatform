@@ -22,7 +22,7 @@ class DetailServiceImpl(
                     addLanguageParameter(language = language)
                     addAppendToResponseQuery(
                         appendToResponses =
-                        listOf(CREDIT_APPEND_TO_RESPONSE)
+                        listOf(CREDIT_APPEND_TO_RESPONSE, WATCH_PROVIDERS_APPEND_TO_RESPONSE)
                     )
                 }
             }
@@ -36,7 +36,7 @@ class DetailServiceImpl(
                     addLanguageParameter(language = language)
                     addAppendToResponseQuery(
                         appendToResponses =
-                        listOf(CREDIT_APPEND_TO_RESPONSE)
+                        listOf(CREDIT_APPEND_TO_RESPONSE, WATCH_PROVIDERS_APPEND_TO_RESPONSE)
                     )
                 }
             }
@@ -48,6 +48,7 @@ class DetailServiceImpl(
         private const val TV_DETAIL = "tv"
         private const val APPEND_TO_RESPONSE_QUERY = "append_to_response"
         private const val CREDIT_APPEND_TO_RESPONSE = "credits"
+        private const val WATCH_PROVIDERS_APPEND_TO_RESPONSE = "watch/providers"
     }
 
     private fun HttpRequestBuilder.addAppendToResponseQuery(

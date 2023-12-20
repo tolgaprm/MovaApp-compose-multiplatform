@@ -5,6 +5,7 @@ import feature_detail.data.dto.ProductionCompanyDto
 import feature_detail.data.dto.ProductionCountry
 import feature_detail.data.dto.SpokenLanguageDto
 import feature_detail.data.dto.credits.CreditsDto
+import feature_detail.data.dto.watchProvider.WatchProvidersDto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -35,5 +36,6 @@ data class MovieDetailDto(
     val video: Boolean?,
     @SerialName("vote_average") val voteAverage: Double?,
     @SerialName("vote_count") val voteCount: Int?,
-    @SerialName("credits") val credits: CreditsDto?
+    @SerialName("credits") val credits: CreditsDto?,
+    @SerialName("watch/providers") val watchProviders: WatchProvidersDto?
 )

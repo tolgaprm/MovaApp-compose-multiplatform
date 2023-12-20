@@ -4,7 +4,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import feature_detail.domain.movie.MovieDetail
+import feature_detail.domain.movie.model.MovieDetail
 
 @Composable
 fun MovieDetailSuccessView(

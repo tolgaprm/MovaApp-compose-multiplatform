@@ -1,6 +1,6 @@
 package feature_detail.presentation
 
-import feature_detail.domain.movie.MovieDetail
+import feature_detail.domain.movie.model.MovieDetail
 import feature_detail.domain.tv.model.TvSeriesDetail
 
 sealed interface DetailScreenUiState {

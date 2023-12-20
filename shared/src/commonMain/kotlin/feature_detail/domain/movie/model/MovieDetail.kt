@@ -1,7 +1,8 @@
-package feature_detail.domain.movie
+package feature_detail.domain.movie.model
 
 import feature_detail.domain.model.credits.Cast
 import feature_detail.domain.model.credits.Director
+import feature_detail.domain.model.watchProvider.WatchProviderItem
 
 data class MovieDetail(
     val id: Int,
@@ -14,5 +15,6 @@ data class MovieDetail(
     val formattedVoteCount: String,
     val genresBySeparatedByComma: String? = null,
     val casts: List<Cast>,
-    val directors: List<Director>
+    val directors: List<Director>,
+    val watchProviderItem: WatchProviderItem?
 )

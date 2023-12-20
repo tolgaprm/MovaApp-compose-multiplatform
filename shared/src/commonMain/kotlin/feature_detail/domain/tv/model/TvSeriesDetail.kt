@@ -2,6 +2,7 @@ package feature_detail.domain.tv.model
 
 import feature_detail.domain.model.credits.Cast
 import feature_detail.domain.model.credits.Director
+import feature_detail.domain.model.watchProvider.WatchProviderItem
 
 data class TvSeriesDetail(
     val id: Int,
@@ -16,5 +17,6 @@ data class TvSeriesDetail(
     val formattedVoteCount: String,
     val genresBySeparatedByComma: String? = null,
     val cast: List<Cast>,
-    val directors: List<Director>
+    val directors: List<Director>,
+    val watchProviderItem: WatchProviderItem?
 )

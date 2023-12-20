@@ -12,13 +12,14 @@ class TvSeriesDetailRepositoryImpl(
 ) : TvSeriesDetailRepository {
     override suspend fun getTvSeriesDetail(
         id: Int,
-        language: String
+        language: String,
+        countryIsoCode: String
     ): Resource<TvSeriesDetail> {
         return tryResultReturnResource {
             tvSeriesDetailRemoteDataSource.getTvSeriesDetail(
                 id = id,
                 language = language
-            ).toTvSeriesDetail()
+            ).toTvSeriesDetail(countryIsoCode)
         }
     }
 }

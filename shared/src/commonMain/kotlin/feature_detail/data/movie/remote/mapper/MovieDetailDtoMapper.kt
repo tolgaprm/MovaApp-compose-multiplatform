@@ -4,10 +4,13 @@ import core.data.orZero
 import core.data.util.MovaUtil
 import feature_detail.data.mapper.toDirectors
 import feature_detail.data.mapper.toListCast
+import feature_detail.data.mapper.toWatchProviderItem
 import feature_detail.data.movie.remote.dto.MovieDetailDto
-import feature_detail.domain.movie.MovieDetail
+import feature_detail.domain.movie.model.MovieDetail
 
-fun MovieDetailDto.toMovieDetail(): MovieDetail {
+fun MovieDetailDto.toMovieDetail(
+    countryIsoCode: String
+): MovieDetail {
     return MovieDetail(
         id = id.orZero(),
         posterPath = posterPath,
@@ -19,6 +22,7 @@ fun MovieDetailDto.toMovieDetail(): MovieDetail {
         formattedVoteCount = MovaUtil.formatVoteCount(voteCount = voteCount),
         genresBySeparatedByComma = genres?.map { it.name }?.joinToString(", "),
         casts = credits?.castDto?.toListCast().orEmpty(),
-        directors = credits?.crewDto.toDirectors()
+        directors = credits?.crewDto.toDirectors(),
+        watchProviderItem = watchProviders?.results?.toWatchProviderItem(countryIsoCode = countryIsoCode)
     )
 }
