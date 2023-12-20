@@ -5,11 +5,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import co.touchlab.kermit.Logger
 import core.common.ImageSize
+import core.common.TMDBConstants
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import io.ktor.http.Url
-
-private const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/"
 
 @Composable
 fun MovaImage(
@@ -41,5 +40,5 @@ fun MovaImage(
 }
 
 private fun getImageUrl(imageUrl: String, imageSize: ImageSize): String {
-    return "$IMAGE_BASE_URL/${imageSize.path}/$imageUrl"
+    return "${TMDBConstants.IMAGE_BASE_URL}/${imageSize.path}/$imageUrl"
 }
