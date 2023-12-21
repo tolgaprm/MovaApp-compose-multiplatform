@@ -1,4 +1,4 @@
-package feature_explore.presentation.components
+package core.presentation.components.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,7 +22,6 @@ import core.presentation.components.MovaImage
 import core.presentation.components.RatingStats
 import core.presentation.components.verticalGradientRect
 import core.presentation.theme.dimensions
-import feature_explore.presentation.model.SearchItemType
 
 @Composable
 fun SearchItem(

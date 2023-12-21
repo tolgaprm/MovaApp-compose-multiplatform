@@ -1,11 +1,13 @@
-package feature_detail.presentation.components
+package feature_detail.presentation.components.section
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -27,11 +29,15 @@ fun ActorSections(
     castOfList: List<Cast>,
     onClickedCastItem: (Int) -> Unit
 ) {
-    Column(modifier = modifier.fillMaxWidth()) {
+    Column(
+        modifier = modifier
+    ) {
         Text(
             text = "Actors",
             style = MaterialTheme.typography.headlineMedium
         )
+
+        Spacer(modifier = Modifier.height(MaterialTheme.dimensions.twoLevel))
 
         LazyRow(
             modifier = Modifier.fillMaxWidth(),

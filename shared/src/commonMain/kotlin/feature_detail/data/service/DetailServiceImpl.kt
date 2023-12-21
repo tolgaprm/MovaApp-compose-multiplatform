@@ -1,7 +1,11 @@
 package feature_detail.data.service
 
 import core.common.dispatcher.DispatcherProvider
+import core.data.addCommonParameters
 import core.data.addLanguageParameter
+import core.data.dto.ApiResponse
+import core.data.movie.MovieDto
+import core.data.tvseries.TvSeriesDto
 import core.data.util.tryResult
 import feature_detail.data.movie.remote.dto.MovieDetailDto
 import feature_detail.data.tv.remote.dto.TvSeriesDetailDto
@@ -15,10 +19,10 @@ class DetailServiceImpl(
     private val httpClient: HttpClient,
     private val dispatcherProvider: DispatcherProvider
 ) : DetailService {
-    override suspend fun getMovieDetail(id: Int, language: String): MovieDetailDto {
+    override suspend fun getMovieDetail(movieId: Int, language: String): MovieDetailDto {
         return withContext(dispatcherProvider.IO) {
             tryResult {
-                httpClient.get("$MOVIE_DETAIL/$id") {
+                httpClient.get("$MOVIE_DETAIL/$movieId") {
                     addLanguageParameter(language = language)
                     addAppendToResponseQuery(
                         appendToResponses =
@@ -29,15 +33,47 @@ class DetailServiceImpl(
         }
     }
 
-    override suspend fun getTvSeriesDetail(id: Int, language: String): TvSeriesDetailDto {
+    override suspend fun getTvSeriesDetail(tvSeriesId: Int, language: String): TvSeriesDetailDto {
         return withContext(dispatcherProvider.IO) {
             tryResult {
-                httpClient.get("$TV_DETAIL/$id") {
+                httpClient.get("$TV_DETAIL/$tvSeriesId") {
                     addLanguageParameter(language = language)
                     addAppendToResponseQuery(
                         appendToResponses =
                         listOf(CREDIT_APPEND_TO_RESPONSE, WATCH_PROVIDERS_APPEND_TO_RESPONSE)
                     )
+                }
+            }
+        }
+    }
+
+    override suspend fun getMovieRecommendations(
+        movieId: Int,
+        language: String,
+        page: Int
+    ): ApiResponse<MovieDto> {
+        return withContext(dispatcherProvider.IO) {
+            tryResult {
+                httpClient.get(
+                    "$MOVIE_DETAIL/$movieId/$RECOMMENDATIONS",
+                ) {
+                    addCommonParameters(language = language, page = page)
+                }
+            }
+        }
+    }
+
+    override suspend fun getTvSeriesRecommendations(
+        tvSeriesId: Int,
+        language: String,
+        page: Int
+    ): ApiResponse<TvSeriesDto> {
+        return withContext(dispatcherProvider.IO) {
+            tryResult {
+                httpClient.get(
+                    "$TV_DETAIL/$tvSeriesId/$RECOMMENDATIONS",
+                ) {
+                    addCommonParameters(language = language, page = page)
                 }
             }
         }
@@ -49,6 +85,7 @@ class DetailServiceImpl(
         private const val APPEND_TO_RESPONSE_QUERY = "append_to_response"
         private const val CREDIT_APPEND_TO_RESPONSE = "credits"
         private const val WATCH_PROVIDERS_APPEND_TO_RESPONSE = "watch/providers"
+        private const val RECOMMENDATIONS = "recommendations"
     }
 
     private fun HttpRequestBuilder.addAppendToResponseQuery(

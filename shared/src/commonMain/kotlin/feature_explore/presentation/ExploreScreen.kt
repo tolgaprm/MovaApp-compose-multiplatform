@@ -1,18 +1,13 @@
 package feature_explore.presentation
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.material3.rememberStandardBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
 import app.cash.paging.compose.collectAsLazyPagingItems
 import core.domain.movie.Movie
@@ -21,13 +16,12 @@ import core.presentation.base.MovaOptionalInfoBottomSheetScaffold
 import core.presentation.base.expandBottomSheet
 import core.presentation.base.hideBottomSheet
 import core.presentation.components.paging.MPagingVerticalGrid
-import core.presentation.theme.dimensions
+import core.presentation.components.search.SearchItem
+import core.presentation.components.search.SearchItemType
 import feature_explore.domain.multiSearch.MultiSearch
 import feature_explore.presentation.components.ExploreScreenTopSectionWithSearchBar
 import feature_explore.presentation.components.ExploreSheetContent
-import feature_explore.presentation.components.SearchItem
 import feature_explore.presentation.components.SearchPersonItem
-import feature_explore.presentation.model.SearchItemType
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -155,7 +149,7 @@ private fun ExploreScreenMultiSearchContent(
     onClickTvSeriesItem: (TvSeries) -> Unit,
     onNavigateToPersonDetail: (Int) -> Unit
 ) {
-    ExplorePagingVerticalGrid(
+    MPagingVerticalGrid(
         modifier = modifier,
         pagingItems = multiSearchPagingData,
     ) { multiSearch ->
@@ -204,7 +198,7 @@ private fun ExploreScreenMovieSearchedWithFiltersContent(
     moviePagingItems: LazyPagingItems<Movie>,
     onClickMovieItem: (Movie) -> Unit
 ) {
-    ExplorePagingVerticalGrid(
+    MPagingVerticalGrid(
         modifier = modifier,
         pagingItems = moviePagingItems
     ) { movie ->
@@ -227,7 +221,7 @@ private fun ExploreScreenTvSeriesSearchedWithFiltersContent(
     moviePagingItems: LazyPagingItems<TvSeries>,
     onClickTvSeriesItem: (TvSeries) -> Unit
 ) {
-    ExplorePagingVerticalGrid(
+    MPagingVerticalGrid(
         modifier = modifier,
         pagingItems = moviePagingItems
     ) { tvSeries ->
@@ -241,24 +235,5 @@ private fun ExploreScreenTvSeriesSearchedWithFiltersContent(
             posterImageUrl = tvSeries.posterPath,
             searchItemType = SearchItemType.TV_SERIES
         )
-    }
-}
-
-@Composable
-private fun <T : Any> ExplorePagingVerticalGrid(
-    modifier: Modifier = Modifier,
-    pagingItems: LazyPagingItems<T>,
-    itemContent: @Composable (T) -> Unit
-) {
-    MPagingVerticalGrid(
-        modifier = modifier,
-        pagingItems = pagingItems,
-        isShowAppendLoading = false,
-        columns = GridCells.Adaptive(170.dp),
-        contentPadding = PaddingValues(MaterialTheme.dimensions.fourLevel),
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.fourLevel),
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensions.fourLevel)
-    ) {
-        itemContent(it)
     }
 }

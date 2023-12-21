@@ -1,5 +1,7 @@
-package feature_detail.presentation.components
+package feature_detail.presentation.components.section.detail
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -8,14 +10,20 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
+import app.cash.paging.compose.LazyPagingItems
+import core.domain.tvseries.TvSeries
+import core.presentation.theme.dimensions
 import feature_detail.domain.tv.model.TvSeriesDetail
+import feature_detail.presentation.components.recommendations.TvSeriesRecommendationItem
 
 @Composable
 fun TvDetailSuccessView(
     modifier: Modifier = Modifier,
     tvSeriesDetail: TvSeriesDetail,
+    tvSeriesRecommendations: LazyPagingItems<TvSeries>,
     onClickedCastItem: (Int) -> Unit,
-    onClickedDirector: (Int) -> Unit
+    onClickedDirector: (Int) -> Unit,
+    onClickedRecommendationItem: (TvSeries) -> Unit
 ) {
     DetailSuccessSection(
         modifier = modifier,
@@ -38,7 +46,15 @@ fun TvDetailSuccessView(
         directors = tvSeriesDetail.directors,
         onClickedCastItem = onClickedCastItem,
         onClickedDirector = onClickedDirector,
-        watchProviderItem = tvSeriesDetail.watchProviderItem
+        watchProviderItem = tvSeriesDetail.watchProviderItem,
+        pagingItems = tvSeriesRecommendations,
+        pagingItemComponent = { tvSeries ->
+            TvSeriesRecommendationItem(
+                modifier = Modifier.padding(horizontal = MaterialTheme.dimensions.fourLevel)
+                    .clickable { onClickedRecommendationItem(tvSeries) },
+                tvSeries = tvSeries
+            )
+        }
     )
 }
 

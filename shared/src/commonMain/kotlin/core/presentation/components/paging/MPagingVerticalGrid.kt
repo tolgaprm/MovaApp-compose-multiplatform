@@ -5,22 +5,23 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import app.cash.paging.compose.LazyPagingItems
+import core.presentation.theme.dimensions
 
 @Composable
 fun <T : Any> MPagingVerticalGrid(
     modifier: Modifier = Modifier,
-    columns: GridCells,
     pagingItems: LazyPagingItems<T>?,
-    isShowAppendLoading: Boolean = true,
-    contentPadding: PaddingValues = PaddingValues(0.dp),
+    columns: GridCells.Adaptive = GridCells.Adaptive(170.dp),
+    isShowAppendLoading: Boolean = false,
+    contentPadding: PaddingValues = PaddingValues(MaterialTheme.dimensions.fourLevel),
+    verticalArrangement: Arrangement.HorizontalOrVertical = Arrangement.spacedBy(MaterialTheme.dimensions.fourLevel),
+    horizontalArrangement: Arrangement.HorizontalOrVertical = Arrangement.spacedBy(MaterialTheme.dimensions.fourLevel),
     reverseLayout: Boolean = false,
-    verticalArrangement: Arrangement.Vertical =
-        if (!reverseLayout) Arrangement.Top else Arrangement.Bottom,
-    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
     addItemOnTop: LazyGridScope.() -> Unit = {},
     itemContent: @Composable (T) -> Unit
 ) {
@@ -31,6 +32,7 @@ fun <T : Any> MPagingVerticalGrid(
         contentPadding = contentPadding,
         verticalArrangement = verticalArrangement,
         horizontalArrangement = horizontalArrangement,
+        reverseLayout = reverseLayout
     ) {
         addItemOnTop()
 

@@ -1,4 +1,4 @@
-package feature_explore.presentation.components
+package core.presentation.components.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import core.presentation.theme.dimensions
-import feature_explore.presentation.model.SearchItemType
 
 @Composable
 fun SearchItemTypeText(

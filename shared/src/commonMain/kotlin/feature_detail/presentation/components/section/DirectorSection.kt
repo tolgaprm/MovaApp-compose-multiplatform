@@ -1,4 +1,4 @@
-package feature_detail.presentation.components
+package feature_detail.presentation.components.section
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

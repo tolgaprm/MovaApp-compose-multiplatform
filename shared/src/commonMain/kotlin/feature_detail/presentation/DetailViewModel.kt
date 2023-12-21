@@ -1,6 +1,5 @@
 package feature_detail.presentation
 
-import co.touchlab.kermit.Logger
 import core.presentation.base.BaseViewModel
 import core.presentation.util.viewModelScope
 import feature_detail.domain.movie.MovieDetailRepository
@@ -13,6 +12,7 @@ class DetailViewModel(
     private val tvSeriesDetailRepository: TvSeriesDetailRepository
 ) :
     BaseViewModel<DetailScreenUiState, DetailScreenEvent>(DetailScreenUiState.Loading) {
+
     override fun onEvent(event: DetailScreenEvent) {
         when (event) {
             is DetailScreenEvent.GetMovieDetail -> {
@@ -37,18 +37,18 @@ class DetailViewModel(
         }
     }
 
-    private fun getMovieDetail(id: Int) {
+    private fun getMovieDetail(movieId: Int) {
         mutableState.update { DetailScreenUiState.Loading }
         viewModelScope.launch {
             handleResourceWithCallbacks(
                 resourceSupplier = {
-                    movieDetailRepository.getMovieDetail(id = id)
+                    movieDetailRepository.getMovieDetail(id = movieId)
                 },
                 onSuccessCallback = { movieDetail ->
-                    Logger.withTag("DetailViewModel").d(movieDetail.watchProviderItem.toString())
                     mutableState.update {
                         DetailScreenUiState.MovieSuccess(
-                            movieDetail = movieDetail
+                            movieDetail = movieDetail,
+                            movieRecommendations = movieDetailRepository.getMovieRecommendations(id = movieId)
                         )
                     }
                 },
@@ -56,7 +56,7 @@ class DetailViewModel(
                     mutableState.update {
                         DetailScreenUiState.Error(
                             message = errorMessage,
-                            movieId = id,
+                            movieId = movieId,
                             tvSeriesId = null
                         )
                     }
@@ -65,19 +65,20 @@ class DetailViewModel(
         }
     }
 
-    private fun getTvSeriesDetail(id: Int) {
+    private fun getTvSeriesDetail(tvSeriesId: Int) {
         mutableState.update { DetailScreenUiState.Loading }
         viewModelScope.launch {
             handleResourceWithCallbacks(
                 resourceSupplier = {
-                    tvSeriesDetailRepository.getTvSeriesDetail(id = id)
+                    tvSeriesDetailRepository.getTvSeriesDetail(id = tvSeriesId)
                 },
                 onSuccessCallback = { tvDetail ->
-                    Logger.withTag("DetailViewModel").d(tvDetail.watchProviderItem.toString())
-
                     mutableState.update {
                         DetailScreenUiState.TvSeriesSuccess(
-                            tvSeriesDetail = tvDetail
+                            tvSeriesDetail = tvDetail,
+                            tvSeriesRecommendations = tvSeriesDetailRepository.getTvSeriesRecommendations(
+                                id = tvSeriesId
+                            )
                         )
                     }
                 },
@@ -86,7 +87,7 @@ class DetailViewModel(
                         DetailScreenUiState.Error(
                             message = errorMessage,
                             movieId = null,
-                            tvSeriesId = id
+                            tvSeriesId = tvSeriesId
                         )
                     }
                 }

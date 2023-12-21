@@ -8,12 +8,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import app.cash.paging.compose.collectAsLazyPagingItems
 import core.presentation.components.BackButton
 import core.presentation.components.ErrorView
 import core.presentation.components.MCircularProgressIndicator
 import core.presentation.theme.dimensions
-import feature_detail.presentation.components.MovieDetailSuccessView
-import feature_detail.presentation.components.TvDetailSuccessView
+import feature_detail.presentation.components.section.detail.MovieDetailSuccessView
+import feature_detail.presentation.components.section.detail.TvDetailSuccessView
 
 @Composable
 fun DetailScreen(
@@ -50,7 +51,11 @@ fun DetailScreen(
                         modifier = modifier.matchParentSize(),
                         movieDetail = uiState.movieDetail,
                         onClickedCastItem = onNavigateToPersonDetail,
-                        onClickedDirector = onNavigateToPersonDetail
+                        onClickedDirector = onNavigateToPersonDetail,
+                        movieRecommendations = uiState.movieRecommendations.collectAsLazyPagingItems(),
+                        onClickedRecommendationItem = {
+                            //
+                        }
                     )
                 }
 
@@ -58,7 +63,11 @@ fun DetailScreen(
                     TvDetailSuccessView(
                         tvSeriesDetail = uiState.tvSeriesDetail,
                         onClickedCastItem = onNavigateToPersonDetail,
-                        onClickedDirector = onNavigateToPersonDetail
+                        onClickedDirector = onNavigateToPersonDetail,
+                        tvSeriesRecommendations = uiState.tvSeriesRecommendations.collectAsLazyPagingItems(),
+                        onClickedRecommendationItem = {
+                            //
+                        }
                     )
                 }
             }

@@ -19,9 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import core.presentation.components.MovaImage
+import core.presentation.components.search.SearchItemType
+import core.presentation.components.search.SearchItemTypeText
 import core.presentation.theme.dimensions
 import feature_explore.domain.model.PersonSearch
-import feature_explore.presentation.model.SearchItemType
 
 @Composable
 fun SearchPersonItem(

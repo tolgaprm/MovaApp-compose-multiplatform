@@ -1,4 +1,4 @@
-package feature_explore.presentation.model
+package core.presentation.components.search
 
 enum class SearchItemType(val value: String) {
     MOVIE("Movie"),
