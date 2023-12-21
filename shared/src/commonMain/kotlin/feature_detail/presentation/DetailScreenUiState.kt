@@ -12,12 +12,14 @@ sealed interface DetailScreenUiState {
 
     data class MovieSuccess(
         val movieDetail: MovieDetail,
-        val movieRecommendations: Flow<PagingData<Movie>>
+        val movieRecommendations: Flow<PagingData<Movie>>,
+        val selectedRecommendationMovie: Movie? = null
     ) : DetailScreenUiState
 
     data class TvSeriesSuccess(
         val tvSeriesDetail: TvSeriesDetail,
-        val tvSeriesRecommendations: Flow<PagingData<TvSeries>>
+        val tvSeriesRecommendations: Flow<PagingData<TvSeries>>,
+        val selectedRecommendationTvSeries: TvSeries? = null
     ) : DetailScreenUiState
 
     data class Error(
@@ -26,3 +28,9 @@ sealed interface DetailScreenUiState {
         val movieId: Int? = null
     ) : DetailScreenUiState
 }
+
+fun DetailScreenUiState.getMovieSuccess(): DetailScreenUiState.MovieSuccess? =
+    (this as? DetailScreenUiState.MovieSuccess)
+
+fun DetailScreenUiState.getTvSeriesSuccess(): DetailScreenUiState.TvSeriesSuccess? =
+    (this as? DetailScreenUiState.TvSeriesSuccess)

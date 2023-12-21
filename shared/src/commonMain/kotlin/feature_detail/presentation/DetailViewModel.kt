@@ -34,6 +34,22 @@ class DetailViewModel(
                     }
                 }
             }
+
+            is DetailScreenEvent.OnClickRecommendationMovie -> {
+                mutableState.update {
+                    (state.value as? DetailScreenUiState.MovieSuccess)?.copy(
+                        selectedRecommendationMovie = event.movie
+                    ) as DetailScreenUiState
+                }
+            }
+
+            is DetailScreenEvent.OnClickRecommendationTvSeries -> {
+                mutableState.update {
+                    (state.value as? DetailScreenUiState.TvSeriesSuccess)?.copy(
+                        selectedRecommendationTvSeries = event.tvSeries
+                    ) as DetailScreenUiState
+                }
+            }
         }
     }
 
