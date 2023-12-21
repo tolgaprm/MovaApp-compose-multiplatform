@@ -1,12 +1,12 @@
 package feature_detail.domain.model.watchProvider
 
 data class WatchProviderItem(
-    val stream: List<WatchProviderItemDetail>,
-    val rent: List<WatchProviderItemDetail>,
-    val buy: List<WatchProviderItemDetail>
+    val stream: List<WatchProviderItemInfo>,
+    val rent: List<WatchProviderItemInfo>,
+    val buy: List<WatchProviderItemInfo>
 )
 
-data class WatchProviderItemDetail(
+data class WatchProviderItemInfo(
     val logoPath: String,
     val providerName: String,
 )

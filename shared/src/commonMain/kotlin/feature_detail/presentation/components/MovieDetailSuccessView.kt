@@ -31,6 +31,7 @@ fun MovieDetailSuccessView(
         castOfList = movieDetail.casts,
         onClickedCastItem = onClickedCastItem,
         directors = movieDetail.directors,
-        onClickedDirector = onClickedDirector
+        onClickedDirector = onClickedDirector,
+        watchProviderItem = movieDetail.watchProviderItem
     )
 }

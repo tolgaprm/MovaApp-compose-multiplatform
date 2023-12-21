@@ -37,7 +37,8 @@ fun TvDetailSuccessView(
         castOfList = tvSeriesDetail.cast,
         directors = tvSeriesDetail.directors,
         onClickedCastItem = onClickedCastItem,
-        onClickedDirector = onClickedDirector
+        onClickedDirector = onClickedDirector,
+        watchProviderItem = tvSeriesDetail.watchProviderItem
     )
 }
 

@@ -4,7 +4,7 @@ import feature_detail.data.dto.watchProvider.WatchProviderItemDetailDto
 import feature_detail.data.dto.watchProvider.WatchProviderRegionDto
 import feature_detail.data.util.Country
 import feature_detail.domain.model.watchProvider.WatchProviderItem
-import feature_detail.domain.model.watchProvider.WatchProviderItemDetail
+import feature_detail.domain.model.watchProvider.WatchProviderItemInfo
 
 fun WatchProviderRegionDto.toWatchProviderItem(
     countryIsoCode: String
@@ -21,9 +21,9 @@ fun WatchProviderRegionDto.toWatchProviderItem(
     )
 }
 
-fun List<WatchProviderItemDetailDto>?.toWatchProviderItemDetail(): List<WatchProviderItemDetail> {
+fun List<WatchProviderItemDetailDto>?.toWatchProviderItemDetail(): List<WatchProviderItemInfo> {
     return this?.sortedBy { it.displayPriority }?.take(2)?.map {
-        WatchProviderItemDetail(
+        WatchProviderItemInfo(
             logoPath = it.logoPath,
             providerName = it.providerName
         )
