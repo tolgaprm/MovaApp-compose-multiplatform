@@ -18,11 +18,11 @@ class HomeScreenRoute : Screen {
         val navigator = LocalNavigator.currentOrThrow
 
         val homeViewModel = viewModel<HomeViewModel>()
-        val nowPlayingMovies = homeViewModel.nowPlayingMovies.data?.collectAsLazyPagingItems()
-        val popularMovies = homeViewModel.popularMovies.data?.collectAsLazyPagingItems()
-        val topRatedMovies = homeViewModel.topRatedMovies.data?.collectAsLazyPagingItems()
-        val popularTvSeries = homeViewModel.popularTvSeries.data?.collectAsLazyPagingItems()
-        val topRatedTvSeries = homeViewModel.topRatedTvSeries.data?.collectAsLazyPagingItems()
+        val nowPlayingMovies = homeViewModel.nowPlayingMovies?.collectAsLazyPagingItems()
+        val popularMovies = homeViewModel.popularMovies?.collectAsLazyPagingItems()
+        val topRatedMovies = homeViewModel.topRatedMovies?.collectAsLazyPagingItems()
+        val popularTvSeries = homeViewModel.popularTvSeries?.collectAsLazyPagingItems()
+        val topRatedTvSeries = homeViewModel.topRatedTvSeries?.collectAsLazyPagingItems()
         val uiState = homeViewModel.state.collectAsStateWithLifecycleM()
 
         HomeScreen(

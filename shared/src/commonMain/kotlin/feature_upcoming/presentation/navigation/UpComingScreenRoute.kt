@@ -18,7 +18,7 @@ object UpComingScreenRoute : Screen {
         val navigator = LocalNavigator.currentOrThrow
         val upcomingViewModel = viewModel<UpComingViewModel>()
         val upcomingScreenUiState = upcomingViewModel.state.collectAsStateWithLifecycleM()
-        val moviePagingItems = upcomingViewModel.upcomingMovies.data?.collectAsLazyPagingItems()
+        val moviePagingItems = upcomingViewModel.upcomingMovies?.collectAsLazyPagingItems()
 
         UpComingScreen(
             pagingMovies = moviePagingItems,
