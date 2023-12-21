@@ -14,6 +14,7 @@ import core.domain.genre.tv.usecase.GetTvGenreListUseCase
 import feature_splash.presentation.SplashViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.cache.HttpCache
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
@@ -50,6 +51,13 @@ private fun createHttpClient(
     }
 
     install(HttpCache) {
+    }
+
+    install(HttpTimeout) {
+        val timeout = 30000L
+        connectTimeoutMillis = timeout
+        requestTimeoutMillis = timeout
+        socketTimeoutMillis = timeout
     }
 
     defaultRequest {

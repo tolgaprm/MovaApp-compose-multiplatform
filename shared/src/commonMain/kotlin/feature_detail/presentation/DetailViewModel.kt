@@ -1,5 +1,6 @@
 package feature_detail.presentation
 
+import co.touchlab.kermit.Logger
 import core.presentation.base.BaseViewModel
 import core.presentation.util.viewModelScope
 import feature_detail.domain.movie.MovieDetailRepository
@@ -44,6 +45,7 @@ class DetailViewModel(
                     movieDetailRepository.getMovieDetail(id = id)
                 },
                 onSuccessCallback = { movieDetail ->
+                    Logger.withTag("DetailViewModel").d(movieDetail.watchProviderItem.toString())
                     mutableState.update {
                         DetailScreenUiState.MovieSuccess(
                             movieDetail = movieDetail
@@ -71,6 +73,8 @@ class DetailViewModel(
                     tvSeriesDetailRepository.getTvSeriesDetail(id = id)
                 },
                 onSuccessCallback = { tvDetail ->
+                    Logger.withTag("DetailViewModel").d(tvDetail.watchProviderItem.toString())
+
                     mutableState.update {
                         DetailScreenUiState.TvSeriesSuccess(
                             tvSeriesDetail = tvDetail

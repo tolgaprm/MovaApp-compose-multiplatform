@@ -1,9 +1,39 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.codingfeline.buildkonfig.compiler.FieldSpec
+
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
-    id("org.jetbrains.compose")
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.10"
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.compose)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.buildKonfig)
 }
+
+buildkonfig {
+    packageName = "com.prmto.mova"
+
+    defaultConfigs {
+        buildConfigField(
+            FieldSpec.Type.STRING, "API_KEY_TMDB",
+            gradleLocalProperties(rootDir).getProperty("API_KEY_TMDB"),
+            const = true
+        )
+
+        buildConfigField(
+            FieldSpec.Type.STRING, "TMDB_BASE_URL",
+            rootProject.requireStringProperty("TMDB_BASE_URL"),
+            const = true
+        )
+
+
+        buildConfigField(
+            FieldSpec.Type.STRING, "IMAGE_BASE_URL",
+            rootProject.requireStringProperty("IMAGE_BASE_URL"),
+            const = true
+        )
+    }
+}
+
 
 kotlin {
     androidTarget()
@@ -96,4 +126,8 @@ android {
     kotlin {
         jvmToolchain(17)
     }
+}
+
+fun Project.requireStringProperty(key: String): String {
+    return (properties[key] as? String)!!
 }

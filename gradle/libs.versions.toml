@@ -3,6 +3,7 @@ activity-compose-version = "1.8.0"
 agp-version = "8.0.2"
 appcompat-version = "1.6.1"
 assertK-version = "0.25"
+buildKonfig = "0.14.0"
 compileSdk-version = "34"
 compose-version = "1.5.3"
 core-ktx-version = "1.12.0"
@@ -58,3 +59,14 @@ paging-library = [
     "paging-common",
     "paging-compose-common",
 ]
+
+[plugins]
+
+android-application = { id = "com.android.application", version.ref = "agp-version" }
+android-library = { id = "com.android.library", version.ref = "agp-version" }
+buildKonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildKonfig" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose-version" }
+jvm-plugin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-version" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin-version" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin-version" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin-version" }

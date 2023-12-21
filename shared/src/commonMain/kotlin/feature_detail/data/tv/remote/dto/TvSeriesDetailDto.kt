@@ -4,6 +4,8 @@ import core.data.genre.dto.GenreDto
 import feature_detail.data.dto.ProductionCompanyDto
 import feature_detail.data.dto.ProductionCountry
 import feature_detail.data.dto.SpokenLanguageDto
+import feature_detail.data.dto.credits.CreditsDto
+import feature_detail.data.dto.watchProvider.WatchProvidersDto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -39,5 +41,7 @@ data class TvSeriesDetailDto(
     val tagline: String?,
     val type: String?,
     @SerialName("vote_average") val voteAverage: Double?,
-    @SerialName("vote_count") val voteCount: Int?
+    @SerialName("vote_count") val voteCount: Int?,
+    @SerialName("credits") val credits: CreditsDto?,
+    @SerialName("watch/providers") val watchProviders: WatchProvidersDto?
 )

@@ -1,22 +1,20 @@
-package feature_detail.domain.tv.model
+package feature_detail.domain.movie.model
 
 import feature_detail.domain.model.credits.Cast
 import feature_detail.domain.model.credits.Director
 import feature_detail.domain.model.watchProvider.WatchProviderItem
 
-data class TvSeriesDetail(
+data class MovieDetail(
     val id: Int,
     val posterPath: String?,
-    val releaseDate: String,
-    val name: String,
-    val numberOfSeasons: Int,
-    val inProduction: Boolean,
-    val lastAirDate: String,
+    val originalTitle: String,
     val overview: String,
+    val releaseDate: String,
+    val runtime: Map<String, String>,
     val voteAverage: Double,
     val formattedVoteCount: String,
     val genresBySeparatedByComma: String? = null,
-    val cast: List<Cast>,
+    val casts: List<Cast>,
     val directors: List<Director>,
     val watchProviderItem: WatchProviderItem?
 )
