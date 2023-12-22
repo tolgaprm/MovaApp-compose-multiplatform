@@ -5,5 +5,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class WatchProviderRegionDto(
-    @SerialName("TR") val us: WatchProviderItemDto?,
+    @SerialName("US") val us: WatchProviderItemDto?,
 )

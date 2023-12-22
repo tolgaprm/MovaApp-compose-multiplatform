@@ -18,3 +18,10 @@ inline fun <T, R> Resource<T>.onError(action: (Throwable) -> R): Resource<T> {
     }
     return this
 }
+
+inline fun <T, R> Resource<List<T>>.mapResourceToList(transform: (T) -> R): List<R> {
+    return when (this) {
+        is Resource.Success -> data?.map(transform) ?: emptyList()
+        is Resource.Error -> emptyList()
+    }
+}

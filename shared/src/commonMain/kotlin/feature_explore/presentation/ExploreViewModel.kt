@@ -1,5 +1,11 @@
 package feature_explore.presentation
 
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
+import core.common.mapResourceToList
 import core.domain.genre.movie.MovieGenreRepository
 import core.domain.genre.tv.TvGenreRepository
 import core.presentation.base.BaseViewModel
@@ -12,15 +18,17 @@ import feature_explore.presentation.model.FilterItem
 import feature_explore.presentation.model.SortBy
 import feature_explore.presentation.model.joinWithComma
 import feature_explore.presentation.model.toFilterItem
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class ExploreViewModel(
     private val multiSearchRepository: MultiSearchRepository,
     private val tvGenreRepository: TvGenreRepository,
@@ -31,14 +39,19 @@ class ExploreViewModel(
     ExploreScreenUiState.MultiSearchResponse()
 ) {
     private val viewModelState = MutableStateFlow(ExploreViewModelState())
-    private var searchJob: Job? = null
+    var searchTextState by mutableStateOf("")
+        private set
 
-    val uiState = viewModelState.map(ExploreViewModelState::toUiState)
-        .stateIn(
-            scope = viewModelScope,
-            SharingStarted.Eagerly,
-            viewModelState.value.toUiState()
-        )
+    val uiState = combine(
+        snapshotFlow { searchTextState }.mapLatest { it },
+        viewModelState
+    ) { searchText, viewModelState ->
+        viewModelState.toUiState(searchText)
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(),
+        initialValue = ExploreScreenUiState.MultiSearchResponse()
+    )
 
     init {
         updateGenres()
@@ -131,9 +144,9 @@ class ExploreViewModel(
                         sortBy = selectedSortBy.queryParam
                     )
 
+                    updateSearchTextToEmpty()
                     viewModelState.update {
                         it.copy(
-                            searchText = "",
                             searchedMovieFlowPagingData = response,
                             multiSearchFlowPagingData = flowOf(),
                             searchedTvSeriesFlowPagingData = flowOf()
@@ -149,9 +162,9 @@ class ExploreViewModel(
                         sortBy = selectedSortBy.queryParam
                     )
 
+                    updateSearchTextToEmpty()
                     viewModelState.update {
                         it.copy(
-                            searchText = "",
                             searchedTvSeriesFlowPagingData = response,
                             multiSearchFlowPagingData = flowOf(),
                             searchedMovieFlowPagingData = flowOf()
@@ -163,16 +176,16 @@ class ExploreViewModel(
     }
 
     private fun handleSearchTextChanged(searchText: String) {
-        viewModelState.update { it.copy(searchText = searchText) }
-        searchJob?.cancel()
-        searchJob = viewModelScope.launch {
-            val response = multiSearchRepository.multiSearch(searchText)
-            viewModelState.update {
-                it.copy(
-                    multiSearchFlowPagingData = response,
-                    isActiveFilter = false
-                )
-            }
+        searchTextState = searchText
+
+        val response = derivedStateOf {
+            multiSearchRepository.multiSearch(searchText)
+        }
+        viewModelState.update {
+            it.copy(
+                multiSearchFlowPagingData = response.value,
+                isActiveFilter = false
+            )
         }
     }
 
@@ -208,7 +221,7 @@ class ExploreViewModel(
 
             viewModelState.update {
                 it.copy(
-                    genreFilterItems = genres.map { genre ->
+                    genreFilterItems = genres.mapResourceToList { genre ->
                         FilterItem(
                             id = genre.id,
                             title = genre.name,
@@ -226,5 +239,9 @@ class ExploreViewModel(
                 isSelected = filterItem.title == selectedFilterItem.title
             )
         }
+    }
+
+    private fun updateSearchTextToEmpty() {
+        searchTextState = ""
     }
 }

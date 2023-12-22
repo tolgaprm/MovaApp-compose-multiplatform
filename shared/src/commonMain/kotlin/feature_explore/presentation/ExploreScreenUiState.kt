@@ -16,14 +16,8 @@ sealed class ExploreScreenUiState {
     open val selectedMovie: Movie? = null
     open val selectedTvSeries: TvSeries? = null
     open val genreFilterItems: List<FilterItem> = emptyList()
-    open val categoriesFilterItems: List<FilterItem> = listOf(
-        Category.MOVIES.toFilterItem(isSelected = true),
-        Category.TV_SERIES.toFilterItem(isSelected = false)
-    )
-    open val sortByFilterItems: List<FilterItem> = listOf(
-        SortBy.POPULARITY.toFilterItem(isSelected = true),
-        SortBy.LATEST_RELEASE.toFilterItem(isSelected = false)
-    )
+    open val categoriesFilterItems: List<FilterItem> = defaultCategoriesFilterItems
+    open val sortByFilterItems: List<FilterItem> = defaultSortByFilterItems
 
     data class MultiSearchResponse(
         override val searchText: String = "",
@@ -45,15 +39,8 @@ sealed class ExploreScreenUiState {
 }
 
 data class ExploreViewModelState(
-    val searchText: String = "",
-    val categoriesFilterItems: List<FilterItem> = listOf(
-        Category.MOVIES.toFilterItem(isSelected = true),
-        Category.TV_SERIES.toFilterItem(isSelected = false)
-    ),
-    val sortByFilterItems: List<FilterItem> = listOf(
-        SortBy.POPULARITY.toFilterItem(isSelected = true),
-        SortBy.LATEST_RELEASE.toFilterItem(isSelected = false)
-    ),
+    val categoriesFilterItems: List<FilterItem> = defaultCategoriesFilterItems,
+    val sortByFilterItems: List<FilterItem> = defaultSortByFilterItems,
     val genreFilterItems: List<FilterItem> = emptyList(),
     val multiSearchFlowPagingData: Flow<PagingData<MultiSearch>> = flowOf(),
     val searchedMovieFlowPagingData: Flow<PagingData<Movie>> = flowOf(),
@@ -62,7 +49,7 @@ data class ExploreViewModelState(
     val selectedTvSeries: TvSeries? = null,
     val isActiveFilter: Boolean = false
 ) {
-    fun toUiState(): ExploreScreenUiState {
+    fun toUiState(searchText: String = ""): ExploreScreenUiState {
         return if (isActiveFilter) {
             ExploreScreenUiState.SearchedWithFilters(
                 searchText = searchText,
@@ -87,11 +74,20 @@ data class ExploreViewModelState(
 
 fun ExploreViewModelState.selectedCategory(): Category {
     val filterItem = categoriesFilterItems.first { it.isSelected }
-    return Category.values()[filterItem.id]
+    return Category.entries[filterItem.id]
 }
 
 fun ExploreViewModelState.selectedSortBy(): SortBy {
     val filterItem = sortByFilterItems.first { it.isSelected }
-    return SortBy.values()[filterItem.id]
+    return SortBy.entries[filterItem.id]
 }
 
+private val defaultCategoriesFilterItems = listOf(
+    Category.MOVIES.toFilterItem(isSelected = true),
+    Category.TV_SERIES.toFilterItem(isSelected = false)
+)
+
+private val defaultSortByFilterItems = listOf(
+    SortBy.POPULARITY.toFilterItem(isSelected = true),
+    SortBy.LATEST_RELEASE.toFilterItem(isSelected = false)
+)

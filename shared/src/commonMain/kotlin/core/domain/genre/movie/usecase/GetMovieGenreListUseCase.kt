@@ -13,11 +13,16 @@ class GetMovieGenreListUseCase : KoinComponent {
 
     operator fun invoke(language: String = ""): Flow<Resource<List<Genre>>> {
         return flow {
-            try {
-                val result = movieGenreRepository.getMovieGenreList(language)
-                emit(Resource.Success(result))
-            } catch (e: Exception) {
-                emit(Resource.Error(e))
+            when (val result = movieGenreRepository.getMovieGenreList(language)) {
+                is Resource.Success -> {
+                    result.data?.let {
+                        emit(Resource.Success(result.data))
+                    }
+                }
+
+                is Resource.Error -> {
+                    emit(Resource.Error(result.error ?: Exception()))
+                }
             }
         }
     }

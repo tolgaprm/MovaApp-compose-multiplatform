@@ -107,18 +107,22 @@ fun <T : Any> DetailSuccessSection(
                     )
                 }
 
-                ActorSections(
-                    modifier = Modifier.fillMaxWidth(),
-                    castOfList = castOfList,
-                    onClickedCastItem = onClickedCastItem
-                )
+                if (castOfList.isNotEmpty()) {
+                    ActorSections(
+                        modifier = Modifier.fillMaxWidth(),
+                        castOfList = castOfList,
+                        onClickedCastItem = onClickedCastItem
+                    )
+                }
             }
         }
 
-        RecommendationsSection(
-            pagingItems = pagingItems,
-            itemContent = { item -> pagingItemComponent(item) }
-        )
+        if (pagingItems.itemCount > 0) {
+            RecommendationsSection(
+                pagingItems = pagingItems,
+                itemContent = { item -> pagingItemComponent(item) }
+            )
+        }
     }
 }
 
