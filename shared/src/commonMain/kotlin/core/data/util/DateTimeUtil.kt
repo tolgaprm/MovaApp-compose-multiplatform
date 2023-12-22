@@ -10,7 +10,7 @@ object DateTimeUtil {
         val dateFormat = LocalDate.parse(inputDate)
 
         val year = dateFormat.year
-        val month = dateFormat.month.name
+        val month = dateFormat.month.name.lowercase().replaceFirstChar { it.uppercase() }
         val day = dateFormat.dayOfMonth
 
         return "$day $month, $year"

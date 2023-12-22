@@ -10,6 +10,7 @@ import core.presentation.util.viewModel
 import feature_detail.presentation.DetailScreen
 import feature_detail.presentation.DetailScreenEvent
 import feature_detail.presentation.DetailViewModel
+import feature_person_detail.presentation.navigation.PersonDetailRoute
 
 data class DetailScreenRoute(
     val movieId: Int? = null,
@@ -26,8 +27,8 @@ data class DetailScreenRoute(
             uiState = uiState,
             onBackPressed = navigator::pop,
             onEvent = detailViewModel::onEvent,
-            onNavigateToPersonDetail = {
-                // TODO navigate to Actor Detail
+            onNavigateToPersonDetail = { personId ->
+                navigator.push(PersonDetailRoute(personId))
             }
         )
 

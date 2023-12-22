@@ -9,6 +9,7 @@ import core.presentation.util.viewModel
 import feature_detail.presentation.navigation.DetailScreenRoute
 import feature_explore.presentation.ExploreScreen
 import feature_explore.presentation.ExploreViewModel
+import feature_person_detail.presentation.navigation.PersonDetailRoute
 
 class ExploreScreenRoute : Screen {
 
@@ -23,8 +24,8 @@ class ExploreScreenRoute : Screen {
             uiState = exploreUiState,
             onEvent = exploreViewModel::onEvent,
             searchTextState = searchTextState,
-            onNavigateToPersonDetail = {
-                // TODO navigate to person detail
+            onNavigateToPersonDetail = { personId ->
+                navigator.push(PersonDetailRoute(personId))
             },
             onNavigateToDetail = {
                 navigator.push(
