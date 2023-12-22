@@ -59,6 +59,8 @@ kotlin {
                 implementation(compose.materialIconsExtended)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
+                // DateTime
+                implementation(libs.kotlin.datetime)
                 //Logger
                 implementation(libs.kermit.logger)
                 // Ktor
