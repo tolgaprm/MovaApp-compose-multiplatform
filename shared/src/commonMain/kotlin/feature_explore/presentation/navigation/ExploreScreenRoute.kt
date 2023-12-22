@@ -17,10 +17,12 @@ class ExploreScreenRoute : Screen {
         val navigator = LocalNavigator.currentOrThrow
         val exploreViewModel = viewModel<ExploreViewModel>()
         val exploreUiState = exploreViewModel.uiState.collectAsStateWithLifecycleM()
+        val searchTextState = exploreViewModel.searchTextState
 
         ExploreScreen(
             uiState = exploreUiState,
             onEvent = exploreViewModel::onEvent,
+            searchTextState = searchTextState,
             onNavigateToPersonDetail = {
                 // TODO navigate to person detail
             },

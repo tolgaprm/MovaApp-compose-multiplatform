@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
 sealed class ExploreScreenUiState {
-    open val searchText: String = ""
     open val selectedMovie: Movie? = null
     open val selectedTvSeries: TvSeries? = null
     open val genreFilterItems: List<FilterItem> = emptyList()
@@ -20,14 +19,12 @@ sealed class ExploreScreenUiState {
     open val sortByFilterItems: List<FilterItem> = defaultSortByFilterItems
 
     data class MultiSearchResponse(
-        override val searchText: String = "",
         val multiSearchFlowPagingData: Flow<PagingData<MultiSearch>> = flowOf(),
         override val selectedMovie: Movie? = null,
         override val selectedTvSeries: TvSeries? = null
     ) : ExploreScreenUiState()
 
     data class SearchedWithFilters(
-        override val searchText: String = "",
         val searchedMovieFlowPagingData: Flow<PagingData<Movie>> = flowOf(),
         val searchedTvSeriesFlowPagingData: Flow<PagingData<TvSeries>> = flowOf(),
         override val genreFilterItems: List<FilterItem> = emptyList(),
@@ -49,10 +46,9 @@ data class ExploreViewModelState(
     val selectedTvSeries: TvSeries? = null,
     val isActiveFilter: Boolean = false
 ) {
-    fun toUiState(searchText: String = ""): ExploreScreenUiState {
+    fun toUiState(): ExploreScreenUiState {
         return if (isActiveFilter) {
             ExploreScreenUiState.SearchedWithFilters(
-                searchText = searchText,
                 searchedMovieFlowPagingData = searchedMovieFlowPagingData,
                 searchedTvSeriesFlowPagingData = searchedTvSeriesFlowPagingData,
                 genreFilterItems = genreFilterItems,
@@ -63,7 +59,6 @@ data class ExploreViewModelState(
             )
         } else {
             ExploreScreenUiState.MultiSearchResponse(
-                searchText = searchText,
                 multiSearchFlowPagingData = multiSearchFlowPagingData,
                 selectedMovie = selectedMovie,
                 selectedTvSeries = selectedTvSeries

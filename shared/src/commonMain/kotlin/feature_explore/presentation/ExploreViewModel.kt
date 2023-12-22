@@ -1,10 +1,8 @@
 package feature_explore.presentation
 
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import core.common.mapResourceToList
 import core.domain.genre.movie.MovieGenreRepository
 import core.domain.genre.tv.TvGenreRepository
@@ -18,17 +16,16 @@ import feature_explore.presentation.model.FilterItem
 import feature_explore.presentation.model.SortBy
 import feature_explore.presentation.model.joinWithComma
 import feature_explore.presentation.model.toFilterItem
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class ExploreViewModel(
     private val multiSearchRepository: MultiSearchRepository,
     private val tvGenreRepository: TvGenreRepository,
@@ -39,19 +36,16 @@ class ExploreViewModel(
     ExploreScreenUiState.MultiSearchResponse()
 ) {
     private val viewModelState = MutableStateFlow(ExploreViewModelState())
+    private var searchJob: Job? = null
     var searchTextState by mutableStateOf("")
         private set
 
-    val uiState = combine(
-        snapshotFlow { searchTextState }.mapLatest { it },
-        viewModelState
-    ) { searchText, viewModelState ->
-        viewModelState.toUiState(searchText)
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(),
-        initialValue = ExploreScreenUiState.MultiSearchResponse()
-    )
+    val uiState = viewModelState.map(ExploreViewModelState::toUiState)
+        .stateIn(
+            viewModelScope,
+            SharingStarted.Eagerly,
+            ExploreScreenUiState.MultiSearchResponse()
+        )
 
     init {
         updateGenres()
@@ -178,15 +172,21 @@ class ExploreViewModel(
     private fun handleSearchTextChanged(searchText: String) {
         searchTextState = searchText
 
-        val response = derivedStateOf {
-            multiSearchRepository.multiSearch(searchText)
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+            delay(300)
+            val response = if (searchText.isNotEmpty()) {
+                multiSearchRepository.multiSearch(searchText)
+            } else flowOf()
+
+            viewModelState.update {
+                it.copy(
+                    multiSearchFlowPagingData = response,
+                    isActiveFilter = false
+                )
+            }
         }
-        viewModelState.update {
-            it.copy(
-                multiSearchFlowPagingData = response.value,
-                isActiveFilter = false
-            )
-        }
+
     }
 
     private fun handleOnClickResetButton() {

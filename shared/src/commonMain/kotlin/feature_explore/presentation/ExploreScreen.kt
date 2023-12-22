@@ -27,6 +27,7 @@ import feature_explore.presentation.components.SearchPersonItem
 @Composable
 fun ExploreScreen(
     modifier: Modifier = Modifier,
+    searchTextState: String,
     uiState: ExploreScreenUiState,
     onEvent: (ExploreScreenEvent) -> Unit,
     onNavigateToPersonDetail: (Int) -> Unit,
@@ -81,7 +82,7 @@ fun ExploreScreen(
         topBar = {
             ExploreScreenTopSectionWithSearchBar(
                 modifier = Modifier.fillMaxWidth(),
-                searchText = uiState.searchText,
+                searchText = searchTextState,
                 onClickedFilter = {
                     if (bottomSheetScaffoldState.bottomSheetState.isVisible) {
                         coroutineScope.hideBottomSheet(bottomSheetScaffoldState)
