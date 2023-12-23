@@ -10,10 +10,16 @@ class PersonDetailViewModel(
     private val personRepository: PersonRepository
 ) :
     BaseViewModel<PersonDetailUiState, PersonDetailEvent>(PersonDetailUiState.Loading) {
+    private var personId: Int = 0
 
     override fun onEvent(event: PersonDetailEvent) {
         when (event) {
-            is PersonDetailEvent.GetPersonDetail -> getPersonDetail(event.personId)
+            is PersonDetailEvent.GetPersonDetail -> {
+                personId = event.personId
+                getPersonDetail(event.personId)
+            }
+
+            is PersonDetailEvent.OnTryAgainClicked -> getPersonDetail(personId = personId)
         }
     }
 

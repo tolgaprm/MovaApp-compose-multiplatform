@@ -4,8 +4,8 @@ import kotlinx.datetime.LocalDate
 
 object DateTimeUtil {
 
-    fun convertDateFormat(inputDate: String?): String {
-        if (inputDate == null) return ""
+    fun convertDateFormat(inputDate: String?): String? {
+        if (inputDate == null) return null
 
         val dateFormat = LocalDate.parse(inputDate)
 

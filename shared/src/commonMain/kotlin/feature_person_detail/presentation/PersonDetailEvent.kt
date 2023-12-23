@@ -5,4 +5,6 @@ sealed interface PersonDetailEvent {
     data class GetPersonDetail(
         val personId: Int
     ) : PersonDetailEvent
+
+    data object OnTryAgainClicked : PersonDetailEvent
 }

@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import core.presentation.util.collectAsStateWithLifecycleM
 import core.presentation.util.viewModel
 import feature_person_detail.presentation.PersonDetailEvent
@@ -16,12 +18,15 @@ data class PersonDetailRoute(
 ) : Screen {
     @Composable
     override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
         val personDetailViewModel = viewModel<PersonDetailViewModel>()
         val personDetailUiState = personDetailViewModel.state.collectAsStateWithLifecycleM()
 
         PersonDetailScreen(
             modifier = Modifier.fillMaxSize(),
-            personDetailUiState = personDetailUiState
+            personDetailUiState = personDetailUiState,
+            onPopBackStack = navigator::pop,
+            onEvent = personDetailViewModel::onEvent
         )
 
         LaunchedEffect(Unit) {
