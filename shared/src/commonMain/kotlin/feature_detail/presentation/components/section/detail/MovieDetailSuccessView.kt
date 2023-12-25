@@ -7,9 +7,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import app.cash.paging.compose.LazyPagingItems
-import core.domain.movie.Movie
+import core.domain.model.movie.Movie
 import core.presentation.theme.dimensions
-import feature_detail.domain.movie.model.MovieDetail
+import feature_detail.domain.model.movie.MovieDetail
 import feature_detail.presentation.components.recommendations.MovieRecommendationItem
 
 @Composable

@@ -4,9 +4,9 @@ import app.cash.paging.PagingData
 import app.cash.paging.map
 import core.common.Resource
 import core.data.util.MovaUtil
-import core.domain.genre.models.Genre
-import core.domain.movie.Movie
-import core.domain.tvseries.TvSeries
+import core.domain.model.genre.Genre
+import core.domain.model.movie.Movie
+import core.domain.model.tv.TvSeries
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 

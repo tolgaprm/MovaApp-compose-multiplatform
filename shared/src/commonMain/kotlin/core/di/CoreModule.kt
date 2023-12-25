@@ -1,16 +1,16 @@
 package core.di
 
 import core.common.TMDBConstants
-import core.data.genre.movie.MovieGenreRemoteDataSource
-import core.data.genre.movie.MovieGenreRepoImpl
-import core.data.genre.service.GenreService
-import core.data.genre.service.GenreServiceImpl
-import core.data.genre.tv.TvGenreRemoteDataSource
-import core.data.genre.tv.TvGenreRepoImpl
-import core.domain.genre.movie.MovieGenreRepository
-import core.domain.genre.movie.usecase.GetMovieGenreListUseCase
-import core.domain.genre.tv.TvGenreRepository
-import core.domain.genre.tv.usecase.GetTvGenreListUseCase
+import core.data.remote.dataSources.genre.movie.MovieGenreRemoteDataSource
+import core.data.remote.dataSources.genre.movie.MovieGenreRepoImpl
+import core.data.remote.dataSources.genre.tv.TvGenreRemoteDataSource
+import core.data.remote.dataSources.genre.tv.TvGenreRepoImpl
+import core.data.remote.service.genre.GenreService
+import core.data.remote.service.genre.GenreServiceImpl
+import core.domain.repository.MovieGenreRepository
+import core.domain.repository.TvGenreRepository
+import core.domain.usecase.movie.GetMovieGenreListUseCase
+import core.domain.usecase.tv.GetTvGenreListUseCase
 import feature_splash.presentation.SplashViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine

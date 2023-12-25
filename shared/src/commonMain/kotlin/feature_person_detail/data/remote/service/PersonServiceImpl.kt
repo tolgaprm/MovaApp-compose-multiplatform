@@ -1,7 +1,7 @@
 package feature_person_detail.data.remote.service
 
 import core.common.dispatcher.DispatcherProvider
-import core.data.addLanguageParameter
+import core.data.util.addLanguageParameter
 import core.data.util.tryResult
 import feature_person_detail.data.remote.dto.PersonDetailDto
 import io.ktor.client.HttpClient

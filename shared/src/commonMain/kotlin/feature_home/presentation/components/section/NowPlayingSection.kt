@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.ui.Modifier
 import app.cash.paging.compose.LazyPagingItems
-import core.domain.movie.Movie
-import feature_home.presentation.components.NowPlayingHorizontalRowPager
+import core.domain.model.movie.Movie
+import feature_home.presentation.components.nowPlaying.NowPlayingHorizontalRowPager
 
 @Suppress("functionName")
 fun LazyListScope.NowPlayingSection(

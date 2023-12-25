@@ -2,7 +2,7 @@ package feature_person_detail.data.repository
 
 import core.common.Resource
 import core.data.util.tryResultReturnResource
-import feature_person_detail.data.remote.PersonRemoteDataSource
+import feature_person_detail.data.remote.dataSource.PersonRemoteDataSource
 import feature_person_detail.data.remote.mapper.toPersonDetail
 import feature_person_detail.domain.model.PersonDetail
 import feature_person_detail.domain.repository.PersonRepository

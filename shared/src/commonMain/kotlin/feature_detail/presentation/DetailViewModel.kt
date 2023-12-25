@@ -2,8 +2,8 @@ package feature_detail.presentation
 
 import core.presentation.base.BaseViewModel
 import core.presentation.util.viewModelScope
-import feature_detail.domain.movie.MovieDetailRepository
-import feature_detail.domain.tv.TvSeriesDetailRepository
+import feature_detail.domain.repository.MovieDetailRepository
+import feature_detail.domain.repository.TvSeriesDetailRepository
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 

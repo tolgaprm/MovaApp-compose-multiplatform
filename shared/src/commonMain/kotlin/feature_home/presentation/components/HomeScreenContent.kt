@@ -7,8 +7,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import app.cash.paging.compose.LazyPagingItems
-import core.domain.movie.Movie
-import core.domain.tvseries.TvSeries
+import core.domain.model.movie.Movie
+import core.domain.model.tv.TvSeries
 import core.presentation.theme.dimensions
 import feature_home.presentation.components.section.MoviesSectionWithTitle
 import feature_home.presentation.components.section.NowPlayingSection

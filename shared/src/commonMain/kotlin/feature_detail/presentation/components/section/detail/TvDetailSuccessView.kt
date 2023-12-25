@@ -11,9 +11,9 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import app.cash.paging.compose.LazyPagingItems
-import core.domain.tvseries.TvSeries
+import core.domain.model.tv.TvSeries
 import core.presentation.theme.dimensions
-import feature_detail.domain.tv.model.TvSeriesDetail
+import feature_detail.domain.model.tv.TvSeriesDetail
 import feature_detail.presentation.components.recommendations.TvSeriesRecommendationItem
 
 @Composable

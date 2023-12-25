@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import core.domain.movie.Movie
-import core.domain.tvseries.TvSeries
+import core.domain.model.movie.Movie
+import core.domain.model.tv.TvSeries
 import core.presentation.components.InfoBottomSheet
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

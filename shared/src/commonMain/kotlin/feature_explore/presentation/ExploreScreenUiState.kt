@@ -1,9 +1,9 @@
 package feature_explore.presentation
 
 import androidx.paging.PagingData
-import core.domain.movie.Movie
-import core.domain.tvseries.TvSeries
-import feature_explore.domain.multiSearch.MultiSearch
+import core.domain.model.movie.Movie
+import core.domain.model.tv.TvSeries
+import feature_explore.domain.model.MultiSearch
 import feature_explore.presentation.model.Category
 import feature_explore.presentation.model.FilterItem
 import feature_explore.presentation.model.SortBy

@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import app.cash.paging.compose.LazyPagingItems
-import core.domain.movie.Movie
-import core.domain.tvseries.TvSeries
+import core.domain.model.movie.Movie
+import core.domain.model.tv.TvSeries
 import core.presentation.base.MovaInfoBottomSheetScaffold
 import core.presentation.base.expandBottomSheet
 import core.presentation.base.hideBottomSheet

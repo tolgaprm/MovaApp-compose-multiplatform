@@ -1,6 +1,6 @@
 package core.data.util
 
-import core.domain.genre.models.Genre
+import core.domain.model.genre.Genre
 
 object MovaUtil {
     fun getGenresBySeparatedByComma(genreIds: List<Int>, genres: List<Genre>?): String {

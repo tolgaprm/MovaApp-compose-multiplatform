@@ -1,7 +1,7 @@
 package feature_explore.presentation
 
-import core.domain.movie.Movie
-import core.domain.tvseries.TvSeries
+import core.domain.model.movie.Movie
+import core.domain.model.tv.TvSeries
 import feature_explore.presentation.model.FilterItem
 
 sealed interface ExploreScreenEvent {

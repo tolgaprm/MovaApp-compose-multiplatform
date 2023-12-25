@@ -1,10 +1,10 @@
 package feature_home.domain.usecase
 
-import core.domain.genre.tv.usecase.GetTopRatedTvSeriesUseCase
-import feature_home.domain.movie.usecase.GetNowPlayingMoviesUseCase
-import feature_home.domain.movie.usecase.GetPopularMoviesUseCase
-import feature_home.domain.movie.usecase.GetTopRatedMoviesUseCase
-import feature_home.domain.tv.usecase.GetPopularTvSeriesUseCase
+import feature_home.domain.usecase.movie.GetNowPlayingMoviesUseCase
+import feature_home.domain.usecase.movie.GetPopularMoviesUseCase
+import feature_home.domain.usecase.movie.GetTopRatedMoviesUseCase
+import feature_home.domain.usecase.tv.GetPopularTvSeriesUseCase
+import feature_home.domain.usecase.tv.GetTopRatedTvSeriesUseCase
 
 data class HomeUseCases(
     val getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase,

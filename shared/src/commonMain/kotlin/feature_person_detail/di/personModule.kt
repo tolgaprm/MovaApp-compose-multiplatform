@@ -1,6 +1,6 @@
 package feature_person_detail.di
 
-import feature_person_detail.data.remote.PersonRemoteDataSource
+import feature_person_detail.data.remote.dataSource.PersonRemoteDataSource
 import feature_person_detail.data.remote.service.PersonService
 import feature_person_detail.data.remote.service.PersonServiceImpl
 import feature_person_detail.data.repository.PersonRepositoryImpl
