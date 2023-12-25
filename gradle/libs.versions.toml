@@ -11,6 +11,7 @@ kamel-version = "0.8.2"
 kermit-version = "2.0.2"
 koin-version = "3.5.0"
 kotlin-version = "1.9.10"
+kotlin-datetime = "0.5.0"
 ktor-version = "2.3.5"
 minSdk-version = "24"
 moko-version = "0.16.1"
@@ -31,6 +32,7 @@ kamel-media = { module = "media.kamel:kamel-image", version.ref = "kamel-version
 kermit-logger = { module = "co.touchlab:kermit", version.ref = "kermit-version" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin-version" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin-version" }
+kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlin-datetime" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-version" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor-version" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor-version" }

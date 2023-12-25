@@ -25,8 +25,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import core.domain.movie.Movie
-import core.domain.tvseries.TvSeries
+import core.domain.model.movie.Movie
+import core.domain.model.tv.TvSeries
 import core.presentation.theme.dimensions
 
 @Composable

@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
 import core.common.ImageSize
-import core.domain.movie.Movie
+import core.domain.model.movie.Movie
 import core.presentation.components.GenresView
 import core.presentation.components.MovaImage
 import core.presentation.theme.dimensions

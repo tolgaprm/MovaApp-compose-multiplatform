@@ -1,10 +1,10 @@
 package feature_detail.presentation
 
 import androidx.paging.PagingData
-import core.domain.movie.Movie
-import core.domain.tvseries.TvSeries
-import feature_detail.domain.movie.model.MovieDetail
-import feature_detail.domain.tv.model.TvSeriesDetail
+import core.domain.model.movie.Movie
+import core.domain.model.tv.TvSeries
+import feature_detail.domain.model.movie.MovieDetail
+import feature_detail.domain.model.tv.TvSeriesDetail
 import kotlinx.coroutines.flow.Flow
 
 sealed interface DetailScreenUiState {

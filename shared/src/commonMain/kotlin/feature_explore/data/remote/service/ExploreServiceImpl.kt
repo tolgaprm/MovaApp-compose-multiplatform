@@ -1,12 +1,12 @@
 package feature_explore.data.remote.service
 
 import core.common.dispatcher.DispatcherProvider
-import core.data.addCommonParameters
-import core.data.dto.ApiResponse
-import core.data.movie.MovieDto
-import core.data.tvseries.TvSeriesDto
+import core.data.remote.dto.ApiResponse
+import core.data.remote.dto.movie.MovieDto
+import core.data.remote.dto.tv.TvSeriesDto
+import core.data.util.addCommonParameters
 import core.data.util.tryResult
-import feature_explore.data.multiSearch.dto.SearchDto
+import feature_explore.data.remote.dto.multiSearch.SearchDto
 import io.ktor.client.HttpClient
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get

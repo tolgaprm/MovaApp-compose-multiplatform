@@ -1,11 +1,11 @@
 package feature_upcoming.di
 
-import feature_upcoming.data.movie.UpcomingMovieRepositoryImpl
-import feature_upcoming.data.movie.remote.UpComingMovieRemoteDataSource
-import feature_upcoming.data.service.UpComingServiceImpl
-import feature_upcoming.data.service.UpcomingService
-import feature_upcoming.domain.movie.UpcomingMovieRepository
-import feature_upcoming.domain.movie.usecase.GetUpcomingMovieUseCase
+import feature_upcoming.data.remote.dataSource.UpComingMovieRemoteDataSource
+import feature_upcoming.data.remote.service.UpComingServiceImpl
+import feature_upcoming.data.remote.service.UpcomingService
+import feature_upcoming.data.repository.UpcomingMovieRepositoryImpl
+import feature_upcoming.domain.repository.UpcomingMovieRepository
+import feature_upcoming.domain.usecase.GetUpcomingMovieUseCase
 import feature_upcoming.presentation.UpComingViewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module

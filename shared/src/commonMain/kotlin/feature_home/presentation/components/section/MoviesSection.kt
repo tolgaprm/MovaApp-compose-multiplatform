@@ -7,8 +7,8 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
 import app.cash.paging.compose.LazyPagingItems
-import core.domain.movie.Movie
-import core.domain.tvseries.TvSeries
+import core.domain.model.movie.Movie
+import core.domain.model.tv.TvSeries
 import core.presentation.components.MovieItem
 import core.presentation.components.TvSeriesItem
 import core.presentation.components.paging.MPagingRowList

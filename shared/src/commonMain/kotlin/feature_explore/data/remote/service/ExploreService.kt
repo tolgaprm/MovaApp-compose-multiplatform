@@ -1,9 +1,9 @@
 package feature_explore.data.remote.service
 
-import core.data.dto.ApiResponse
-import core.data.movie.MovieDto
-import core.data.tvseries.TvSeriesDto
-import feature_explore.data.multiSearch.dto.SearchDto
+import core.data.remote.dto.ApiResponse
+import core.data.remote.dto.movie.MovieDto
+import core.data.remote.dto.tv.TvSeriesDto
+import feature_explore.data.remote.dto.multiSearch.SearchDto
 
 interface ExploreService {
 

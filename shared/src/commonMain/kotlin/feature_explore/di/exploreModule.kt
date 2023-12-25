@@ -1,16 +1,16 @@
 package feature_explore.di
 
-import feature_explore.data.movie.ExploreMovieRepositoryImpl
-import feature_explore.data.movie.remote.ExploreMovieRemoteDataSource
-import feature_explore.data.multiSearch.MultiSearchRepositoryImpl
-import feature_explore.data.multiSearch.remote.MultiSearchRemoteDataSource
+import feature_explore.data.remote.dataSource.ExploreMovieRemoteDataSource
+import feature_explore.data.remote.dataSource.ExploreTvSeriesRemoteDataSource
+import feature_explore.data.remote.dataSource.MultiSearchRemoteDataSource
 import feature_explore.data.remote.service.ExploreService
 import feature_explore.data.remote.service.ExploreServiceImpl
-import feature_explore.data.tv.ExploreTvSeriesRepositoryImpl
-import feature_explore.data.tv.remote.ExploreTvSeriesRemoteDataSource
-import feature_explore.domain.movie.ExploreMovieRepository
-import feature_explore.domain.multiSearch.MultiSearchRepository
-import feature_explore.domain.tv.ExploreTvSeriesRepository
+import feature_explore.data.repository.ExploreMovieRepositoryImpl
+import feature_explore.data.repository.ExploreTvSeriesRepositoryImpl
+import feature_explore.data.repository.MultiSearchRepositoryImpl
+import feature_explore.domain.repository.ExploreMovieRepository
+import feature_explore.domain.repository.ExploreTvSeriesRepository
+import feature_explore.domain.repository.MultiSearchRepository
 import feature_explore.presentation.ExploreViewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
