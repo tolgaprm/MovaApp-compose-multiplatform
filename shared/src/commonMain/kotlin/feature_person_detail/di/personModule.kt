@@ -5,6 +5,7 @@ import feature_person_detail.data.remote.service.PersonService
 import feature_person_detail.data.remote.service.PersonServiceImpl
 import feature_person_detail.data.repository.PersonRepositoryImpl
 import feature_person_detail.domain.repository.PersonRepository
+import feature_person_detail.domain.usecase.GetPersonDetailUseCase
 import feature_person_detail.presentation.PersonDetailViewModel
 import org.koin.dsl.module
 
@@ -13,5 +14,6 @@ val personModule = module {
     single { PersonRemoteDataSource(get()) }
     single<PersonRepository> { PersonRepositoryImpl(get()) }
 
+    factory { GetPersonDetailUseCase(get(), get()) }
     factory { PersonDetailViewModel(get()) }
 }

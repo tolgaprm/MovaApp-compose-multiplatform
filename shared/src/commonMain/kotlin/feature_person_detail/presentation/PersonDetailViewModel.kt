@@ -2,12 +2,12 @@ package feature_person_detail.presentation
 
 import core.presentation.base.BaseViewModel
 import core.presentation.util.viewModelScope
-import feature_person_detail.domain.repository.PersonRepository
+import feature_person_detail.domain.usecase.GetPersonDetailUseCase
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class PersonDetailViewModel(
-    private val personRepository: PersonRepository
+    private val getPersonDetailUseCase: GetPersonDetailUseCase
 ) :
     BaseViewModel<PersonDetailUiState, PersonDetailEvent>(PersonDetailUiState.Loading) {
     private var personId: Int = 0
@@ -28,10 +28,9 @@ class PersonDetailViewModel(
             mutableState.update { PersonDetailUiState.Loading }
             handleResourceWithCallbacks(
                 resourceSupplier = {
-                    personRepository.getPersonDetail(personId)
+                    getPersonDetailUseCase(personId = personId)
                 },
                 onSuccessCallback = { personDetail ->
-
                     mutableState.update {
                         PersonDetailUiState.Success(
                             personDetail = personDetail
