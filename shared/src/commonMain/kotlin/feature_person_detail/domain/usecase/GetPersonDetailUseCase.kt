@@ -6,12 +6,11 @@ import core.domain.error.UnknownErrorException
 import feature_person_detail.domain.model.PersonDetail
 import feature_person_detail.domain.repository.PersonRepository
 import kotlinx.coroutines.withContext
-import org.koin.core.component.KoinComponent
 
 class GetPersonDetailUseCase(
     private val personRepository: PersonRepository,
     private val dispatcherProvider: DispatcherProvider
-) : KoinComponent {
+) {
 
     suspend operator fun invoke(
         personId: Int,
@@ -50,8 +49,10 @@ private fun sortByPopularity(personDetail: PersonDetail): PersonDetail {
 
     return personDetail.copy(
         combinedCredit = personDetail.combinedCredit?.copy(
-            cast = personDetail.combinedCredit.cast.sortedByDescending { it.popularity },
+            cast = personDetail.combinedCredit.cast.sortedByDescending { it.popularity }
+                .distinctBy { it.id },
             crew = personDetail.combinedCredit.crew.sortedByDescending { it.popularity }
+                .distinctBy { it.id }
         )
     )
 }
