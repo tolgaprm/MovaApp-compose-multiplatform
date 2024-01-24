@@ -12,6 +12,6 @@ fun PersonCastDto.toPersonCast(): PersonCast {
         popularity = popularity.orZero(),
         posterPath = posterPath,
         character = character.orEmpty(),
-        mediaType = MediaType.fromValue(mediaType.orEmpty().lowercase())
+        mediaType = MediaType.fromValue(mediaType?.lowercase().orEmpty())
     )
 }

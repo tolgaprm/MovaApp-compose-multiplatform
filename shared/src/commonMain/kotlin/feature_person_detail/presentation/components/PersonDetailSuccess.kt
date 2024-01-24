@@ -224,8 +224,8 @@ private fun <T : PersonWorks> AsWorksSection(
                     PersonWorksType.CAST -> {
                         val personCast = item as? PersonCast ?: return@items
                         PersonWorkItem(
-                            posterImageUrl = item.posterPath,
-                            mediaType = item.mediaType,
+                            posterImageUrl = personCast.posterPath,
+                            mediaType = personCast.mediaType,
                             title = "Character",
                             subtitle = personCast.character
                         )
@@ -234,8 +234,8 @@ private fun <T : PersonWorks> AsWorksSection(
                     PersonWorksType.CREW -> {
                         val personCrew = item as? PersonCrew ?: return@items
                         PersonWorkItem(
-                            posterImageUrl = item.posterPath,
-                            mediaType = item.mediaType,
+                            posterImageUrl = personCrew.posterPath,
+                            mediaType = personCrew.mediaType,
                             title = "Department",
                             subtitle = personCrew.department
                         )

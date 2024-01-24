@@ -11,7 +11,7 @@ fun PersonCrewDto.toPersonCrew(): PersonCrew {
         title = title.orEmpty(),
         popularity = popularity.orZero(),
         posterPath = posterPath,
-        mediaType = MediaType.fromValue(mediaType.orEmpty().lowercase()),
+        mediaType = MediaType.fromValue(mediaType?.lowercase().orEmpty()),
         department = department.orEmpty(),
         job = job.orEmpty()
     )

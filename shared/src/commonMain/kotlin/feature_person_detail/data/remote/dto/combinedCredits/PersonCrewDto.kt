@@ -22,5 +22,5 @@ data class PersonCrewDto(
     @SerialName("credit_id") val creditId: String?,
     val department: String?,
     val job: String?,
-    val mediaType: String?
+    @SerialName("media_type") val mediaType: String?
 )

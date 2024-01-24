@@ -22,5 +22,5 @@ data class PersonCastDto(
     val character: String?,
     @SerialName("credit_id") val creditId: String?,
     val order: Int?,
-    val mediaType: String?
+    @SerialName("media_type") val mediaType: String?
 )

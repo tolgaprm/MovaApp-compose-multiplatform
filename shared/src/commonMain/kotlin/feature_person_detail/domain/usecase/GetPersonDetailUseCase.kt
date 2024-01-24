@@ -23,16 +23,13 @@ class GetPersonDetailUseCase(
 
         return when (personDetailResponse) {
             is Resource.Success -> {
-                withContext(dispatcherProvider.Default) {
-                    Resource.Success(
-                        sortByPopularity(
-                            personDetailResponse.data ?: return@withContext
-                            Resource.Error(
-                                UnknownErrorException()
-                            )
-                        )
+                if (personDetailResponse.data == null) return Resource.Error(UnknownErrorException())
+                Resource.Success(
+                    sortByPopularity(
+                        personDetailResponse.data,
+                        dispatcherProvider
                     )
-                }
+                )
             }
 
             is Resource.Error -> {
@@ -45,14 +42,21 @@ class GetPersonDetailUseCase(
 }
 
 
-private fun sortByPopularity(personDetail: PersonDetail): PersonDetail {
+private suspend fun sortByPopularity(
+    personDetail: PersonDetail,
+    dispatcherProvider: DispatcherProvider
+): PersonDetail {
 
-    return personDetail.copy(
-        combinedCredit = personDetail.combinedCredit?.copy(
-            cast = personDetail.combinedCredit.cast.sortedByDescending { it.popularity }
-                .distinctBy { it.id },
-            crew = personDetail.combinedCredit.crew.sortedByDescending { it.popularity }
-                .distinctBy { it.id }
+    return withContext(dispatcherProvider.Default) {
+        personDetail.copy(
+            combinedCredit = personDetail.combinedCredit?.copy(
+                cast = personDetail.combinedCredit.cast.distinctBy { it.id }
+                    .sortedByDescending { it.popularity },
+
+                crew = personDetail.combinedCredit.crew.distinctBy { it.id }
+                    .sortedByDescending { it.popularity }
+
+            )
         )
-    )
+    }
 }
