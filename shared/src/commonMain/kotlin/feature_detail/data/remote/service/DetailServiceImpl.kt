@@ -4,15 +4,14 @@ import core.common.dispatcher.DispatcherProvider
 import core.data.remote.dto.ApiResponse
 import core.data.remote.dto.movie.MovieDto
 import core.data.remote.dto.tv.TvSeriesDto
+import core.data.util.addAppendToResponseQuery
 import core.data.util.addCommonParameters
 import core.data.util.addLanguageParameter
 import core.data.util.tryResult
 import feature_detail.data.remote.dto.movie.MovieDetailDto
 import feature_detail.data.remote.dto.tv.TvSeriesDetailDto
 import io.ktor.client.HttpClient
-import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
-import io.ktor.client.request.parameter
 import kotlinx.coroutines.withContext
 
 class DetailServiceImpl(
@@ -82,15 +81,8 @@ class DetailServiceImpl(
     companion object {
         private const val MOVIE_DETAIL = "movie"
         private const val TV_DETAIL = "tv"
-        private const val APPEND_TO_RESPONSE_QUERY = "append_to_response"
         private const val CREDIT_APPEND_TO_RESPONSE = "credits"
         private const val WATCH_PROVIDERS_APPEND_TO_RESPONSE = "watch/providers"
         private const val RECOMMENDATIONS = "recommendations"
-    }
-
-    private fun HttpRequestBuilder.addAppendToResponseQuery(
-        appendToResponses: List<String>
-    ) {
-        parameter(APPEND_TO_RESPONSE_QUERY, appendToResponses.joinToString(","))
     }
 }

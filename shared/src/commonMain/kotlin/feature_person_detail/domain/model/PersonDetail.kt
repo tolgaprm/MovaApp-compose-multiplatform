@@ -1,5 +1,7 @@
 package feature_person_detail.domain.model
 
+import feature_person_detail.domain.model.combinedCredits.PersonCredit
+
 data class PersonDetail(
     val id: Int,
     val name: String,
@@ -7,5 +9,6 @@ data class PersonDetail(
     val birthday: String?,
     val deathDay: String?,
     val placeOfBirth: String,
-    val profilePath: String?
+    val profilePath: String?,
+    val combinedCredit: PersonCredit?
 )

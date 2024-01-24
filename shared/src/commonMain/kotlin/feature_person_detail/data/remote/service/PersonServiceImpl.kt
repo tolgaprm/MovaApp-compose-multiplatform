@@ -1,6 +1,7 @@
 package feature_person_detail.data.remote.service
 
 import core.common.dispatcher.DispatcherProvider
+import core.data.util.addAppendToResponseQuery
 import core.data.util.addLanguageParameter
 import core.data.util.tryResult
 import feature_person_detail.data.remote.dto.PersonDetailDto
@@ -20,6 +21,9 @@ class PersonServiceImpl(
             tryResult {
                 httpClient.get("$PERSON_DETAIL/$id") {
                     addLanguageParameter(language)
+                    addAppendToResponseQuery(
+                        appendToResponses = listOf(CREDIT_APPEND_TO_RESPONSE)
+                    )
                 }
             }
         }
@@ -27,5 +31,6 @@ class PersonServiceImpl(
 
     companion object {
         private const val PERSON_DETAIL = "person"
+        private const val CREDIT_APPEND_TO_RESPONSE = "combined_credits"
     }
 }

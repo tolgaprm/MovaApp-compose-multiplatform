@@ -1,11 +1,11 @@
 package feature_explore.data.remote.pagingSource
 
 import core.data.util.paging.BasePagingSource
+import core.domain.model.MediaType
 import feature_explore.data.remote.dataSource.MultiSearchRemoteDataSource
 import feature_explore.data.remote.mapper.toMovie
 import feature_explore.data.remote.mapper.toPersonSearch
 import feature_explore.data.remote.mapper.toTvSeries
-import feature_explore.domain.model.MediaType
 import feature_explore.domain.model.MultiSearch
 
 class MultiSearchPagingSource(

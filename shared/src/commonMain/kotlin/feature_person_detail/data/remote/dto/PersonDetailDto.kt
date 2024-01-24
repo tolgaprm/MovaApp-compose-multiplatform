@@ -1,5 +1,6 @@
 package feature_person_detail.data.remote.dto
 
+import feature_person_detail.data.remote.dto.combinedCredits.PersonCreditsDto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -18,5 +19,6 @@ data class PersonDetailDto(
     val name: String?,
     @SerialName("place_of_birth") val placeOfBirth: String?,
     val popularity: Double?,
-    @SerialName("profile_path") val profilePath: String?
+    @SerialName("profile_path") val profilePath: String?,
+    @SerialName("combined_credits") val combinedCredits: PersonCreditsDto?
 )

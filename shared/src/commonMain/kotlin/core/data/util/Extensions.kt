@@ -12,6 +12,12 @@ fun HttpRequestBuilder.addCommonParameters(language: String, page: Int) {
     addPageParameter(page = page)
 }
 
+fun HttpRequestBuilder.addAppendToResponseQuery(
+    appendToResponses: List<String>
+) {
+    parameter(APPEND_TO_RESPONSE_QUERY, appendToResponses.joinToString(","))
+}
+
 fun HttpRequestBuilder.addLanguageParameter(language: String) {
     parameter(LANGUAGE_PARAM, language)
 }
@@ -22,5 +28,6 @@ fun HttpRequestBuilder.addPageParameter(page: Int) {
 
 fun Boolean?.orFalse(): Boolean = this ?: false
 
-const val LANGUAGE_PARAM = "language"
-const val PAGE_PARAM = "page"
+private const val LANGUAGE_PARAM = "language"
+private const val PAGE_PARAM = "page"
+private const val APPEND_TO_RESPONSE_QUERY = "append_to_response"
