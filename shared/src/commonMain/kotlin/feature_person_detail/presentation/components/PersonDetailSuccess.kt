@@ -61,21 +61,25 @@ fun PersonDetailSuccess(
             placeOfBirth = uiState.personDetail.placeOfBirth
         )
 
-        AsWorksSection(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(MaterialTheme.dimensions.fourLevel),
-            sectionTitle = "As Actor's Works",
-            personWorks = uiState.personDetail.combinedCredit?.cast ?: emptyList()
-        )
+        uiState.personDetail.combinedCredit?.cast?.let {
+            AsWorksSection(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(MaterialTheme.dimensions.fourLevel),
+                sectionTitle = "As Actor's Works",
+                personWorks = uiState.personDetail.combinedCredit.cast
+            )
+        }
 
-        AsWorksSection(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(MaterialTheme.dimensions.fourLevel),
-            sectionTitle = "As Director's Works",
-            personWorks = uiState.personDetail.combinedCredit?.crew ?: emptyList()
-        )
+        uiState.personDetail.combinedCredit?.crew?.let {
+            AsWorksSection(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(MaterialTheme.dimensions.fourLevel),
+                sectionTitle = "As Director's Works",
+                personWorks = uiState.personDetail.combinedCredit.crew
+            )
+        }
     }
 }
 
